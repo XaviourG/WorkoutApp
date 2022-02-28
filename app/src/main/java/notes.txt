@@ -1,0 +1,34 @@
+Regarding the database, we need to track:
+* Exercise performance
+* workout history
+*etc
+
+The approach will be a db of exercises sub dbs. Each exercise sub db will maintain performance
+ logs sorted by date, these logs will contain weight and reps.
+ Workouts will be recorded as ordered lists of references to said performance logs.
+ Logs will be set agnostic, as in 4 sets of bench will be recorded as four individual logs.
+
+ We also need the workout templates and programs
+
+
+ Nah nah nah, 1 db, 3 entity types: Exercises, Workouts, & Logs(Sets), oh and program
+
+ Exercise
+ - id
+ - Name
+ - Prime Mover
+ - Equipment
+
+ Workout (templates not logs)
+ - id
+ - title
+ - array of exercises as strings (encoded strings - exerciseID|sets|reps|modifier)
+ - notes
+
+ Log
+ - id
+ - date (need to create type converter for this)
+ - exercise
+ - modifier
+ - load
+ - reps performed
