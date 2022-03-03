@@ -5,21 +5,51 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ExerciseDao {
+
+    //Methods for Exercise Entities
     @Query("SELECT * FROM Exercise ORDER BY name")
-    fun getAll(): Flow<MutableList<Exercise>>
+    fun getAllExercises(): Flow<MutableList<Exercise>>
 
     @Query("SELECT * FROM Exercise WHERE EID IN (:exIds)")
-    fun loadAllByIds(exIds: IntArray): Flow<MutableList<Exercise>>
+    fun loadAllExercisesByIds(exIds: IntArray): Flow<MutableList<Exercise>>
 
     @Query("SELECT * FROM Exercise WHERE name LIKE :name LIMIT 1")
-    fun findByName(name: String): Exercise
+    fun findExerciseByName(name: String): Exercise
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertAll(vararg exercises: Exercise)
-
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(exercise: Exercise)
+    suspend fun insertExercise(exercise: Exercise)
 
     @Delete
-    fun delete(exercise: Exercise)
+    fun deleteExercise(exercise: Exercise)
+
+
+    //Methods for Workout Entities
+    @Query("SELECT * FROM Workout ORDER BY title")
+    fun getAllWorkouts(): Flow<MutableList<Workout>>
+
+    @Query("SELECT * FROM Workout ORDER BY title")
+    suspend fun updateWorkouts(): MutableList<Workout>
+
+    @Query("SELECT * FROM Workout WHERE title LIKE :title LIMIT 1")
+    fun findWorkoutByTitle(title: String): Workout
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertWorkout(workout: Workout)
+
+    @Delete
+    fun deleteWorkout(workout: Workout)
+
+
+    //Methods for Log Entities
+    //@Query("SELECT * FROM Log ORDER BY date")
+    //fun getAllLogs(): Flow<MutableList<Exercise>>
+
+    @Query("SELECT * FROM Log WHERE exerciseID LIKE :exerciseID LIMIT 1")
+    fun findLogByExerciseID(exerciseID: Int): Log
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertLog(log: Log)
+
+    @Delete
+    fun deleteLog(log: Log)
 }
