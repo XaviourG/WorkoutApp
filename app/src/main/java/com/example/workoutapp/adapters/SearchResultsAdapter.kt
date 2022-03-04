@@ -8,13 +8,15 @@ import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.workoutapp.R
 import com.example.workoutapp.data.exercisedb.Exercise
+import com.example.workoutapp.data.exercisedb.ExerciseViewModel
 import com.example.workoutapp.data.exercisedb.Workout
 import com.example.workoutapp.databinding.ActivityBuildWorkoutBinding
 import com.example.workoutapp.databinding.FragmentExerciseBinding
 import com.example.workoutapp.databinding.WorkoutListingBinding
 
 
-class SearchResultsAdapter(private val wlAdapter: WorkoutBuildAdapter) : RecyclerView.Adapter<SearchResultsAdapter.SearchResultsViewHolder>() {
+class SearchResultsAdapter(private val wlAdapter: WorkoutBuildAdapter,
+                           private val viewModel: ExerciseViewModel) : RecyclerView.Adapter<SearchResultsAdapter.SearchResultsViewHolder>() {
 
     var shownData = emptyList<Exercise>()
     var fullData = emptyList<Exercise>()
@@ -41,10 +43,17 @@ class SearchResultsAdapter(private val wlAdapter: WorkoutBuildAdapter) : Recycle
     override fun onBindViewHolder(holder: SearchResultsViewHolder, position: Int) {
         holder.binding.tvExName.text = shownData[position].name
         holder.binding.tvExType.text = shownData[position].exType
-        holder.binding.tvExName.setOnClickListener {
-            wlAdapter.addExercise(shownData[position])
-            //var name = shownData[position].name
-            //println("Adding $name to workout!!!")
+        if(shownData[position].name.contains("Create New Exercise:")){
+            holder.binding.tvExName.setOnClickListener {
+                val newExercise = Exercise(name = shownData[position].name.substring(21))
+                viewModel.insert(newExercise)
+            }
+        } else {
+            holder.binding.tvExName.setOnClickListener {
+                wlAdapter.addExercise(shownData[position])
+                //var name = shownData[position].name
+                //println("Adding $name to workout!!!")
+            }
         }
     }
 
@@ -55,7 +64,11 @@ class SearchResultsAdapter(private val wlAdapter: WorkoutBuildAdapter) : Recycle
     }
 
     fun filter (query : String){
-        shownData = fullData.filter {query.lowercase() in it.name.lowercase()}
+        val createPrompt = Exercise(name = "Create New Exercise: $query")
+        val l = mutableListOf<Exercise>(createPrompt)
+        shownData = (fullData.filter {query.lowercase() in it.name.lowercase()}
+                + l)
+
         notifyDataSetChanged()
     }
 

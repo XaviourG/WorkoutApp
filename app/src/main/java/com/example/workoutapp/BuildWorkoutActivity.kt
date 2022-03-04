@@ -44,7 +44,7 @@ class BuildWorkoutActivity : AppCompatActivity() {
         binding.rvBuildSpace.adapter = wlAdapter
         binding.rvBuildSpace.layoutManager = LinearLayoutManager(this)
 
-        srAdapter = SearchResultsAdapter(wlAdapter)
+        srAdapter = SearchResultsAdapter(wlAdapter, exerciseViewModel)
         binding.rvSearchResults.adapter = srAdapter
         binding.rvSearchResults.layoutManager = LinearLayoutManager(this)
 
