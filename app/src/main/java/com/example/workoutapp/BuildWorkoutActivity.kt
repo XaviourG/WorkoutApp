@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.workoutapp.adapters.SearchResultsAdapter
+import com.example.workoutapp.adapters.WorkoutBuildAdapter
 import com.example.workoutapp.adapters.WorkoutListAdapter
 import com.example.workoutapp.data.exercisedb.*
 import com.example.workoutapp.databinding.ActivityBuildWorkoutBinding
@@ -23,6 +24,7 @@ class BuildWorkoutActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityBuildWorkoutBinding
     private lateinit var srAdapter: SearchResultsAdapter
+    private lateinit var wlAdapter: WorkoutBuildAdapter
 
     private val exerciseViewModel: ExerciseViewModel by viewModels {
         ExerciseViewModel.ExerciseViewModelFactory((application as MyApplication).repository)
@@ -38,7 +40,11 @@ class BuildWorkoutActivity : AppCompatActivity() {
         setContentView(view)
         title="New Workout"
 
-        srAdapter = SearchResultsAdapter()
+        wlAdapter = WorkoutBuildAdapter()
+        binding.rvBuildSpace.adapter = wlAdapter
+        binding.rvBuildSpace.layoutManager = LinearLayoutManager(this)
+
+        srAdapter = SearchResultsAdapter(wlAdapter)
         binding.rvSearchResults.adapter = srAdapter
         binding.rvSearchResults.layoutManager = LinearLayoutManager(this)
 

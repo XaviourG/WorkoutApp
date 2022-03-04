@@ -14,7 +14,7 @@ import com.example.workoutapp.databinding.FragmentExerciseBinding
 import com.example.workoutapp.databinding.WorkoutListingBinding
 
 
-class SearchResultsAdapter : RecyclerView.Adapter<SearchResultsAdapter.SearchResultsViewHolder>() {
+class SearchResultsAdapter(private val wlAdapter: WorkoutBuildAdapter) : RecyclerView.Adapter<SearchResultsAdapter.SearchResultsViewHolder>() {
 
     var shownData = emptyList<Exercise>()
     var fullData = emptyList<Exercise>()
@@ -42,7 +42,9 @@ class SearchResultsAdapter : RecyclerView.Adapter<SearchResultsAdapter.SearchRes
         holder.binding.tvExName.text = shownData[position].name
         holder.binding.tvExType.text = shownData[position].exType
         holder.binding.tvExName.setOnClickListener {
-            println("HUZZAZH!") //This will add the exercise to the workout
+            wlAdapter.addExercise(shownData[position])
+            //var name = shownData[position].name
+            //println("Adding $name to workout!!!")
         }
     }
 
@@ -53,7 +55,7 @@ class SearchResultsAdapter : RecyclerView.Adapter<SearchResultsAdapter.SearchRes
     }
 
     fun filter (query : String){
-        shownData = fullData.filter {query in it.name.lowercase()}
+        shownData = fullData.filter {query.lowercase() in it.name.lowercase()}
         notifyDataSetChanged()
     }
 
