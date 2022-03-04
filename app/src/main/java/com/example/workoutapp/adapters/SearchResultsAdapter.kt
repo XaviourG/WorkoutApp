@@ -47,6 +47,7 @@ class SearchResultsAdapter(private val wlAdapter: WorkoutBuildAdapter,
             holder.binding.tvExName.setOnClickListener {
                 val newExercise = Exercise(name = shownData[position].name.substring(21))
                 viewModel.insert(newExercise)
+                wlAdapter.addExercise(newExercise)
             }
         } else {
             holder.binding.tvExName.setOnClickListener {
