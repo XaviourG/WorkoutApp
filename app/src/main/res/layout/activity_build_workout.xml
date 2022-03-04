@@ -37,37 +37,37 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvBuildSpace"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@id/svBuild"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbBuild">
+        app:layout_constraintTop_toBottomOf="@+id/svBuild">
     </androidx.recyclerview.widget.RecyclerView>
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/svBuild"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        app:defaultQueryHint="Add Exercise"
-        app:queryHint="Add Exercise"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/search_bar_bg"
+        app:defaultQueryHint="Add Exercise"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvBuildSpace"/>
+        app:layout_constraintTop_toBottomOf="@+id/tbBuild"
+        app:queryHint="Add Exercise"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSearchResults"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/svBuild" />
