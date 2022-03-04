@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="80dp">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/tvName"
@@ -18,10 +18,29 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSets"
         android:layout_width="409dp"
-        android:layout_height="710dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginStart="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+    <Button
+        android:id="@+id/btnAddSet"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:text="Add Set"
+        android:textSize="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvSets" />
+
+    <Button
+        android:id="@+id/btnDeleteExercise"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:text="DEL"
+        android:textSize="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
