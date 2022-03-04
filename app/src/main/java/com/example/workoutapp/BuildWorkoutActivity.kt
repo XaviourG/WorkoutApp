@@ -38,7 +38,7 @@ class BuildWorkoutActivity : AppCompatActivity() {
         binding = ActivityBuildWorkoutBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        title="New Workout"
+        title="Workout Builder"
 
         wlAdapter = WorkoutBuildAdapter(this)
         binding.rvBuildSpace.adapter = wlAdapter
@@ -80,6 +80,15 @@ class BuildWorkoutActivity : AppCompatActivity() {
                 return false
             }
         })
+
+        //Save button pressed, display 'enter name' popup then save to database.
+        binding.btnSave.setOnClickListener{
+            var title = binding.etTitle.text.toString()
+            val workout = Workout(title=title, exercises = wlAdapter.exerciseList)
+            exerciseViewModel.insertWorkout(workout)
+            val i = Intent(this@BuildWorkoutActivity, WorkoutListActivity::class.java)
+            startActivity(i)
+        }
 
     }
 

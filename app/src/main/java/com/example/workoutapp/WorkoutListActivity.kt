@@ -40,11 +40,14 @@ class WorkoutListActivity : AppCompatActivity() {
         fakeList.add(Workout(title = "Hardcore Parkour", exercises = fakeExs))
 
          */
-
-        wlAdapter = WorkoutListAdapter(exerciseViewModel.workouts)
-
+        wlAdapter = WorkoutListAdapter()
         binding.rvWorkoutList.adapter = wlAdapter
         binding.rvWorkoutList.layoutManager = LinearLayoutManager(this)
+        exerciseViewModel.allWorkouts.observe(this, { list ->
+            list.let {
+                wlAdapter.setData(it)
+            }
+        })
 
         binding.btnHomeWL.setOnClickListener {
             val i = Intent(this@WorkoutListActivity, MainActivity::class.java)
@@ -55,11 +58,13 @@ class WorkoutListActivity : AppCompatActivity() {
             startActivity(i)
         }
 
+            /*
         binding.btnRefreshList.setOnClickListener {
             exerciseViewModel.updateWorkouts()
             wlAdapter.updateWorkouts(exerciseViewModel.workouts)
             binding.btnRefreshList.visibility = View.GONE
         }
+
+             */
         //binding.btnNewWorkout.text = workouts[0].title
-    }
-}
+}}
