@@ -18,7 +18,12 @@ class WorkoutBuildAdapter(private val context : BuildWorkoutActivity) : Recycler
         var sets: Array<Int> = arrayOf(1)
     )
 
-    var exerciseList = mutableListOf<ExerciseInstance>()
+    data class Inst(
+        val EI: ExerciseInstance,
+        var adapter: SetBuildAdapter? = null
+        )
+
+    var list = mutableListOf<Inst>()
 
     class WorkoutBuildViewHolder(val binding: ExerciseListingBinding)
         : RecyclerView.ViewHolder(binding.root)
@@ -30,7 +35,7 @@ class WorkoutBuildAdapter(private val context : BuildWorkoutActivity) : Recycler
     }
 
     override fun onBindViewHolder(holder: WorkoutBuildAdapter.WorkoutBuildViewHolder, position: Int) {
-        holder.binding.tvName.text = exerciseList[position].exercise.name
+        holder.binding.tvName.text = list[position].EI.exercise.name
         holder.binding.btnDeleteExercise.setOnClickListener {
             removeExerciseByPos(position)
         }
@@ -41,21 +46,32 @@ class WorkoutBuildAdapter(private val context : BuildWorkoutActivity) : Recycler
         holder.binding.btnAddSet.setOnClickListener {
             setAdapter.addSet()
         }
+        list[position].adapter = setAdapter
     }
 
     override fun getItemCount(): Int {
-        return exerciseList.size
+        return list.size
     }
 
     fun addExercise(ex: Exercise){
-        var exI = ExerciseInstance(ex)
-        exerciseList.add(exI)
-        notifyItemInserted(exerciseList.size - 1)
+        var inst = Inst(ExerciseInstance(ex))
+        list.add(inst)
+        notifyItemInserted(list.size - 1)
     }
 
     fun removeExerciseByPos(position: Int){
-        exerciseList.removeAt(position)
+        list.removeAt(position)
         notifyItemRemoved(position)
+    }
+
+    fun updateSets(){
+        for(inst in list){
+            inst.EI.sets = inst.adapter!!.getSets()
+        }
+    }
+
+    fun getExerciseList(): List<ExerciseInstance> {
+        return list.map {it.EI}
     }
 
 }

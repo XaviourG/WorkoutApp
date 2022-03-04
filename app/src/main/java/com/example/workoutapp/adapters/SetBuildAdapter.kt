@@ -44,4 +44,8 @@ class SetBuildAdapter : RecyclerView.Adapter<SetBuildAdapter.SetBuildViewHolder>
         sets.removeAt(position)
         notifyItemRemoved(position)
     }
+
+    fun getSets(): Array<Int>{
+        return sets.toTypedArray()
+    }
 }

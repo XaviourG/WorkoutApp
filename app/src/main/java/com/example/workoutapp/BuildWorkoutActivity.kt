@@ -84,7 +84,8 @@ class BuildWorkoutActivity : AppCompatActivity() {
         //Save button pressed, display 'enter name' popup then save to database.
         binding.btnSave.setOnClickListener{
             var title = binding.etTitle.text.toString()
-            val workout = Workout(title=title, exercises = wlAdapter.exerciseList)
+            wlAdapter.updateSets()
+            val workout = Workout(title=title, exercises = wlAdapter.getExerciseList())
             exerciseViewModel.insertWorkout(workout)
             val i = Intent(this@BuildWorkoutActivity, WorkoutListActivity::class.java)
             startActivity(i)
