@@ -7,28 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".BuildWorkoutActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvBuildSpace"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/svBuild">
-    </androidx.recyclerview.widget.RecyclerView>
-
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/svBuild"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/search_bar_bg"
-        app:layout_constraintTop_toBottomOf="@+id/tbBuild"/>
-
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbBuild"
@@ -46,8 +24,71 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="X"
-        app:layout_constraintEnd_toEndOf="@+id/tbBuild"
+        app:layout_constraintStart_toStartOf="@+id/tbBuild"
         app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SAVE"
+        app:layout_constraintEnd_toEndOf="@id/tbBuild"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvBuildSpace"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@id/svBuild"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tbBuild">
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/svBuild"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        app:defaultQueryHint="Add Exercise"
+        app:queryHint="Add Exercise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/search_bar_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvBuildSpace"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSearchResults"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/svBuild" />
+
+    <!--
+    <Button
+        android:id="@+id/btnAddEx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Add Exercise"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvBuildSpace" />
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/svBuild"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/search_bar_bg"
+        app:layout_constraintTop_toBottomOf="@+id/tbBuild"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSearchResults"
@@ -56,6 +97,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/svBuild" />
+
 
     <Button
         android:id="@+id/btnTestPrintDB"
@@ -82,6 +124,7 @@
         android:hint="Exercise Name"
         app:layout_constraintBottom_toTopOf="@+id/btnTestInsert"
         app:layout_constraintStart_toStartOf="parent" />
+    -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

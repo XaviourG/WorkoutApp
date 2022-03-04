@@ -42,7 +42,7 @@ class WorkoutListActivity : AppCompatActivity() {
          */
 
         wlAdapter = WorkoutListAdapter(exerciseViewModel.workouts)
-        println("ADAPTER BOUND!!!!!!!!!!!!!!!!!!!!!!!")
+
         binding.rvWorkoutList.adapter = wlAdapter
         binding.rvWorkoutList.layoutManager = LinearLayoutManager(this)
 

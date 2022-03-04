@@ -6,11 +6,12 @@
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2890625" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2890625" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/drawable/search_bar_bg.xml" value="0.2890625" />
-        <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/activity_build_workout.xml" value="0.1" />
+        <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/activity_build_workout.xml" value="0.2857142857142857" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/activity_main.xml" value="0.46770833333333334" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/activity_program.xml" value="0.27291666666666664" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/activity_workout.xml" value="0.27291666666666664" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/activity_workout_list.xml" value="0.27291666666666664" />
+        <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/fragment_exercise.xml" value="0.2857142857142857" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/workout_listing.xml" value="0.5142857142857143" />
       </map>
     </option>
