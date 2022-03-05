@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.workoutapp.BuildWorkoutActivity
 import com.example.workoutapp.data.exercisedb.Exercise
+import com.example.workoutapp.data.exercisedb.ExerciseInstance
 import com.example.workoutapp.data.exercisedb.Workout
 import com.example.workoutapp.databinding.ExerciseListingBinding
 import com.example.workoutapp.databinding.FragmentExerciseBinding
@@ -14,11 +15,6 @@ import kotlinx.coroutines.currentCoroutineContext
 import kotlin.coroutines.coroutineContext
 
 class WorkoutBuildAdapter(private val context : AppCompatActivity) : RecyclerView.Adapter<WorkoutBuildAdapter.WorkoutBuildViewHolder>() {
-
-    data class ExerciseInstance(
-        val exercise: Exercise,
-        var sets: Array<Int> = arrayOf(1)
-    )
 
     data class Inst(
         val EI: ExerciseInstance,
@@ -44,7 +40,9 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity) : RecyclerVie
         var setAdapter = SetBuildAdapter()
         holder.binding.rvSets.adapter = setAdapter
         holder.binding.rvSets.layoutManager = LinearLayoutManager(context)
-        setAdapter.addSet()
+        for(set in list[position].EI.sets) {
+            setAdapter.addSet()
+        }
         holder.binding.btnAddSet.setOnClickListener {
             setAdapter.addSet()
         }

@@ -1,7 +1,7 @@
 package com.example.workoutapp.data.exercisedb
 
 import androidx.room.TypeConverter
-import com.example.workoutapp.adapters.WorkoutBuildAdapter
+import com.example.workoutapp.data.exercisedb.ExerciseInstance
 
 class Converters {
     @TypeConverter
@@ -15,16 +15,16 @@ class Converters {
     }
 
     @TypeConverter
-    fun toExerciseList(listString: String): List<WorkoutBuildAdapter.ExerciseInstance> {
+    fun toExerciseList(listString: String): List<ExerciseInstance> {
         var list = listString.split("|")
-        var newList = mutableListOf<WorkoutBuildAdapter.ExerciseInstance>()
+        var newList = mutableListOf<ExerciseInstance>()
         for(s in list){
             var bits = s.split("-")
             var sets: Array<Int> = bits[1].split(".").map{it.toInt()}.toTypedArray()
             var eid = bits[0].split(".")[0].toInt()
             var name = bits[0].split(".")[1]
             var exercise = Exercise(EID = eid, name = name)
-            var exerciseInstance = WorkoutBuildAdapter.ExerciseInstance(
+            var exerciseInstance = ExerciseInstance(
                 exercise = exercise,
                 sets = sets
             )
@@ -34,7 +34,7 @@ class Converters {
     }
 
     @TypeConverter
-    fun fromExerciseList(exerciseInstanceList: List<WorkoutBuildAdapter.ExerciseInstance>)
+    fun fromExerciseList(exerciseInstanceList: List<ExerciseInstance>)
     : String {
         var list = mutableListOf<String>()
         for(ex in exerciseInstanceList){

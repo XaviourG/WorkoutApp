@@ -55,7 +55,7 @@ class WorkoutEditor : AppCompatActivity() {
             srAdapter.setData(it)
         }
         })
-        workout = Workout(title="FakeWorkout",exercises=mutableListOf<WorkoutBuildAdapter.ExerciseInstance>())
+        workout = Workout(title="FakeWorkout",exercises=mutableListOf<ExerciseInstance>())
         var wid = intent.getIntExtra("WID",1)
         exerciseViewModel.allWorkouts.observe(this, {
                 list -> list.let{
