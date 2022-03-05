@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WorkoutApp">
         <activity
+            android:name=".WorkoutEditor"
+            android:exported="true" />
+        <activity
             android:name=".BuildWorkoutActivity"
             android:exported="true" />
         <activity

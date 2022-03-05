@@ -35,6 +35,15 @@ class ExerciseViewModel(private val exerciseRepository: ExerciseRepository) : Vi
         exerciseRepository.delete(exercise)
     }
 
+    fun deleteWorkout(workout: Workout) = viewModelScope.launch {
+        exerciseRepository.deleteWorkout(workout)
+    }
+
+    /*fun getWorkoutByID(WID: Int): Workout {
+        exerciseRepository.getWorkoutByID(WID)
+    }*/
+
+
     class ExerciseViewModelFactory(private val exerciseRepository: ExerciseRepository)
         :ViewModelProvider.Factory{
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {

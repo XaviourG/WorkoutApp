@@ -33,11 +33,14 @@ interface ExerciseDao {
     @Query("SELECT * FROM Workout WHERE title LIKE :title LIMIT 1")
     fun findWorkoutByTitle(title: String): Workout
 
+    @Query("SELECT * FROM Workout WHERE WID LIKE :WID LIMIT 1")
+    fun getWorkoutByID(WID: Int): Workout
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertWorkout(workout: Workout)
 
     @Delete
-    fun deleteWorkout(workout: Workout)
+    suspend fun deleteWorkout(workout: Workout)
 
 
     //Methods for Log Entities

@@ -2,16 +2,18 @@ package com.example.workoutapp.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.workoutapp.BuildWorkoutActivity
 import com.example.workoutapp.data.exercisedb.Exercise
+import com.example.workoutapp.data.exercisedb.Workout
 import com.example.workoutapp.databinding.ExerciseListingBinding
 import com.example.workoutapp.databinding.FragmentExerciseBinding
 import kotlinx.coroutines.currentCoroutineContext
 import kotlin.coroutines.coroutineContext
 
-class WorkoutBuildAdapter(private val context : BuildWorkoutActivity) : RecyclerView.Adapter<WorkoutBuildAdapter.WorkoutBuildViewHolder>() {
+class WorkoutBuildAdapter(private val context : AppCompatActivity) : RecyclerView.Adapter<WorkoutBuildAdapter.WorkoutBuildViewHolder>() {
 
     data class ExerciseInstance(
         val exercise: Exercise,
@@ -21,7 +23,7 @@ class WorkoutBuildAdapter(private val context : BuildWorkoutActivity) : Recycler
     data class Inst(
         val EI: ExerciseInstance,
         var adapter: SetBuildAdapter? = null
-        )
+    )
 
     var list = mutableListOf<Inst>()
 
@@ -72,6 +74,17 @@ class WorkoutBuildAdapter(private val context : BuildWorkoutActivity) : Recycler
 
     fun getExerciseList(): List<ExerciseInstance> {
         return list.map {it.EI}
+    }
+    fun setWorkout(workout: Workout){
+        var newList = mutableListOf<Inst>()
+        println("Iterating through ${workout}")
+        for(ex in workout.exercises) {
+            var newInst = Inst(ex)
+            newList.add(newInst)
+        }
+        println("Set workout to newList: $newList")
+        list = newList
+        notifyDataSetChanged()
     }
 
 }

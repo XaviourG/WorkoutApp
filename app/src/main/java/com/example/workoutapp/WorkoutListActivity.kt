@@ -40,7 +40,7 @@ class WorkoutListActivity : AppCompatActivity() {
         fakeList.add(Workout(title = "Hardcore Parkour", exercises = fakeExs))
 
          */
-        wlAdapter = WorkoutListAdapter()
+        wlAdapter = WorkoutListAdapter(this)
         binding.rvWorkoutList.adapter = wlAdapter
         binding.rvWorkoutList.layoutManager = LinearLayoutManager(this)
         exerciseViewModel.allWorkouts.observe(this, { list ->
