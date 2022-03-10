@@ -2,9 +2,13 @@ package com.example.workoutapp.adapters
 
 import android.content.Context
 import android.content.Intent
+import android.text.Layout
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
+import android.widget.PopupWindow
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +20,7 @@ import com.example.workoutapp.data.exercisedb.ExerciseViewModel
 import com.example.workoutapp.data.exercisedb.Workout
 import com.example.workoutapp.databinding.ActivityBuildWorkoutBinding
 import com.example.workoutapp.databinding.WorkoutListingBinding
+import com.example.workoutapp.databinding.WorkoutListingPopupBinding
 
 
 class WorkoutListAdapter(private val context: Context)
@@ -50,10 +55,30 @@ class WorkoutListAdapter(private val context: Context)
             with(workouts[position]) {
                 binding.tvWorkoutListing.text = title
                 binding.tvWorkoutListing.setOnClickListener {
+                    val popup = PopupWindow(context)
+                    val binding2 = WorkoutListingPopupBinding.inflate(LayoutInflater.from(context))
+                    //val view = LayoutInflater.from(context).inflate(R.layout.workout_listing_popup, null)
+                    popup.contentView = binding2.root
+                    binding2.btnCancel.setOnClickListener{
+                        popup.dismiss() }
+                    binding2.btnEdit.setOnClickListener{
+                        val i = Intent(context,
+                            WorkoutEditor::class.java)
+                        i.putExtra("WID", workouts[position].WID)
+                        startActivity(context, i, null)
+                    }
+                    binding2.btnStart.setOnClickListener{
+
+                    }
+                    popup.showAtLocation(binding2.root, Gravity.CENTER, 0, 0)
+
+                    /*
                     val i = Intent(context,
                         WorkoutEditor::class.java)
                     i.putExtra("WID", workouts[position].WID)
                     startActivity(context, i, null)
+
+                     */
                 }
                 //ADD CODE HERE TO FLESH OUT WORKOUT BOXES } }
             }
