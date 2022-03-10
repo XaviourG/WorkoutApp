@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         title="Homepage"
         binding.btnNextWorkout.setOnClickListener {
-            val intent = Intent(this@MainActivity, WorkoutActivity::class.java)
+            val intent = Intent(this@MainActivity, WorkoutPlayer::class.java)
             startActivity(intent)
         }
         binding.btnWorkouts.setOnClickListener {
