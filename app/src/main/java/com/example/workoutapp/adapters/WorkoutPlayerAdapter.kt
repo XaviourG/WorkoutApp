@@ -18,13 +18,14 @@ class WorkoutPlayerAdapter(private val context : AppCompatActivity) : RecyclerVi
     class WorkoutPlayerViewHolder(val binding: ExercisePlayerListingBinding)
         : RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viwType: Int): WorkoutPlayerAdapter.WorkoutPlayerViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viwType: Int): WorkoutPlayerViewHolder {
         val binding = ExercisePlayerListingBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
-        return WorkoutPlayerAdapter.WorkoutPlayerViewHolder(binding)
+        return WorkoutPlayerViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: WorkoutPlayerAdapter.WorkoutPlayerViewHolder, position: Int) {
+        println("!! CREATING ${list[position]} in Recycler view!")
         holder.binding.tvName.text = list[position].EI.exercise.name
 
         var setAdapter = SetBuildAdapter()
@@ -57,9 +58,21 @@ class WorkoutPlayerAdapter(private val context : AppCompatActivity) : RecyclerVi
             var newInst = WorkoutBuildAdapter.Inst(ex)
             newList.add(newInst)
         }
-        println("Set workout to newList: $newList")
+        /*
+        var i=0
+        for(inst in newList){
+            list.add(inst)
+            notifyItemInserted(i)
+            i++
+        }
+        */
+
+
+        //*
         list = newList
+        println("!!! Recycler View Updated to: $newList")
         notifyDataSetChanged()
+        //*/
     }
 
 }

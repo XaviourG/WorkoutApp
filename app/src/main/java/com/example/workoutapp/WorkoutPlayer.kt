@@ -1,5 +1,6 @@
 package com.example.workoutapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -32,20 +33,23 @@ class WorkoutPlayer : AppCompatActivity() {
         binding.rvPlayer.layoutManager = LinearLayoutManager(this)
 
         workout = Workout(title="FakeWorkout",exercises=mutableListOf<ExerciseInstance>())
-        var wid = intent.getIntExtra("WID",14)
+        var wid = intent.getIntExtra("WID",21)
         exerciseViewModel.allWorkouts.observe(this, { list ->
             list.let {
-                println("Searching for wid:$wid in >> $it")
                 for (w in it) {
                     if (w.WID == wid) {
                         workout = w
-                        println("FOUND WORKOUT: $workout")
                         wpAdapter.setWorkout(workout)
                         title = workout.title
                     }
                 }
             }
         })
+
+        binding.btnX.setOnClickListener {
+            val i = Intent(this@WorkoutPlayer, MainActivity::class.java)
+            startActivity(i)
+        }
     }
 
 }
