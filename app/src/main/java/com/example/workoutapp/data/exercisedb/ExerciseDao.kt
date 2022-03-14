@@ -41,6 +41,8 @@ interface ExerciseDao {
 
     @Delete
     suspend fun deleteWorkout(workout: Workout)
+    @Update
+    suspend fun updateWorkout(workout: Workout)
 
 
     //Methods for Log Entities

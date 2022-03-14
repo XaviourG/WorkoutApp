@@ -27,6 +27,7 @@ class WorkoutEditor : AppCompatActivity() {
     private lateinit var srAdapter: SearchResultsAdapter
     private lateinit var wlAdapter: WorkoutBuildAdapter
     private lateinit var workout: Workout
+    private var WID = 1
 
     private val exerciseViewModel: ExerciseViewModel by viewModels {
         ExerciseViewModel.ExerciseViewModelFactory((application as MyApplication).repository)
@@ -66,7 +67,7 @@ class WorkoutEditor : AppCompatActivity() {
                     println("FOUND WORKOUT: $workout")
                     wlAdapter.setWorkout(workout)
                     binding.etTitle.setText(workout.title)
-                    exerciseViewModel.deleteWorkout(workout)
+                    //exerciseViewModel.deleteWorkout(workout)
                 }
             }
         }
@@ -99,8 +100,9 @@ class WorkoutEditor : AppCompatActivity() {
         binding.btnDone.setOnClickListener{
             var title = binding.etTitle.text.toString()
             wlAdapter.updateSets()
-            val workout = Workout(title=title, exercises = wlAdapter.getExerciseList())
-            exerciseViewModel.insertWorkout(workout)
+            val workout = Workout(WID=wid, title=title, exercises = wlAdapter.getExerciseList())
+            //exerciseViewModel.insertWorkout(workout)
+            exerciseViewModel.updateWorkout(workout)
             val i = Intent(this@WorkoutEditor, WorkoutListActivity::class.java)
             startActivity(i)
         }

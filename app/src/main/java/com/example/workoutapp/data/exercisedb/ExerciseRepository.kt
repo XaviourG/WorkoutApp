@@ -52,4 +52,10 @@ class ExerciseRepository(private val exerciseDao: ExerciseDao) {
         return exerciseDao.getWorkoutByID(WID)
     }
 
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun updateWorkout(workout: Workout) {
+        exerciseDao.updateWorkout(workout)
+    }
+
 }

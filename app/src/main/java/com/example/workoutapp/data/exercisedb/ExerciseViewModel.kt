@@ -39,6 +39,10 @@ class ExerciseViewModel(private val exerciseRepository: ExerciseRepository) : Vi
         exerciseRepository.deleteWorkout(workout)
     }
 
+    fun updateWorkout(workout: Workout) = viewModelScope.launch {
+        exerciseRepository.updateWorkout(workout)
+    }
+
     /*fun getWorkoutByID(WID: Int): Workout {
         exerciseRepository.getWorkoutByID(WID)
     }*/
