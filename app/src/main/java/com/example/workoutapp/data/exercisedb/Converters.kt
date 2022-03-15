@@ -15,10 +15,21 @@ class Converters {
     }
 
     @TypeConverter
+    fun toIntList(string: String): List<Int> {
+        return string.split("|").map { it.toInt() }
+    }
+
+    @TypeConverter
+    fun fromIntList(intList: List<Int>): String {
+        return intList.map{ it.toString() }.joinToString(separator = "|")
+    }
+
+    @TypeConverter
     fun toExerciseList(listString: String): List<ExerciseInstance> {
         var list = listString.split("|")
         var newList = mutableListOf<ExerciseInstance>()
         for(s in list){
+            println("Is this the sabatour? $s")
             var bits = s.split("-")
             var sets: Array<Int> = bits[1].split(".").map{it.toInt()}.toTypedArray()
             var eid = bits[0].split(".")[0].toInt()
@@ -38,8 +49,10 @@ class Converters {
     : String {
         var list = mutableListOf<String>()
         for(ex in exerciseInstanceList){
+            println("Yeah nah the EID is = ${ex.exercise.EID}")
             var s: String = ex.exercise.EID.toString().plus(".").plus(ex.exercise.name)
                 .plus("-").plus(ex.sets.joinToString(separator = "."))
+            println("Saving new exercise as $s")
             list.add(s)
         }
         return list.joinToString(separator = "|")

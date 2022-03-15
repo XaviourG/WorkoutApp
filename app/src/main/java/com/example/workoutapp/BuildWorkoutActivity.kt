@@ -40,7 +40,7 @@ class BuildWorkoutActivity : AppCompatActivity() {
         setContentView(view)
         title="Workout Builder"
 
-        wlAdapter = WorkoutBuildAdapter(this)
+        wlAdapter = WorkoutBuildAdapter(this, exerciseViewModel)
         binding.rvBuildSpace.adapter = wlAdapter
         binding.rvBuildSpace.layoutManager = LinearLayoutManager(this)
 

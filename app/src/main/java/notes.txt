@@ -32,3 +32,9 @@ The approach will be a db of exercises sub dbs. Each exercise sub db will mainta
  - modifier
  - load
  - reps performed
+
+
+
+Dbugging to come back to later:
+
+- Using exercises just created to save a workout results in a number format exception

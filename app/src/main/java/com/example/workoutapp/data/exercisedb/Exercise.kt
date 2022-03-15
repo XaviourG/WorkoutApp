@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Exercise(
-    @PrimaryKey(autoGenerate = true) val EID: Int? = null,
+    @PrimaryKey(autoGenerate = true) var EID: Int? = null,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "primeMover") val primeMover: String? = null,
     @ColumnInfo(name = "exType") val exType: String? = null

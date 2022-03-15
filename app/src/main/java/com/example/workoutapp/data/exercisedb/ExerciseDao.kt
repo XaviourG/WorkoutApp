@@ -58,6 +58,6 @@ interface ExerciseDao {
     @Delete
     fun deleteLog(log: Log)
 
-    @Query("SELECT * FROM Log ORDER BY date")
+    @Query("SELECT * FROM Log ORDER BY date DESC")
     fun getAllLogs(): Flow<MutableList<Log>>
 }

@@ -8,13 +8,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.workoutapp.BuildWorkoutActivity
 import com.example.workoutapp.data.exercisedb.Exercise
 import com.example.workoutapp.data.exercisedb.ExerciseInstance
+import com.example.workoutapp.data.exercisedb.ExerciseViewModel
 import com.example.workoutapp.data.exercisedb.Workout
 import com.example.workoutapp.databinding.ExerciseListingBinding
 import com.example.workoutapp.databinding.FragmentExerciseBinding
 import kotlinx.coroutines.currentCoroutineContext
 import kotlin.coroutines.coroutineContext
 
-class WorkoutBuildAdapter(private val context : AppCompatActivity) : RecyclerView.Adapter<WorkoutBuildAdapter.WorkoutBuildViewHolder>() {
+class WorkoutBuildAdapter(private val context : AppCompatActivity,
+                          private val exerciseViewModel: ExerciseViewModel)
+    : RecyclerView.Adapter<WorkoutBuildAdapter.WorkoutBuildViewHolder>() {
 
     data class Inst(
         val EI: ExerciseInstance,
@@ -54,9 +57,26 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity) : RecyclerVie
     }
 
     fun addExercise(ex: Exercise){
-        var inst = Inst(ExerciseInstance(ex))
-        list.add(inst)
-        notifyItemInserted(list.size - 1)
+        if(ex.EID == null){
+            exerciseViewModel.allExercises.observe(context, {l ->
+                l.let {
+                    for (exercise in it) {
+                        if (exercise.name == ex.name) {
+                            ex.EID = exercise.EID
+                            var inst = Inst(ExerciseInstance(ex))
+                            list.add(inst)
+                            notifyItemInserted(list.size - 1)
+                            break
+                        }
+                    }
+                }
+            })
+        }
+        else{
+            var inst = Inst(ExerciseInstance(ex))
+            list.add(inst)
+            notifyItemInserted(list.size - 1)
+        }
     }
 
     fun removeExerciseByPos(position: Int){
