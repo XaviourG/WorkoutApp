@@ -9,6 +9,6 @@ data class Log(
     @PrimaryKey(autoGenerate = true) val LID: Int? = null,
     @ColumnInfo(name = "date") val date: String,
     @ColumnInfo(name = "exerciseID") val exerciseID: Int,
-    @ColumnInfo(name = "performance") val load: String
+    @ColumnInfo(name = "performance") val performance: String
     //Where performance is stored load.reps.modifier|load.reps.modifier|...
 )

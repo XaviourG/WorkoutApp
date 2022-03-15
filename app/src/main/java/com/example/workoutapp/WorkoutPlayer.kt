@@ -28,7 +28,7 @@ class WorkoutPlayer : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        wpAdapter = WorkoutPlayerAdapter(this)
+        wpAdapter = WorkoutPlayerAdapter(this, exerciseViewModel)
         binding.rvPlayer.adapter = wpAdapter
         binding.rvPlayer.layoutManager = LinearLayoutManager(this)
 

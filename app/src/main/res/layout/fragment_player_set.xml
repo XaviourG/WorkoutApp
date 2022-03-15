@@ -9,12 +9,11 @@
         android:id="@+id/etLoad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="6"
-        android:layout_marginStart="30dp"
         android:layout_marginTop="5dp"
-        android:inputType="number"
+        android:ems="6"
         android:hint="Load (KG)"
-        app:layout_constraintStart_toStartOf="parent"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/tvPrevEx"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
@@ -35,5 +34,15 @@
         android:layout_marginTop="5dp"
         android:text="o"
         app:layout_constraintStart_toEndOf="@+id/etReps"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvPrevEx"
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:text="--"
+        android:layout_marginTop="15dp"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

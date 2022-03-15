@@ -1,12 +1,15 @@
 package com.example.workoutapp.data.exercisedb
 
 import androidx.annotation.WorkerThread
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 
 class ExerciseRepository(private val exerciseDao: ExerciseDao) {
 
     val allExercises:Flow<MutableList<Exercise>> = exerciseDao.getAllExercises()
     val allWorkouts:Flow<MutableList<Workout>> = exerciseDao.getAllWorkouts()
+    val allLogs:Flow<MutableList<Log>> = exerciseDao.getAllLogs()
     lateinit var workoutList: MutableList<Workout>
 
     @Suppress("RedundantSuspendModifier")
@@ -56,6 +59,11 @@ class ExerciseRepository(private val exerciseDao: ExerciseDao) {
     @WorkerThread
     suspend fun updateWorkout(workout: Workout) {
         exerciseDao.updateWorkout(workout)
+    }
+
+    @WorkerThread
+    suspend fun getLastLog(eid: Int): Log {
+        return exerciseDao.findLastLogByExerciseID(eid)
     }
 
 }

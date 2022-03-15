@@ -2,18 +2,18 @@ package com.example.workoutapp.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.workoutapp.data.exercisedb.Exercise
-import com.example.workoutapp.data.exercisedb.ExerciseInstance
-import com.example.workoutapp.data.exercisedb.Log
-import com.example.workoutapp.data.exercisedb.Workout
+import com.example.workoutapp.MyApplication
+import androidx.activity.viewModels
+import com.example.workoutapp.data.exercisedb.*
 import com.example.workoutapp.databinding.ExerciseListingBinding
 import com.example.workoutapp.databinding.ExercisePlayerListingBinding
 import java.time.LocalDateTime
 
-class WorkoutPlayerAdapter(private val context : AppCompatActivity) : RecyclerView.Adapter<WorkoutPlayerAdapter.WorkoutPlayerViewHolder>() {
+class WorkoutPlayerAdapter(private val context : AppCompatActivity, private val exerciseViewModel: ExerciseViewModel) : RecyclerView.Adapter<WorkoutPlayerAdapter.WorkoutPlayerViewHolder>() {
 
     data class ModifiedInst(
         val EI: ExerciseInstance,
@@ -36,6 +36,22 @@ class WorkoutPlayerAdapter(private val context : AppCompatActivity) : RecyclerVi
         holder.binding.tvName.text = list[position].EI.exercise.name
 
         var setAdapter = PlayerSetAdapter()
+
+        val eid = list[position].EI.exercise.EID
+        var previousExecution: Log? = null
+        exerciseViewModel.allLogs.observe(context, {list ->
+            list.let {
+                for(l in it) {
+                    if (l.exerciseID == eid) {
+                        previousExecution = l
+                        println("Found previous execution: $previousExecution")
+                        setAdapter.updatePrev(previousExecution!!)
+                        break
+                    }
+                }
+            }
+        })
+
         holder.binding.rvSets.adapter = setAdapter
         holder.binding.rvSets.layoutManager = LinearLayoutManager(context)
         for(set in list[position].EI.sets) {
@@ -85,7 +101,7 @@ class WorkoutPlayerAdapter(private val context : AppCompatActivity) : RecyclerVi
                 val l = Log(
                     date = LocalDateTime.now().toString(),
                     exerciseID = ex.EI.exercise.EID!!,
-                    load = setLog
+                    performance = setLog
                 )
                 logs.add(l)
             }

@@ -2,14 +2,17 @@ package com.example.workoutapp.data.exercisedb
 
 import android.view.View
 import androidx.lifecycle.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ExerciseViewModel(private val exerciseRepository: ExerciseRepository) : ViewModel() {
 
     val allExercises : LiveData<MutableList<Exercise>> = exerciseRepository.allExercises.asLiveData()
     val allWorkouts : LiveData<MutableList<Workout>> = exerciseRepository.allWorkouts.asLiveData()
+    val allLogs : LiveData<MutableList<Log>> = exerciseRepository.allLogs.asLiveData()
     var workouts: MutableList<Workout> = mutableListOf<Workout>()
 
 
@@ -42,6 +45,12 @@ class ExerciseViewModel(private val exerciseRepository: ExerciseRepository) : Vi
     fun updateWorkout(workout: Workout) = viewModelScope.launch {
         exerciseRepository.updateWorkout(workout)
     }
+
+    /*fun getLastLog(eid: Int) = viewModelScope.launch {
+        suspend fun getLastLogg(eid: Int): Log = withContext(Dispatchers.IO) {
+            exerciseRepository.getLastLog(eid)
+        }
+    } */
 
     /*fun getWorkoutByID(WID: Int): Workout {
         exerciseRepository.getWorkoutByID(WID)

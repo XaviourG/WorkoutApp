@@ -50,11 +50,14 @@ interface ExerciseDao {
     //fun getAllLogs(): Flow<MutableList<Exercise>>
 
     @Query("SELECT * FROM Log WHERE exerciseID LIKE :exerciseID LIMIT 1")
-    fun findLogByExerciseID(exerciseID: Int): Log
+    fun findLastLogByExerciseID(exerciseID: Int): Log
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertLog(log: Log)
 
     @Delete
     fun deleteLog(log: Log)
+
+    @Query("SELECT * FROM Log ORDER BY date")
+    fun getAllLogs(): Flow<MutableList<Log>>
 }
