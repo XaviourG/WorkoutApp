@@ -80,8 +80,15 @@ class WorkoutPlayerAdapter(private val context : AppCompatActivity) : RecyclerVi
         var logs = mutableListOf<Log>()
         for(ex in list){
             val setLog = ex.adapter!!.getLog()
-            val l = Log(date=LocalDateTime.now().toString(),exerciseID = ex.EI.exercise.EID!!,load=setLog)
-            logs.add(l)
+            if(setLog == ""){}
+            else {
+                val l = Log(
+                    date = LocalDateTime.now().toString(),
+                    exerciseID = ex.EI.exercise.EID!!,
+                    load = setLog
+                )
+                logs.add(l)
+            }
         }
         return logs
 

@@ -29,8 +29,10 @@ class PlayerSetAdapter : RecyclerView.Adapter<PlayerSetAdapter.PlayerSetViewHold
         //Do nothing I suppose, we just want the empty fields.
         holder.binding.btnTick.setOnClickListener{
             holder.binding.etLoad.setTextColor(Color.GREEN)
+            holder.binding.etReps.setTextColor(Color.GREEN)
+            holder.binding.btnTick.setBackgroundColor(Color.GREEN)
             sets[position] = holder.binding.etLoad.text.toString() + "." + holder.binding.etReps.text.toString() + "." + "none"
-            //
+            println(sets[position])
         }
     }
 
@@ -51,8 +53,8 @@ class PlayerSetAdapter : RecyclerView.Adapter<PlayerSetAdapter.PlayerSetViewHold
 
     fun getLog(): String {
         var s = ""
-        for(l in sets){
-            if((l=="0.0.none")){
+        for(l in sets) {
+            if ((l == "0.0.none")) {
                 //don't add
             } else {
                 s = "$s$l|"

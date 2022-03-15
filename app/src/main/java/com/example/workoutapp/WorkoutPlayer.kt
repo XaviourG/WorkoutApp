@@ -53,8 +53,8 @@ class WorkoutPlayer : AppCompatActivity() {
 
         binding.btnFin.setOnClickListener {
             //Logging functionality
-            for(ex in wpAdapter.getLogs()){
-
+            for(l in wpAdapter.getLogs()){
+                exerciseViewModel.insertLog(l)
             }
             //eventually make this go to a finished page
             val i = Intent(this@WorkoutPlayer, MainActivity::class.java)
