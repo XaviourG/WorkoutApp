@@ -33,7 +33,7 @@ class WorkoutPlayer : AppCompatActivity() {
         binding.rvPlayer.layoutManager = LinearLayoutManager(this)
 
         workout = Workout(title="FakeWorkout",exercises=mutableListOf<ExerciseInstance>())
-        var wid = intent.getIntExtra("WID",21)
+        var wid = intent.getIntExtra("WID",1)
         exerciseViewModel.allWorkouts.observe(this, { list ->
             list.let {
                 for (w in it) {
@@ -47,6 +47,16 @@ class WorkoutPlayer : AppCompatActivity() {
         })
 
         binding.btnX.setOnClickListener {
+            val i = Intent(this@WorkoutPlayer, MainActivity::class.java)
+            startActivity(i)
+        }
+
+        binding.btnFin.setOnClickListener {
+            //Logging functionality
+            for(ex in wpAdapter.getLogs()){
+
+            }
+            //eventually make this go to a finished page
             val i = Intent(this@WorkoutPlayer, MainActivity::class.java)
             startActivity(i)
         }

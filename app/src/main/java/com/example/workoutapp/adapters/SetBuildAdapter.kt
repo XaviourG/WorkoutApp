@@ -1,7 +1,10 @@
 package com.example.workoutapp.adapters
 
+import android.text.TextWatcher
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.workoutapp.data.exercisedb.Exercise
 import com.example.workoutapp.databinding.FragmentExerciseBinding
