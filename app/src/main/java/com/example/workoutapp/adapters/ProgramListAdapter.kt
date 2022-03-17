@@ -34,18 +34,21 @@ class ProgramListAdapter (private val context: Context)
         holder.binding.tvDescription.text = programs[position].description
 
         //Popup
-        val popup = PopupWindow(context)
-        val popupBinding = WorkoutListingPopupBinding.inflate(LayoutInflater.from(context))
-        popupBinding.btnStart.text = "Activate"
-        popup.contentView = popupBinding.root
-        popupBinding.btnCancel.setOnClickListener{
-            popup.dismiss()
-        }
-        popupBinding.btnStart.setOnClickListener{
-            popup.dismiss() //replace with setProgram functionality
-        }
-        popupBinding.btnEdit.setOnClickListener{
-            popup.dismiss() //replace with program editor activity change
+        holder.binding.tvProgramTitle.setOnClickListener {
+            val popup = PopupWindow(context)
+            val popupBinding = WorkoutListingPopupBinding.inflate(LayoutInflater.from(context))
+            popupBinding.btnStart.text = "Activate"
+            popup.contentView = popupBinding.root
+            popupBinding.btnCancel.setOnClickListener {
+                popup.dismiss()
+            }
+            popupBinding.btnStart.setOnClickListener {
+                popup.dismiss() //replace with setProgram functionality
+            }
+            popupBinding.btnEdit.setOnClickListener {
+                popup.dismiss() //replace with program editor activity change
+            }
+            popup.showAtLocation(popupBinding.root, Gravity.CENTER, 0, 0)
         }
     }
 
