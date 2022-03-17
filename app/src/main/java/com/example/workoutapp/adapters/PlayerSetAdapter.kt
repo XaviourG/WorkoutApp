@@ -33,19 +33,32 @@ class PlayerSetAdapter : RecyclerView.Adapter<PlayerSetAdapter.PlayerSetViewHold
             holder.binding.etLoad.setTextColor(Color.GREEN)
             holder.binding.etReps.setTextColor(Color.GREEN)
             holder.binding.btnTick.setBackgroundColor(Color.GREEN)
-            sets[position] = holder.binding.etLoad.text.toString() + "." + holder.binding.etReps.text.toString() + "." + "none"
-            println(sets[position])
+            sets[position] = holder.binding.etLoad.text.toString() + ":" + holder.binding.etReps.text.toString() + ":" + "none"
         }
         holder.binding.tvPrevEx.text = prevs[position]
+
+        var info = sets[position].split(":")
+        if(info[0] == "0"){ // default value do nothing
+        } else {
+            holder.binding.etLoad.setText(info[0])
+        }
+        if(info[1] == "0"){ // default value do nothing
+        } else {
+            holder.binding.etReps.setText(info[1])
+        }
+        if(info[2] == "none"){ // default value do nothing
+        } else {
+            TODO() //implement modified set handling
+        }
     }
 
     override fun getItemCount(): Int {
         return sets.size
     }
 
-    fun addSet() {
+    fun addSet(set: String = "0:0:none") {
         //load.reps.modifier
-        sets.add("0.0.none")
+        sets.add(set)
         prevs.add("--")
         notifyItemInserted(sets.size - 1)
     }
@@ -58,7 +71,7 @@ class PlayerSetAdapter : RecyclerView.Adapter<PlayerSetAdapter.PlayerSetViewHold
     fun getLog(): String {
         var s = ""
         for(l in sets) {
-            if ((l == "0.0.none")) {
+            if ((l == "0:0:none")) {
                 //don't add
             } else {
                 s = "$s$l|"
@@ -74,7 +87,7 @@ class PlayerSetAdapter : RecyclerView.Adapter<PlayerSetAdapter.PlayerSetViewHold
         performances = performances.subList(0, performances.size - 1) //always a "" on end.
         println("PRE CRASH: $prevs")
         for(p in performances){
-            var bits = p.split(".")
+            var bits = p.split(":")
             prevs[i] =
                 bits[0] + "kg x" + bits[1]
             println("!!! Set ex:${i+1} to ${prevs[i]}")

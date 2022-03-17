@@ -43,7 +43,7 @@ class WorkoutPlayerAdapter(private val context : AppCompatActivity, private val 
         holder.binding.rvSets.adapter = setAdapter
         holder.binding.rvSets.layoutManager = LinearLayoutManager(context)
         for(set in list[position].EI.sets) {
-            setAdapter.addSet()
+            setAdapter.addSet(set)
         }
 
         list[position].adapter = setAdapter
