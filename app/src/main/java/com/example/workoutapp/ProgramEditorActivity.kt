@@ -1,12 +1,16 @@
 package com.example.workoutapp
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.workoutapp.adapters.ProgramBuildAdapter
 import com.example.workoutapp.adapters.ProgramSearchAdapter
@@ -42,7 +46,7 @@ class ProgramEditorActivity : AppCompatActivity() {
         binding.rvBuildSpace.adapter = programBuildAdapter
         binding.rvBuildSpace.layoutManager = LinearLayoutManager(this)
 
-        programSearchAdapter = ProgramSearchAdapter(programBuildAdapter, exerciseViewModel)
+        programSearchAdapter = ProgramSearchAdapter(this, programBuildAdapter, exerciseViewModel)
         binding.rvSearchResults.adapter = programSearchAdapter
         binding.rvSearchResults.layoutManager = LinearLayoutManager(this)
 
@@ -68,6 +72,7 @@ class ProgramEditorActivity : AppCompatActivity() {
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 programSearchAdapter.filter(query)
+                hideKeyboard()
                 return false
             }
             override fun onQueryTextChange(query: String): Boolean {
@@ -81,6 +86,7 @@ class ProgramEditorActivity : AppCompatActivity() {
             androidx.appcompat.widget.SearchView.OnCloseListener {
             override fun onClose(): Boolean {
                 binding.rvSearchResults.visibility = View.GONE
+                hideKeyboard()
                 return false
             }
         })
@@ -123,6 +129,19 @@ class ProgramEditorActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    fun Fragment.hideKeyboard() {
+        view?.let {activity?.hideKeyboard(it)}
+    }
+
+    fun Activity.hideKeyboard() {
+        hideKeyboard(currentFocus?: View(this))
+    }
+
+    fun Context.hideKeyboard(view: View) {
+        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
 }

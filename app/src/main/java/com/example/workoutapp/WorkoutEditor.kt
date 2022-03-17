@@ -1,14 +1,18 @@
 package com.example.workoutapp
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextWatcher
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
@@ -78,6 +82,7 @@ class WorkoutEditor : AppCompatActivity() {
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 srAdapter.filter(query)
+                hideKeyboard()
                 return false
             }
             override fun onQueryTextChange(query: String): Boolean {
@@ -91,6 +96,7 @@ class WorkoutEditor : AppCompatActivity() {
             androidx.appcompat.widget.SearchView.OnCloseListener {
             override fun onClose(): Boolean {
                 binding.rvSearchResults.visibility = View.GONE
+                hideKeyboard()
                 return false
             }
         })
@@ -106,6 +112,19 @@ class WorkoutEditor : AppCompatActivity() {
             startActivity(i)
         }
 
+    }
+
+    fun Fragment.hideKeyboard() {
+        view?.let {activity?.hideKeyboard(it)}
+    }
+
+    fun Activity.hideKeyboard() {
+        hideKeyboard(currentFocus?: View(this))
+    }
+
+    fun Context.hideKeyboard(view: View) {
+        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
 

@@ -79,4 +79,6 @@ class ProgramBuildAdapter(private val context : AppCompatActivity,
     fun getWorkoutIDs(): List<Int> {
         return workouts.map {it.WID!!}
     }
+
+
 }
