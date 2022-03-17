@@ -108,7 +108,9 @@ class ProgramEditorActivity : AppCompatActivity() {
                         PID = pid,
                         title = binding.etTitle.text.toString(),
                         workoutIDs = programBuildAdapter.getWorkoutIDs(),
-                        description = binding.etDescription.text.toString()
+                        description = binding.etDescription.text.toString(),
+                        active = program.active,
+                        position = program.position
                     )
                 )
             }
