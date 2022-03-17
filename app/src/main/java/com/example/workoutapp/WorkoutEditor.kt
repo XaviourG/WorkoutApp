@@ -27,7 +27,6 @@ class WorkoutEditor : AppCompatActivity() {
     private lateinit var srAdapter: SearchResultsAdapter
     private lateinit var wlAdapter: WorkoutBuildAdapter
     private lateinit var workout: Workout
-    private var WID = 1
 
     private val exerciseViewModel: ExerciseViewModel by viewModels {
         ExerciseViewModel.ExerciseViewModelFactory((application as MyApplication).repository)

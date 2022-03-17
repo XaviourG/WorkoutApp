@@ -13,6 +13,7 @@ class ExerciseViewModel(private val exerciseRepository: ExerciseRepository) : Vi
     val allExercises : LiveData<MutableList<Exercise>> = exerciseRepository.allExercises.asLiveData()
     val allWorkouts : LiveData<MutableList<Workout>> = exerciseRepository.allWorkouts.asLiveData()
     val allLogs : LiveData<MutableList<Log>> = exerciseRepository.allLogs.asLiveData()
+    val allPrograms: LiveData<MutableList<Program>> = exerciseRepository.allPrograms.asLiveData()
     var workouts: MutableList<Workout> = mutableListOf<Workout>()
 
 
@@ -55,6 +56,15 @@ class ExerciseViewModel(private val exerciseRepository: ExerciseRepository) : Vi
     /*fun getWorkoutByID(WID: Int): Workout {
         exerciseRepository.getWorkoutByID(WID)
     }*/
+
+    //PROGRAM
+    fun insertProgram(program: Program) = viewModelScope.launch {
+        exerciseRepository.insertProgram(program)
+    }
+    fun deleteProgram(program: Program) = viewModelScope.launch {
+        exerciseRepository.deleteProgram(program)
+    }
+
 
 
     class ExerciseViewModelFactory(private val exerciseRepository: ExerciseRepository)

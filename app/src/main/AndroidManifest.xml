@@ -29,6 +29,9 @@
             android:name=".ProgramActivity"
             android:exported="true" />
         <activity
+            android:name=".ProgramEditorActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey
 data class Program(
     @PrimaryKey(autoGenerate = true) val PID: Int? = null,
     @ColumnInfo(name = "title") val title: String,
+    @ColumnInfo(name = "description") val description: String? = "",
     @ColumnInfo(name = "workouts") val workoutIDs: List<Int>,
     @ColumnInfo(name = "position") val position: Int = 0,
     @ColumnInfo(name = "active") val active: Boolean = false

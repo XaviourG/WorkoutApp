@@ -10,6 +10,7 @@ class ExerciseRepository(private val exerciseDao: ExerciseDao) {
     val allExercises:Flow<MutableList<Exercise>> = exerciseDao.getAllExercises()
     val allWorkouts:Flow<MutableList<Workout>> = exerciseDao.getAllWorkouts()
     val allLogs:Flow<MutableList<Log>> = exerciseDao.getAllLogs()
+    val allPrograms:Flow<MutableList<Program>> = exerciseDao.getAllPrograms()
     lateinit var workoutList: MutableList<Workout>
 
     @Suppress("RedundantSuspendModifier")
@@ -64,6 +65,19 @@ class ExerciseRepository(private val exerciseDao: ExerciseDao) {
     @WorkerThread
     suspend fun getLastLog(eid: Int): Log {
         return exerciseDao.findLastLogByExerciseID(eid)
+    }
+
+    //PROGRAMS
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun insertProgram(program: Program){
+        exerciseDao.insertProgram(program)
+    }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun deleteProgram(program: Program){
+        exerciseDao.deleteProgram(program)
     }
 
 }

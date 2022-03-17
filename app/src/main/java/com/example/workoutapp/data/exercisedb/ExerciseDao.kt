@@ -60,4 +60,15 @@ interface ExerciseDao {
 
     @Query("SELECT * FROM Log ORDER BY date DESC")
     fun getAllLogs(): Flow<MutableList<Log>>
+
+
+    //PROGRAMS
+    @Query("SELECT * FROM Program ORDER BY PID DESC")
+    fun getAllPrograms(): Flow<MutableList<Program>>
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertProgram(program: Program)
+
+    @Delete
+    fun deleteProgram(program: Program)
 }
