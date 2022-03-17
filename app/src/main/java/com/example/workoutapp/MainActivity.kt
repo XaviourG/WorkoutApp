@@ -57,6 +57,9 @@ class MainActivity : AppCompatActivity() {
                             setProgram(p)
                             setNextWorkoutText(p.workoutIDs[p.position])
                             binding.btnMyProgram.text = "My Program \n- " + p.title +" -"
+                            binding.tvTotalLoad.text = "Program Cycle:\nWorkout ${p.position+1}/${p.workoutIDs.size}"
+                            binding.progressBar.progress = 80
+
                             break
                         }
                     }
