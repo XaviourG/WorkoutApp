@@ -8,7 +8,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupWindow
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.workoutapp.ProgramEditorActivity
 import com.example.workoutapp.WorkoutEditor
 import com.example.workoutapp.data.exercisedb.ExerciseViewModel
 import com.example.workoutapp.data.exercisedb.Program
@@ -34,6 +36,7 @@ class ProgramListAdapter (private val context: Context, private val exerciseView
     override fun onBindViewHolder(holder: ProgramListAdapter.ProgramListViewHolder, position: Int) {
         holder.binding.tvProgramTitle.text = programs[position].title
         holder.binding.tvDescription.text = programs[position].description
+
         if(programs[position].active){
             holder.binding.tvProgramTitle.setTextColor(Color.RED)
             //holder.binding.tvProgramTitle.setTextAppearance()
@@ -47,6 +50,7 @@ class ProgramListAdapter (private val context: Context, private val exerciseView
             val popupBinding = WorkoutListingPopupBinding.inflate(LayoutInflater.from(context))
             popupBinding.btnStart.text = "Activate"
             popup.contentView = popupBinding.root
+
             popupBinding.btnCancel.setOnClickListener {
                 popup.dismiss()
             }
@@ -68,7 +72,10 @@ class ProgramListAdapter (private val context: Context, private val exerciseView
                 popup.dismiss() //replace with setProgram functionality
             }
             popupBinding.btnEdit.setOnClickListener {
-                popup.dismiss() //replace with program editor activity change
+                //edit program
+                val i = Intent(context, ProgramEditorActivity::class.java)
+                i.putExtra("PID", programs[position].PID)
+                startActivity(context, i, null)
             }
             popup.showAtLocation(popupBinding.root, Gravity.CENTER, 0, 0)
         }

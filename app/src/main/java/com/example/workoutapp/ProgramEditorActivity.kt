@@ -57,6 +57,7 @@ class ProgramEditorActivity : AppCompatActivity() {
                             program = p
                             programBuildAdapter.setProgram(p)
                             binding.etTitle.setText(p.title)
+                            binding.etDescription.setText(p.description)
                         }
                     }
             }
@@ -93,11 +94,24 @@ class ProgramEditorActivity : AppCompatActivity() {
         binding.rvSearchResults.visibility = View.GONE
 
         binding.btnSave.setOnClickListener {
-            exerciseViewModel.insertProgram(Program(
-                title = binding.etTitle.text.toString(),
-                workoutIDs = programBuildAdapter.getWorkoutIDs(),
-                description = binding.etDescription.text.toString()
-            ))
+            if(isNewProgram) {
+                exerciseViewModel.insertProgram(
+                    Program(
+                        title = binding.etTitle.text.toString(),
+                        workoutIDs = programBuildAdapter.getWorkoutIDs(),
+                        description = binding.etDescription.text.toString()
+                    )
+                )
+            } else {
+                exerciseViewModel.updateProgram(
+                    Program(
+                        PID = pid,
+                        title = binding.etTitle.text.toString(),
+                        workoutIDs = programBuildAdapter.getWorkoutIDs(),
+                        description = binding.etDescription.text.toString()
+                    )
+                )
+            }
             val i = Intent(this@ProgramEditorActivity, ProgramActivity::class.java)
             startActivity(i)
         }
