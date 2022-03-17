@@ -80,8 +80,10 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
     }
 
     fun removeExerciseByPos(position: Int){
+        updateSets()
         list.removeAt(position)
-        notifyItemRemoved(position)
+        //notifyItemRemoved(position)
+        notifyDataSetChanged()
     }
 
     fun updateSets(){
