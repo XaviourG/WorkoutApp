@@ -3,12 +3,18 @@ package com.example.workoutapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.workoutapp.databinding.ActivityBuildWorkoutBinding
+import androidx.activity.viewModels
+import com.example.workoutapp.adapters.ProgramListAdapter
+import com.example.workoutapp.data.exercisedb.ExerciseViewModel
 import com.example.workoutapp.databinding.ActivityProgramBinding
 
 class ProgramActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProgramBinding
+    private lateinit var plAdapter: ProgramListAdapter
+    private val exerciseViewModel: ExerciseViewModel by viewModels {
+        ExerciseViewModel.ExerciseViewModelFactory((application as MyApplication).repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,7 +22,7 @@ class ProgramActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         title="My Program"
-        binding.btnHomeP.setOnClickListener {
+        binding.btnHome.setOnClickListener {
             val i = Intent(this@ProgramActivity, MainActivity::class.java)
             startActivity(i)
         }

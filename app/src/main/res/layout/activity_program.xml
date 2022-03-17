@@ -5,12 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProgramActivity">
-
     <Button
-        android:id="@+id/btnHomeP"
+        android:id="@+id/btnHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Home"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvProgramList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnNewProgram"
+        app:layout_constraintVertical_bias="0.448" />
+
+    <Button
+        android:id="@+id/btnNewProgram"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:text="+ New Program"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnHome" />
 </androidx.constraintlayout.widget.ConstraintLayout>
