@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.workoutapp.R
 import com.example.workoutapp.WorkoutEditor
 import com.example.workoutapp.WorkoutListActivity
+import com.example.workoutapp.WorkoutPlayer
 import com.example.workoutapp.data.exercisedb.Exercise
 import com.example.workoutapp.data.exercisedb.ExerciseViewModel
 import com.example.workoutapp.data.exercisedb.Workout
@@ -68,7 +69,10 @@ class WorkoutListAdapter(private val context: Context)
                         startActivity(context, i, null)
                     }
                     binding2.btnStart.setOnClickListener{
-
+                        //start workout player for this workout
+                        val i = Intent(context, WorkoutPlayer::class.java)
+                        i.putExtra("WID", workouts[position].WID)
+                        startActivity(context, i, null)
                     }
                     popup.showAtLocation(binding2.root, Gravity.CENTER, 0, 0)
 

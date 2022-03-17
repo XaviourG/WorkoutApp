@@ -27,18 +27,24 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         title="Homepage"
         binding.btnNextWorkout.setOnClickListener {
-            val intent = Intent(this@MainActivity, WorkoutPlayer::class.java)
-            intent.putExtra("WID", program.workoutIDs[program.position])
-            intent.putExtra("PID", program.PID)
-
-            //Increment position
-            if(program.position >= program.workoutIDs.size - 1) {
-                program.position = 0
+            if(program.title == "FakeProgram"){
+            //No active program and hence no next workout. Redirect to workouts page.
+                val intent = Intent(this@MainActivity, WorkoutListActivity::class.java)
+                startActivity(intent)
             } else {
-                program.position++
+                val intent = Intent(this@MainActivity, WorkoutPlayer::class.java)
+                intent.putExtra("WID", program.workoutIDs[program.position])
+                intent.putExtra("PID", program.PID)
+
+                //Increment position
+                if (program.position >= program.workoutIDs.size - 1) {
+                    program.position = 0
+                } else {
+                    program.position++
+                }
+                exerciseViewModel.updateProgram(program)
+                startActivity(intent)
             }
-            exerciseViewModel.updateProgram(program)
-            startActivity(intent)
         }
         binding.btnWorkouts.setOnClickListener {
             val intent = Intent(this@MainActivity, WorkoutListActivity::class.java)
