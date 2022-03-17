@@ -12,7 +12,7 @@ import com.example.workoutapp.databinding.FragmentSetBinding
 
 class SetBuildAdapter : RecyclerView.Adapter<SetBuildAdapter.SetBuildViewHolder>() {
 
-    var sets = mutableListOf<Int>()
+    var sets = mutableListOf<Pair<String, SetBuildViewHolder?>>()
     class SetBuildViewHolder(val binding: FragmentSetBinding)
         : RecyclerView.ViewHolder(binding.root)
 
@@ -24,6 +24,7 @@ class SetBuildAdapter : RecyclerView.Adapter<SetBuildAdapter.SetBuildViewHolder>
 
     override fun onBindViewHolder(holder: SetBuildAdapter.SetBuildViewHolder, position: Int) {
         //Do nothing I suppose, we just want the empty fields.
+        sets[position] = Pair(sets[position].first, holder)
         holder.binding.btnDeleteSet.setOnClickListener{
             if(sets.size == 1){
                 //If you remove all sets the damn thing crashes, pop up here saying
@@ -32,14 +33,28 @@ class SetBuildAdapter : RecyclerView.Adapter<SetBuildAdapter.SetBuildViewHolder>
                 rmSetByPos(position)
             }
         }
+        var info = sets[position].first.split(":")
+        println("INFO == $info")
+        if(info[0] == "0"){ // default value do nothing
+        } else {
+            holder.binding.etLoad.setText(info[0])
+        }
+        if(info[1] == "0"){ // default value do nothing
+        } else {
+            holder.binding.etReps.setText(info[1])
+        }
+        if(info[2] == "none"){ // default value do nothing
+        } else {
+            TODO() //implement modified set handling
+        }
     }
 
     override fun getItemCount(): Int {
         return sets.size
     }
 
-    fun addSet() {
-        sets.add(1)
+    fun addSet(set: String = "0:0:none") {
+        sets.add(Pair(set, null))
         notifyItemInserted(sets.size - 1)
     }
 
@@ -48,7 +63,17 @@ class SetBuildAdapter : RecyclerView.Adapter<SetBuildAdapter.SetBuildViewHolder>
         notifyDataSetChanged()
     }
 
-    fun getSets(): Array<Int>{
-        return sets.toTypedArray()
+    fun getSets(): Array<String>{
+        var setList = arrayListOf<String>()
+        for(s in sets){
+            if(s.second == null){}
+            else {
+                var set = s.second!!.binding.etLoad.text.toString() + ":" +
+                        s.second!!.binding.etReps.text.toString() + ":" +
+                        "none" // eventually modified set functionality
+                setList.add(set)
+            }
+        }
+        return setList.toTypedArray()
     }
 }

@@ -7,25 +7,27 @@
 
     <EditText
         android:id="@+id/etLoad"
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:ems="6"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="5dp"
-        android:inputType="number"
+        android:ems="6"
         android:hint="Load (KG)"
+        android:inputType="number"
+        android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etReps"
-        android:layout_width="wrap_content"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:ems="6"
         android:hint="Reps"
+        android:textAlignment="center"
         android:inputType="number"
-        app:layout_constraintStart_toEndOf="@+id/etLoad"
+        app:layout_constraintStart_toEndOf="@+id/tvTimes"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -35,5 +37,15 @@
         android:layout_marginTop="5dp"
         android:text="x"
         app:layout_constraintStart_toEndOf="@+id/etReps"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTimes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(kg/lbs) x"
+        android:textSize="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/etLoad"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

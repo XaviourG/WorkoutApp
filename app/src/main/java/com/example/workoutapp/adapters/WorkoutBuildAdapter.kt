@@ -44,7 +44,7 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
         holder.binding.rvSets.adapter = setAdapter
         holder.binding.rvSets.layoutManager = LinearLayoutManager(context)
         for(set in list[position].EI.sets) {
-            setAdapter.addSet()
+            setAdapter.addSet(set)
         }
         holder.binding.btnAddSet.setOnClickListener {
             setAdapter.addSet()

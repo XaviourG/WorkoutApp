@@ -31,7 +31,7 @@ class Converters {
         for(s in list){
             println("Is this the sabatour? $s")
             var bits = s.split("-")
-            var sets: Array<Int> = bits[1].split(".").map{it.toInt()}.toTypedArray()
+            var sets: Array<String> = bits[1].split("_").toTypedArray<String>()
             var eid = bits[0].split(".")[0].toInt()
             var name = bits[0].split(".")[1]
             var exercise = Exercise(EID = eid, name = name)
@@ -51,7 +51,7 @@ class Converters {
         for(ex in exerciseInstanceList){
             println("Yeah nah the EID is = ${ex.exercise.EID}")
             var s: String = ex.exercise.EID.toString().plus(".").plus(ex.exercise.name)
-                .plus("-").plus(ex.sets.joinToString(separator = "."))
+                .plus("-").plus(ex.sets.joinToString(separator = "_"))
             println("Saving new exercise as $s")
             list.add(s)
         }
