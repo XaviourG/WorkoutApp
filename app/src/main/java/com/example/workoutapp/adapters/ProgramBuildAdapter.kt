@@ -46,7 +46,8 @@ class ProgramBuildAdapter(private val context : AppCompatActivity,
             }
         }
         holder.binding.btnDelete.setOnClickListener {
-            TODO()
+            workouts.removeAt(position)
+            notifyDataSetChanged()
         }
     }
 
@@ -57,11 +58,6 @@ class ProgramBuildAdapter(private val context : AppCompatActivity,
     fun addWorkout(workout: Workout){
         workouts.add(workout)
         notifyItemInserted(workouts.size - 1)
-    }
-
-    fun removeWorkoutByPos(position: Int){
-        workouts.removeAt(position)
-        notifyItemRemoved(position)
     }
 
     fun setProgram(program: Program){
