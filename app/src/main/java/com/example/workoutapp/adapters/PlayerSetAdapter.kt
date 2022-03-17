@@ -37,16 +37,24 @@ class PlayerSetAdapter : RecyclerView.Adapter<PlayerSetAdapter.PlayerSetViewHold
         }
         holder.binding.tvPrevEx.text = prevs[position]
 
-        var info = sets[position].split(":")
-        if(info[0] == "0"){ // default value do nothing
-        } else {
-            holder.binding.etLoad.setText(info[0])
+        if(prevs[position] == "--"){//No existing log show goals
+            var info = sets[position].split(":")
+            if(info[0] == "0"){ // default value do nothing
+                holder.binding.etLoad.setHint("?")
+            } else {
+                holder.binding.etLoad.setHint(info[0])
+            }
+            if(info[1] == "0"){ // default value do nothing
+                holder.binding.etReps.setHint("?")
+            } else {
+                holder.binding.etReps.setHint(info[1])
+            }
+        } else { //last performance exists, show that instead
+            var info = prevs[position].split("kg x")
+            holder.binding.etLoad.setHint(info[0])
+            holder.binding.etReps.setHint(info[1])
         }
-        if(info[1] == "0"){ // default value do nothing
-        } else {
-            holder.binding.etReps.setText(info[1])
-        }
-        if(info[2] == "none"){ // default value do nothing
+        if(sets[position].split(":")[2] == "none"){ // default value do nothing
         } else {
             TODO() //implement modified set handling
         }
@@ -88,9 +96,12 @@ class PlayerSetAdapter : RecyclerView.Adapter<PlayerSetAdapter.PlayerSetViewHold
         println("PRE CRASH: $prevs")
         for(p in performances){
             var bits = p.split(":")
-            prevs[i] =
-                bits[0] + "kg x" + bits[1]
-            println("!!! Set ex:${i+1} to ${prevs[i]}")
+            if (bits[0] == ""){}
+            else {
+                prevs[i] =
+                    bits[0] + "kg x" + bits[1]
+            }
+            println("!!! Set ex:${i + 1} to ${prevs[i]}")
             i++
         }
         notifyDataSetChanged()
