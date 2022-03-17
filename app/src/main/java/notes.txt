@@ -38,3 +38,9 @@ The approach will be a db of exercises sub dbs. Each exercise sub db will mainta
 Dbugging to come back to later:
 
 - Using exercises just created to save a workout results in a number format exception
+
+
+Stuff to add
+- superset functionality
+- add load and rep support for workout building
+- change log figures from ints to floats for negatives and decimals
