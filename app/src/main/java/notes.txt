@@ -42,5 +42,5 @@ Dbugging to come back to later:
 
 Stuff to add
 - superset functionality
-- add load and rep support for workout building
+- add load and rep support for workout building DONE
 - change log figures from ints to floats for negatives and decimals

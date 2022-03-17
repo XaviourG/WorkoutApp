@@ -78,6 +78,7 @@ class PlayerSetAdapter : RecyclerView.Adapter<PlayerSetAdapter.PlayerSetViewHold
 
     fun getLog(): String {
         var s = ""
+        println("SETS!!!!! >> $sets")
         for(l in sets) {
             if ((l == "0:0:none")) {
                 //don't add
@@ -85,6 +86,8 @@ class PlayerSetAdapter : RecyclerView.Adapter<PlayerSetAdapter.PlayerSetViewHold
                 s = "$s$l|"
             }
         }
+        TODO("Its setting sets that are then logged!!! MIstake, " +
+                "fix set workout set funcitonality for loading goals")
         return s
     }
 
