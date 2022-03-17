@@ -10,6 +10,6 @@ data class Program(
     @ColumnInfo(name = "title") val title: String,
     @ColumnInfo(name = "description") val description: String? = "",
     @ColumnInfo(name = "workouts") val workoutIDs: List<Int>,
-    @ColumnInfo(name = "position") val position: Int = 0,
-    @ColumnInfo(name = "active") val active: Boolean = false
+    @ColumnInfo(name = "position") var position: Int = 0,
+    @ColumnInfo(name = "active") var active: Boolean = false
 )

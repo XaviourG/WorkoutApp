@@ -29,7 +29,7 @@ class ProgramActivity : AppCompatActivity() {
             startActivity(i)
         }
 
-        plAdapter = ProgramListAdapter(this)
+        plAdapter = ProgramListAdapter(this, exerciseViewModel)
         binding.rvProgramList.adapter = plAdapter
         binding.rvProgramList.layoutManager = LinearLayoutManager(this)
         exerciseViewModel.allPrograms.observe(this, {programList ->

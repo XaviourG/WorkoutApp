@@ -71,4 +71,7 @@ interface ExerciseDao {
 
     @Delete
     fun deleteProgram(program: Program)
+
+    @Update
+    suspend fun updateProgram(program: Program)
 }

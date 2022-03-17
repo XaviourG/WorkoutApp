@@ -80,4 +80,10 @@ class ExerciseRepository(private val exerciseDao: ExerciseDao) {
         exerciseDao.deleteProgram(program)
     }
 
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun updateProgram(program: Program){
+        exerciseDao.updateProgram(program)
+    }
+
 }

@@ -16,7 +16,6 @@ class ExerciseViewModel(private val exerciseRepository: ExerciseRepository) : Vi
     val allPrograms: LiveData<MutableList<Program>> = exerciseRepository.allPrograms.asLiveData()
     var workouts: MutableList<Workout> = mutableListOf<Workout>()
 
-
     // Launching a new coroutine to insert the data in a non-blocking way
     fun insert(exercise: Exercise) = viewModelScope.launch {
         exerciseRepository.insert(exercise)
@@ -64,6 +63,10 @@ class ExerciseViewModel(private val exerciseRepository: ExerciseRepository) : Vi
     fun deleteProgram(program: Program) = viewModelScope.launch {
         exerciseRepository.deleteProgram(program)
     }
+    fun updateProgram(program: Program) = viewModelScope.launch {
+        exerciseRepository.updateProgram(program)
+    }
+
 
 
 
