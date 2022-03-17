@@ -39,6 +39,15 @@ class WorkoutPlayerAdapter(private val context : AppCompatActivity, private val 
 
         val eid = list[position].EI.exercise.EID
         var previousExecution: Log? = null
+
+        holder.binding.rvSets.adapter = setAdapter
+        holder.binding.rvSets.layoutManager = LinearLayoutManager(context)
+        for(set in list[position].EI.sets) {
+            setAdapter.addSet()
+        }
+
+        list[position].adapter = setAdapter
+
         exerciseViewModel.allLogs.observe(context, {list ->
             list.let {
                 for(l in it) {
@@ -51,14 +60,6 @@ class WorkoutPlayerAdapter(private val context : AppCompatActivity, private val 
                 }
             }
         })
-
-        holder.binding.rvSets.adapter = setAdapter
-        holder.binding.rvSets.layoutManager = LinearLayoutManager(context)
-        for(set in list[position].EI.sets) {
-            setAdapter.addSet()
-        }
-
-        list[position].adapter = setAdapter
     }
 
     override fun getItemCount(): Int {
@@ -93,17 +94,22 @@ class WorkoutPlayerAdapter(private val context : AppCompatActivity, private val 
     }
 
     fun getLogs(): MutableList<Log> {
+        println("$list")
         var logs = mutableListOf<Log>()
         for(ex in list){
-            val setLog = ex.adapter!!.getLog()
-            if(setLog == ""){}
-            else {
-                val l = Log(
-                    date = LocalDateTime.now().toString(),
-                    exerciseID = ex.EI.exercise.EID!!,
-                    performance = setLog
-                )
-                logs.add(l)
+            println("$$$$ Iterating through: $ex")
+            if(ex.adapter == null){ //skip
+            } else {
+                val setLog = ex.adapter!!.getLog()
+                if (setLog == null || setLog == "") {
+                } else {
+                    val l = Log(
+                        date = LocalDateTime.now().toString(),
+                        exerciseID = ex.EI.exercise.EID!!,
+                        performance = setLog
+                    )
+                    logs.add(l)
+                }
             }
         }
         return logs

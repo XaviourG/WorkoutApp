@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import com.example.workoutapp.data.exercisedb.ExerciseViewModel
 import com.example.workoutapp.data.exercisedb.Program
 import com.example.workoutapp.data.exercisedb.Workout
@@ -27,6 +28,16 @@ class MainActivity : AppCompatActivity() {
         title="Homepage"
         binding.btnNextWorkout.setOnClickListener {
             val intent = Intent(this@MainActivity, WorkoutPlayer::class.java)
+            intent.putExtra("WID", program.workoutIDs[program.position])
+            intent.putExtra("PID", program.PID)
+
+            //Increment position
+            if(program.position >= program.workoutIDs.size - 1) {
+                program.position = 0
+            } else {
+                program.position++
+            }
+            exerciseViewModel.updateProgram(program)
             startActivity(intent)
         }
         binding.btnWorkouts.setOnClickListener {
@@ -38,11 +49,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        program = Program(title = "FakeProgram", workoutIDs = emptyList())
         exerciseViewModel.allPrograms.observe(this, {
                 programList -> programList.let {
                     for(p in it){
                         if(p.active){
-                            program = p
+                            setProgram(p)
                             setNextWorkoutText(p.workoutIDs[p.position])
                             binding.btnMyProgram.text = "My Program \n- " + p.title +" -"
                             break
@@ -53,7 +65,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun setNextWorkoutText(wid: Int) {
+    private fun setNextWorkoutText(wid: Int) {
         exerciseViewModel.allWorkouts.observe(this, {
             list -> list.let {
                 for(w in it){
@@ -65,5 +77,9 @@ class MainActivity : AppCompatActivity() {
                 }
         }
         })
+    }
+
+    private fun setProgram(p: Program) {
+        program = p
     }
 }

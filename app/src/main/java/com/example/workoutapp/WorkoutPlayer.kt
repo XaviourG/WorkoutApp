@@ -8,15 +8,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.workoutapp.adapters.WorkoutPlayerAdapter
 import com.example.workoutapp.data.exercisedb.ExerciseInstance
 import com.example.workoutapp.data.exercisedb.ExerciseViewModel
+import com.example.workoutapp.data.exercisedb.Program
 import com.example.workoutapp.data.exercisedb.Workout
 import com.example.workoutapp.databinding.ActivityWorkoutEditorBinding
 import com.example.workoutapp.databinding.ActivityWorkoutPlayerBinding
+import kotlinx.coroutines.delay
 
 class WorkoutPlayer : AppCompatActivity() {
 
     private lateinit var binding: ActivityWorkoutPlayerBinding
     private lateinit var wpAdapter: WorkoutPlayerAdapter
     private lateinit var workout: Workout
+    private lateinit var program: Program
 
     private val exerciseViewModel: ExerciseViewModel by viewModels {
         ExerciseViewModel.ExerciseViewModelFactory((application as MyApplication).repository)
@@ -56,6 +59,7 @@ class WorkoutPlayer : AppCompatActivity() {
             for(l in wpAdapter.getLogs()){
                 exerciseViewModel.insertLog(l)
             }
+
             //eventually make this go to a finished page
             val i = Intent(this@WorkoutPlayer, MainActivity::class.java)
             startActivity(i)

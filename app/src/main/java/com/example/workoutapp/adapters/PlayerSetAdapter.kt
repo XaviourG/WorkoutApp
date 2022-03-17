@@ -72,9 +72,11 @@ class PlayerSetAdapter : RecyclerView.Adapter<PlayerSetAdapter.PlayerSetViewHold
         var i = 0
         var performances = log.performance.split("|")
         performances = performances.subList(0, performances.size - 1) //always a "" on end.
+        println("PRE CRASH: $prevs")
         for(p in performances){
             var bits = p.split(".")
-            prevs[i] = bits[0] + "kg x" + bits[1]
+            prevs[i] =
+                bits[0] + "kg x" + bits[1]
             println("!!! Set ex:${i+1} to ${prevs[i]}")
             i++
         }
