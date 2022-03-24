@@ -1,8 +1,10 @@
 package com.example.workoutapp.adapters
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Color
+import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
@@ -36,33 +38,69 @@ class PlayerSetAdapter(private val context: Context) : RecyclerView.Adapter<Play
     override fun onBindViewHolder(holder: PlayerSetAdapter.PlayerSetViewHolder, position: Int) {
         //Do nothing I suppose, we just want the empty fields.
         holder.binding.btnTick.setOnClickListener{
-            holder.binding.etLoad.setTextColor(Color.WHITE)
-            holder.binding.etLoad.setShadowLayer(10f,0f,0f,Color.BLACK)
-            holder.binding.etReps.setTextColor(Color.WHITE)
-            holder.binding.etReps.setShadowLayer(10f,0f,0f,Color.BLACK)
-            holder.binding.btnTick.setTextColor(Color.WHITE)
-            holder.binding.btnTick.setShadowLayer(10f,0f,0f,Color.BLACK)
-            sets[position] = holder.binding.etLoad.text.toString() + ":" + holder.binding.etReps.text.toString() + ":" + "none"
+            if(holder.binding.etLoad.text.toString() == ""){ //can't log
+                val alertBuilder = AlertDialog.Builder(context)
+                alertBuilder.setTitle("Cannot Log")
+                alertBuilder.setMessage("Load field is empty.")
+                alertBuilder.show()
+            } else if (holder.binding.etReps.text.toString() == "") {
+                val alertBuilder = AlertDialog.Builder(context)
+                alertBuilder.setTitle("Cannot Log")
+                alertBuilder.setMessage("Reps field is empty.")
+                alertBuilder.show()
+            } else {
+                holder.binding.etLoad.setTextColor(Color.WHITE)
+                holder.binding.etLoad.setShadowLayer(10f, 0f, 0f, Color.BLACK)
+                holder.binding.etReps.setTextColor(Color.WHITE)
+                holder.binding.etReps.setShadowLayer(10f, 0f, 0f, Color.BLACK)
+                holder.binding.btnTick.setTextColor(Color.WHITE)
+                holder.binding.btnTick.setShadowLayer(10f, 0f, 0f, Color.BLACK)
+                sets[position] =
+                    holder.binding.etLoad.text.toString() + ":" + holder.binding.etReps.text.toString() + ":" + "none"
+            }
         }
         holder.binding.tvPrevEx.text = prevs[position]
 
         val dark = ContextCompat.getColor(context, R.color.dark)
-        holder.binding.etLoad.setOnClickListener {
-            holder.binding.etLoad.setTextColor(dark)
-            holder.binding.etLoad.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
-            holder.binding.etReps.setTextColor(dark)
-            holder.binding.etReps.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
-            holder.binding.btnTick.setTextColor(dark)
-            holder.binding.btnTick.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
-        }
-        holder.binding.etReps.setOnClickListener {
-            holder.binding.etLoad.setTextColor(dark)
-            holder.binding.etLoad.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
-            holder.binding.etReps.setTextColor(dark)
-            holder.binding.etReps.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
-            holder.binding.btnTick.setTextColor(dark)
-            holder.binding.btnTick.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
-        }
+        holder.binding.etLoad.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //Do nothing
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //Do nothing
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                //If text is at all edited, unhighlight it.
+                holder.binding.etLoad.setTextColor(dark)
+                holder.binding.etLoad.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+                holder.binding.etReps.setTextColor(dark)
+                holder.binding.etReps.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+                holder.binding.btnTick.setTextColor(dark)
+                holder.binding.btnTick.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+            }
+        })
+
+        holder.binding.etReps.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //Do nothing
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //Do nothing
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                //If text is at all edited, unhighlight it.
+                holder.binding.etLoad.setTextColor(dark)
+                holder.binding.etLoad.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+                holder.binding.etReps.setTextColor(dark)
+                holder.binding.etReps.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+                holder.binding.btnTick.setTextColor(dark)
+                holder.binding.btnTick.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+            }
+        })
 
         if(prevs[position] == "--"){//No existing log show goals
             var info = goals[position].split(":")

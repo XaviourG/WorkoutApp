@@ -54,9 +54,10 @@ CONTRAST + 3
 
 
 STUFF TO DO
-- get log hjighlighting fixed in player.
+- get log hjighlighting fixed in player. (Partially done, dosent really work...)
 - add timer to workout player
 - implement supersets, dropsets, rest pause, and myo.
 - exercise notes
 - asthetic up rest of app
+- differentiate between kg and lbs
 - Progress graphing functionality

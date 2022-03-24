@@ -44,7 +44,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="5dp"
-        android:text="o"
+        android:text="✓"
         android:textSize="20dp"
         android:fontFamily="@font/kanit_font"
         android:textColor="@color/dark"
