@@ -57,8 +57,11 @@ STUFF TO DO
 [X] - get log highlighting fixed in player
 [X] - add timer to workout player
 [X] - differentiate between kg and lbs
-[ ] - Workout editor, exercise order shifting
-[ ] - implement supersets, dropsets, rest pause, and myo.
+[X] - Workout editor, exercise order shifting
+[ ] - implement dropsets,
+[ ] - implement rest pause,
+[ ] - implement myo.
+[ ] - implement supersets,
 [ ] - exercise notes
 [ ] - Workout Finished Screen
 [ ] - asthetic up rest of app

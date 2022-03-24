@@ -1,5 +1,6 @@
 package com.example.workoutapp.adapters
 
+import android.opengl.Visibility
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
@@ -23,7 +24,87 @@ class SetBuildAdapter(private val unit: Int) : RecyclerView.Adapter<SetBuildAdap
     }
 
     override fun onBindViewHolder(holder: SetBuildAdapter.SetBuildViewHolder, position: Int) {
-        //Do nothing I suppose, we just want the empty fields.
+        //Hide the set type buttons
+        holder.binding.btnReg.visibility = View.INVISIBLE
+        holder.binding.btnSS.visibility = View.INVISIBLE
+        holder.binding.btnDS.visibility = View.INVISIBLE
+        holder.binding.btnMyo.visibility = View.INVISIBLE
+        //Let type button reveal options and hide everything else
+        holder.binding.btnType.setOnClickListener {
+            //show options
+            holder.binding.btnReg.visibility = View.VISIBLE
+            holder.binding.btnSS.visibility = View.VISIBLE
+            holder.binding.btnDS.visibility = View.VISIBLE
+            holder.binding.btnMyo.visibility = View.VISIBLE
+            //hide other stuff
+            holder.binding.tvTimes.visibility = View.INVISIBLE
+            holder.binding.etLoad.visibility = View.INVISIBLE
+            holder.binding.etReps.visibility = View.INVISIBLE
+            holder.binding.btnType.visibility = View.INVISIBLE
+            holder.binding.btnDeleteSet.visibility = View.INVISIBLE
+        }
+        holder.binding.btnReg.setOnClickListener {
+            //This will eventually change the set type but for now...
+
+            //hide options
+            holder.binding.btnReg.visibility = View.INVISIBLE
+            holder.binding.btnSS.visibility = View.INVISIBLE
+            holder.binding.btnDS.visibility = View.INVISIBLE
+            holder.binding.btnMyo.visibility = View.INVISIBLE
+            //show other stuff
+            holder.binding.tvTimes.visibility = View.VISIBLE
+            holder.binding.etLoad.visibility = View.VISIBLE
+            holder.binding.etReps.visibility = View.VISIBLE
+            holder.binding.btnType.visibility = View.VISIBLE
+            holder.binding.btnDeleteSet.visibility = View.VISIBLE
+        }
+        holder.binding.btnSS.setOnClickListener {
+            //This will eventually change the set type but for now...
+
+            //hide options
+            holder.binding.btnReg.visibility = View.INVISIBLE
+            holder.binding.btnSS.visibility = View.INVISIBLE
+            holder.binding.btnDS.visibility = View.INVISIBLE
+            holder.binding.btnMyo.visibility = View.INVISIBLE
+            //show other stuff
+            holder.binding.tvTimes.visibility = View.VISIBLE
+            holder.binding.etLoad.visibility = View.VISIBLE
+            holder.binding.etReps.visibility = View.VISIBLE
+            holder.binding.btnType.visibility = View.VISIBLE
+            holder.binding.btnDeleteSet.visibility = View.VISIBLE
+        }
+        holder.binding.btnDS.setOnClickListener {
+            //This will eventually change the set type but for now...
+
+            //hide options
+            holder.binding.btnReg.visibility = View.INVISIBLE
+            holder.binding.btnSS.visibility = View.INVISIBLE
+            holder.binding.btnDS.visibility = View.INVISIBLE
+            holder.binding.btnMyo.visibility = View.INVISIBLE
+            //show other stuff
+            holder.binding.tvTimes.visibility = View.VISIBLE
+            holder.binding.etLoad.visibility = View.VISIBLE
+            holder.binding.etReps.visibility = View.VISIBLE
+            holder.binding.btnType.visibility = View.VISIBLE
+            holder.binding.btnDeleteSet.visibility = View.VISIBLE
+        }
+        holder.binding.btnMyo.setOnClickListener {
+            //This will eventually change the set type but for now...
+
+            //hide options
+            holder.binding.btnReg.visibility = View.INVISIBLE
+            holder.binding.btnSS.visibility = View.INVISIBLE
+            holder.binding.btnDS.visibility = View.INVISIBLE
+            holder.binding.btnMyo.visibility = View.INVISIBLE
+            //show other stuff
+            holder.binding.tvTimes.visibility = View.VISIBLE
+            holder.binding.etLoad.visibility = View.VISIBLE
+            holder.binding.etReps.visibility = View.VISIBLE
+            holder.binding.btnType.visibility = View.VISIBLE
+            holder.binding.btnDeleteSet.visibility = View.VISIBLE
+        }
+
+
         sets[position] = Pair(sets[position].first, holder)
         holder.binding.btnDeleteSet.setOnClickListener{
             if(sets.size == 1){

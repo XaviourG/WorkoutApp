@@ -25,8 +25,8 @@
         android:layout_marginTop="5dp"
         android:ems="6"
         android:hint="Reps"
-        android:textAlignment="center"
         android:inputType="number"
+        android:textAlignment="center"
         app:layout_constraintStart_toEndOf="@+id/tvTimes"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,7 +36,8 @@
         android:layout_height="40dp"
         android:layout_marginTop="5dp"
         android:text="x"
-        app:layout_constraintStart_toEndOf="@+id/etReps"
+        android:layout_marginStart="5dp"
+        app:layout_constraintStart_toEndOf="@+id/btnType"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -48,4 +49,52 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toEndOf="@+id/etLoad"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnType"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:text="⋮"
+        app:layout_constraintStart_toEndOf="@+id/etReps"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/btnReg"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:textSize="6dp"
+        android:layout_marginStart="50dp"
+        android:text="Reg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteY="1dp" />
+    <Button
+        android:id="@+id/btnSS"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:textSize="6dp"
+        android:layout_marginStart="20dp"
+        android:text="SS"
+        app:layout_constraintStart_toEndOf="@id/btnReg"
+        app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/btnDS"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:textSize="6dp"
+        android:layout_marginStart="20dp"
+        android:text="DS"
+        app:layout_constraintStart_toEndOf="@id/btnSS"
+        app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/btnMyo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:textSize="6dp"
+        android:layout_marginStart="20dp"
+        android:text="Myo"
+        app:layout_constraintStart_toEndOf="@id/btnDS"
+        app:layout_constraintTop_toTopOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
