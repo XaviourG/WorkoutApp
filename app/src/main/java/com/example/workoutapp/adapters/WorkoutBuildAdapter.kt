@@ -49,6 +49,26 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
         holder.binding.btnAddSet.setOnClickListener {
             setAdapter.addSet()
         }
+
+        holder.binding.btnMoveUp.setOnClickListener {
+            if(position == 0) { //Can't move upwards do nothing
+            } else { //Swap this with the entity above it and notify.
+                val tmp = list[position-1]
+                list[position-1] = list[position]
+                list[position] = tmp
+                notifyDataSetChanged()
+            }
+        }
+        holder.binding.btnMoveDown.setOnClickListener {
+            if(position == list.size - 1) { //Can't move downwards do nothing
+            } else { //Swap this with the entity below it and notify.
+                val tmp = list[position+1]
+                list[position+1] = list[position]
+                list[position] = tmp
+                notifyDataSetChanged()
+            }
+        }
+
         list[position].adapter = setAdapter
     }
 
