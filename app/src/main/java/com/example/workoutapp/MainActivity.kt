@@ -1,9 +1,14 @@
 package com.example.workoutapp
 
+import android.app.ActionBar
 import android.app.Activity
 import android.content.Intent
+import android.content.res.Resources
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Button
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -12,6 +17,7 @@ import com.example.workoutapp.data.exercisedb.Program
 import com.example.workoutapp.data.exercisedb.Workout
 import com.example.workoutapp.databinding.ActivityBuildWorkoutBinding
 import com.example.workoutapp.databinding.ActivityMainBinding
+import com.mikhaellopez.circularprogressbar.CircularProgressBar
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -22,10 +28,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        this.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
         title="Homepage"
+        //setTheme()
+        getSupportActionBar()!!.hide()
+
         binding.btnNextWorkout.setOnClickListener {
             if(program.title == "FakeProgram"){
             //No active program and hence no next workout. Redirect to workouts page.
@@ -64,7 +75,18 @@ class MainActivity : AppCompatActivity() {
                             setNextWorkoutText(p.workoutIDs[p.position])
                             binding.btnMyProgram.text = "My Program \n- " + p.title +" -"
                             binding.tvTotalLoad.text = "Program Cycle:\nWorkout ${p.position+1}/${p.workoutIDs.size}"
-                            binding.progressBar.progress = 80
+                            val progress: Float = (p.position).toFloat() / p.workoutIDs.size
+                            binding.progressBar.apply {
+                                progressMax = 100f
+                                setProgressWithAnimation((progress*100),1000)
+                                progressBarWidth = 6f
+                                backgroundProgressBarWidth = 3f
+                                //progressBarColor = Color.WHITE
+                                progressBarColorDirection = CircularProgressBar.GradientDirection.LEFT_TO_RIGHT
+                                progressBarColorStart = Color.parseColor("#b29456") //#c09a6b
+                                progressBarColorEnd = Color.WHITE
+                                startAngle = 45f
+                            }
 
                             break
                         }

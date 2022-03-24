@@ -44,3 +44,10 @@ Stuff to add
 - superset functionality
 - add load and rep support for workout building DONE
 - change log figures from ints to floats for negatives and decimals
+
+
+IMAGE SHIFTS FOR MABLE BUTTONS
++10 RED
+-26 YELLOW
+BRIGHTNESS + 1
+CONTRAST + 3

@@ -1,6 +1,7 @@
 package com.example.workoutapp
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -100,28 +101,36 @@ class ProgramEditorActivity : AppCompatActivity() {
         binding.rvSearchResults.visibility = View.GONE
 
         binding.btnSave.setOnClickListener {
-            if(isNewProgram) {
-                exerciseViewModel.insertProgram(
-                    Program(
-                        title = binding.etTitle.text.toString(),
-                        workoutIDs = programBuildAdapter.getWorkoutIDs(),
-                        description = binding.etDescription.text.toString()
-                    )
-                )
+            if(programBuildAdapter.getWorkoutIDs().isEmpty()) {
+                //Its an empty program, don't build it
+                val alertBuilder = AlertDialog.Builder(this)
+                alertBuilder.setTitle("Cannot Save!")
+                alertBuilder.setMessage("Program is empty.")
+                alertBuilder.show()
             } else {
-                exerciseViewModel.updateProgram(
-                    Program(
-                        PID = pid,
-                        title = binding.etTitle.text.toString(),
-                        workoutIDs = programBuildAdapter.getWorkoutIDs(),
-                        description = binding.etDescription.text.toString(),
-                        active = program.active,
-                        position = program.position
+                if (isNewProgram) {
+                    exerciseViewModel.insertProgram(
+                        Program(
+                            title = binding.etTitle.text.toString(),
+                            workoutIDs = programBuildAdapter.getWorkoutIDs(),
+                            description = binding.etDescription.text.toString()
+                        )
                     )
-                )
+                } else {
+                    exerciseViewModel.updateProgram(
+                        Program(
+                            PID = pid,
+                            title = binding.etTitle.text.toString(),
+                            workoutIDs = programBuildAdapter.getWorkoutIDs(),
+                            description = binding.etDescription.text.toString(),
+                            active = program.active,
+                            position = program.position
+                        )
+                    )
+                }
+                val i = Intent(this@ProgramEditorActivity, ProgramActivity::class.java)
+                startActivity(i)
             }
-            val i = Intent(this@ProgramEditorActivity, ProgramActivity::class.java)
-            startActivity(i)
         }
         binding.btnX.setOnClickListener {
             val i = Intent(this@ProgramEditorActivity, ProgramActivity::class.java)
