@@ -1,11 +1,15 @@
 package com.example.workoutapp.adapters
 
+import android.content.Context
+import android.content.res.Resources
 import android.graphics.Color
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.workoutapp.R
 import com.example.workoutapp.data.exercisedb.Exercise
@@ -14,7 +18,7 @@ import com.example.workoutapp.databinding.FragmentExerciseBinding
 import com.example.workoutapp.databinding.FragmentPlayerSetBinding
 import com.example.workoutapp.databinding.FragmentSetBinding
 
-class PlayerSetAdapter : RecyclerView.Adapter<PlayerSetAdapter.PlayerSetViewHolder>() {
+class PlayerSetAdapter(private val context: Context) : RecyclerView.Adapter<PlayerSetAdapter.PlayerSetViewHolder>() {
 
     private var sets = mutableListOf<String>()
     private var prevs = mutableListOf<String>()
@@ -41,6 +45,24 @@ class PlayerSetAdapter : RecyclerView.Adapter<PlayerSetAdapter.PlayerSetViewHold
             sets[position] = holder.binding.etLoad.text.toString() + ":" + holder.binding.etReps.text.toString() + ":" + "none"
         }
         holder.binding.tvPrevEx.text = prevs[position]
+
+        val dark = ContextCompat.getColor(context, R.color.dark)
+        holder.binding.etLoad.setOnClickListener {
+            holder.binding.etLoad.setTextColor(dark)
+            holder.binding.etLoad.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+            holder.binding.etReps.setTextColor(dark)
+            holder.binding.etReps.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+            holder.binding.btnTick.setTextColor(dark)
+            holder.binding.btnTick.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+        }
+        holder.binding.etReps.setOnClickListener {
+            holder.binding.etLoad.setTextColor(dark)
+            holder.binding.etLoad.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+            holder.binding.etReps.setTextColor(dark)
+            holder.binding.etReps.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+            holder.binding.btnTick.setTextColor(dark)
+            holder.binding.btnTick.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+        }
 
         if(prevs[position] == "--"){//No existing log show goals
             var info = goals[position].split(":")
