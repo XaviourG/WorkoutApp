@@ -19,6 +19,7 @@
         android:fontFamily="@font/kanit_font"
         android:textSize="16dp"
         android:layout_marginBottom="30dp"
+        android:textColor="@color/black"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         app:layout_constraintBottom_toTopOf="@+id/btnWorkouts"
@@ -36,6 +37,7 @@
         android:shadowRadius="1"
         android:shadowColor="@color/gold"
         android:fontFamily="@font/kanit_font"
+        android:textColor="@color/black"
         android:textSize="16dp"
         app:layout_constraintBottom_toTopOf="@+id/btnMyProgram"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +52,7 @@
         android:layout_marginStart="20dp"
 
         android:text="My Program"
+        android:textColor="@color/black"
         android:shadowRadius="1"
         android:shadowColor="@color/gold"
         android:fontFamily="@font/kanit_font"
