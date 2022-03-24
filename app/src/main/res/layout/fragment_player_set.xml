@@ -11,6 +11,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:ems="6"
+        android:fontFamily="@font/kanit_font"
+        android:textColor="@color/dark"
+        android:textSize="16dp"
+        android:textColorHint="@color/light_gold"
         android:textAlignment="center"
         android:hint="Load (KG)"
         android:inputType="text"
@@ -24,26 +28,45 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:ems="6"
+        android:fontFamily="@font/kanit_font"
+        android:textColor="@color/dark"
+        android:textSize="16dp"
+        android:textColorHint="@color/light_gold"
         android:hint="Reps"
+        android:textColorHighlight="@color/gold"
+        android:textColorLink="@color/gold"
         android:inputType="text"
         app:layout_constraintStart_toEndOf="@+id/tvMid"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/btnTick"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="5dp"
         android:text="o"
+        android:textSize="20dp"
+        android:fontFamily="@font/kanit_font"
+        android:textColor="@color/dark"
+        android:shadowRadius="15"
+        android:shadowColor="@color/gold"
         app:layout_constraintStart_toEndOf="@+id/etReps"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@android:color/transparent"/>
 
     <TextView
         android:id="@+id/tvPrevEx"
-        android:layout_width="80dp"
+        android:layout_width="60dp"
+        android:layout_marginStart="20dp"
         android:layout_height="wrap_content"
         android:text="--"
-        android:layout_marginTop="15dp"
+        android:fontFamily="@font/kanit_font"
+        android:textColor="@color/glow"
+        android:shadowColor="@color/black"
+        android:shadowRadius="5"
+        android:textSize="13dp"
+        android:textStyle="italic"
+        android:layout_marginTop="16dp"
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -53,7 +76,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="(kg/lbs) x"
-        android:layout_marginTop="18dp"
+        android:fontFamily="@font/kanit_font"
+        android:textColor="@color/dark"
+        android:textSize="12dp"
+        android:textColorHint="@color/gold"
+        android:layout_marginTop="20dp"
         app:layout_constraintStart_toEndOf="@+id/etLoad"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

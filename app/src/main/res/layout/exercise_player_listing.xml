@@ -9,7 +9,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Exercise Name"
-        android:layout_marginTop="10dp"
+        android:fontFamily="@font/kanit_font"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:shadowRadius="1"
+        android:shadowColor="@color/gold"
+        android:layout_marginTop="40dp"
         android:layout_marginStart="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

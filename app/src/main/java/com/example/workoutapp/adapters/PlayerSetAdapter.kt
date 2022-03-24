@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.workoutapp.R
 import com.example.workoutapp.data.exercisedb.Exercise
 import com.example.workoutapp.data.exercisedb.Log
 import com.example.workoutapp.databinding.FragmentExerciseBinding
@@ -31,9 +32,12 @@ class PlayerSetAdapter : RecyclerView.Adapter<PlayerSetAdapter.PlayerSetViewHold
     override fun onBindViewHolder(holder: PlayerSetAdapter.PlayerSetViewHolder, position: Int) {
         //Do nothing I suppose, we just want the empty fields.
         holder.binding.btnTick.setOnClickListener{
-            holder.binding.etLoad.setTextColor(Color.GREEN)
-            holder.binding.etReps.setTextColor(Color.GREEN)
-            holder.binding.btnTick.setBackgroundColor(Color.GREEN)
+            holder.binding.etLoad.setTextColor(Color.WHITE)
+            holder.binding.etLoad.setShadowLayer(10f,0f,0f,Color.BLACK)
+            holder.binding.etReps.setTextColor(Color.WHITE)
+            holder.binding.etReps.setShadowLayer(10f,0f,0f,Color.BLACK)
+            holder.binding.btnTick.setTextColor(Color.WHITE)
+            holder.binding.btnTick.setShadowLayer(10f,0f,0f,Color.BLACK)
             sets[position] = holder.binding.etLoad.text.toString() + ":" + holder.binding.etReps.text.toString() + ":" + "none"
         }
         holder.binding.tvPrevEx.text = prevs[position]

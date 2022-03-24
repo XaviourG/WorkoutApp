@@ -4,37 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WorkoutPlayer">
+    tools:context=".WorkoutPlayer"
+    android:background="@drawable/main_bg">
 
-    <Button
+    <android.widget.Button
         android:id="@+id/btnX"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="X"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="←"
+        android:shadowRadius="2"
+        android:shadowColor="@color/gold"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:fontFamily="@font/kanit_font"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="10dp"
+        android:textSize="30dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@android:color/transparent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPlayer"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"></androidx.recyclerview.widget.RecyclerView>
 
-    <Button
+    <android.widget.Button
         android:id="@+id/btnFin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
         android:text="Finish Workout"
+        android:textColor="@color/white"
+        android:fontFamily="@font/kanit_font"
+        android:textSize="16dp"
+        android:shadowColor="@color/gold"
+        android:shadowRadius="2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvPlayer" />
+        app:layout_constraintTop_toBottomOf="@+id/rvPlayer"
+        android:background="@drawable/button_finish"/>
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:fontFamily="@font/kanit_font"
+        android:gravity="center"
+        android:shadowColor="@color/gold"
+        android:shadowRadius="1"
+        android:text="WORKOUT TITLE"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

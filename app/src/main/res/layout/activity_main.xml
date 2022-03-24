@@ -39,7 +39,7 @@
         android:textSize="16dp"
         app:layout_constraintBottom_toTopOf="@+id/btnMyProgram"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/progress_button_light"
+        android:background="@drawable/workouts_button"
         />
 
     <android.widget.Button
