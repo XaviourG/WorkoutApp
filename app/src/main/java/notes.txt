@@ -51,3 +51,11 @@ IMAGE SHIFTS FOR MABLE BUTTONS
 -26 YELLOW
 BRIGHTNESS + 1
 CONTRAST + 3
+
+
+STUFF TO DO
+- get log hjighlighting fixed in player.
+- add timer to workout player
+- implement supersets, dropsets, rest pause, and myo.
+- exercise notes
+- asthetic up rest of app

@@ -48,7 +48,7 @@ class WorkoutPlayer : AppCompatActivity() {
                     if (w.WID == wid) {
                         workout = w
                         wpAdapter.setWorkout(workout)
-                        title = workout.title
+                        binding.tvTitle.setText(workout.title)
                     }
                 }
             }
