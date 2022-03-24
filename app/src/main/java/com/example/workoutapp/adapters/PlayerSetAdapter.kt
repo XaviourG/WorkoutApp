@@ -17,6 +17,7 @@ class PlayerSetAdapter : RecyclerView.Adapter<PlayerSetAdapter.PlayerSetViewHold
 
     private var sets = mutableListOf<String>()
     private var prevs = mutableListOf<String>()
+    private var goals = mutableListOf<String>()
 
     class PlayerSetViewHolder(val binding: FragmentPlayerSetBinding)
         : RecyclerView.ViewHolder(binding.root)
@@ -38,7 +39,7 @@ class PlayerSetAdapter : RecyclerView.Adapter<PlayerSetAdapter.PlayerSetViewHold
         holder.binding.tvPrevEx.text = prevs[position]
 
         if(prevs[position] == "--"){//No existing log show goals
-            var info = sets[position].split(":")
+            var info = goals[position].split(":")
             if(info[0] == "0"){ // default value do nothing
                 holder.binding.etLoad.setHint("?")
             } else {
@@ -64,10 +65,11 @@ class PlayerSetAdapter : RecyclerView.Adapter<PlayerSetAdapter.PlayerSetViewHold
         return sets.size
     }
 
-    fun addSet(set: String = "0:0:none") {
+    fun addSet(goal: String = "0:0:none") {
         //load.reps.modifier
-        sets.add(set)
+        sets.add("0:0:none") //alter none to reflect type
         prevs.add("--")
+        goals.add(goal)
         notifyItemInserted(sets.size - 1)
     }
 
@@ -78,33 +80,34 @@ class PlayerSetAdapter : RecyclerView.Adapter<PlayerSetAdapter.PlayerSetViewHold
 
     fun getLog(): String {
         var s = ""
-        println("SETS!!!!! >> $sets")
+        var logPresent = false
         for(l in sets) {
             if ((l == "0:0:none")) {
                 //don't add
             } else {
-                s = "$s$l|"
+                logPresent = true
             }
+            s = "$s$l|"
         }
-        TODO("Its setting sets that are then logged!!! MIstake, " +
-                "fix set workout set funcitonality for loading goals")
-        return s
+
+        if(logPresent){ return s}
+        else{return ""}
     }
 
     fun updatePrev(log: Log) {
-        println("UPDATING PREVIOUS EXECUTIONS")
         var i = 0
         var performances = log.performance.split("|")
         performances = performances.subList(0, performances.size - 1) //always a "" on end.
-        println("PRE CRASH: $prevs")
         for(p in performances){
             var bits = p.split(":")
             if (bits[0] == ""){}
+            else if(p == "0:0:none"){
+                prevs[i] = "--"
+            }
             else {
                 prevs[i] =
                     bits[0] + "kg x" + bits[1]
             }
-            println("!!! Set ex:${i + 1} to ${prevs[i]}")
             i++
         }
         notifyDataSetChanged()
