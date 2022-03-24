@@ -10,7 +10,7 @@ import com.example.workoutapp.data.exercisedb.Exercise
 import com.example.workoutapp.databinding.FragmentExerciseBinding
 import com.example.workoutapp.databinding.FragmentSetBinding
 
-class SetBuildAdapter : RecyclerView.Adapter<SetBuildAdapter.SetBuildViewHolder>() {
+class SetBuildAdapter(private val unit: Int) : RecyclerView.Adapter<SetBuildAdapter.SetBuildViewHolder>() {
 
     var sets = mutableListOf<Pair<String, SetBuildViewHolder?>>()
     class SetBuildViewHolder(val binding: FragmentSetBinding)
@@ -46,6 +46,13 @@ class SetBuildAdapter : RecyclerView.Adapter<SetBuildAdapter.SetBuildViewHolder>
         if(info[2] == "none"){ // default value do nothing
         } else {
             TODO() //implement modified set handling
+        }
+
+        //set correct unit kg/lbs
+        if(unit == 0) {//set to kg
+            holder.binding.tvTimes.setText("(kg)x")
+        } else {//set to lbs
+            holder.binding.tvTimes.setText("(lbs)x")
         }
     }
 

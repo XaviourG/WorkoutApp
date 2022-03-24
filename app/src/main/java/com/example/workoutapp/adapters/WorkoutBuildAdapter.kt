@@ -40,7 +40,7 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
         holder.binding.btnDeleteExercise.setOnClickListener {
             removeExerciseByPos(position)
         }
-        var setAdapter = SetBuildAdapter()
+        var setAdapter = SetBuildAdapter(list[position].EI.exercise.unit)
         holder.binding.rvSets.adapter = setAdapter
         holder.binding.rvSets.layoutManager = LinearLayoutManager(context)
         for(set in list[position].EI.sets) {
