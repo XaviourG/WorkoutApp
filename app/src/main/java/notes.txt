@@ -59,3 +59,4 @@ STUFF TO DO
 - implement supersets, dropsets, rest pause, and myo.
 - exercise notes
 - asthetic up rest of app
+- Progress graphing functionality
