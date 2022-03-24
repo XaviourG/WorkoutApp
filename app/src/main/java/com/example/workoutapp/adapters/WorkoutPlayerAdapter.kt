@@ -35,7 +35,8 @@ class WorkoutPlayerAdapter(private val context : AppCompatActivity, private val 
         println("!! CREATING ${list[position]} in Recycler view!")
         holder.binding.tvName.text = list[position].EI.exercise.name
 
-        var setAdapter = PlayerSetAdapter(context)
+        println("[-] Creating set for ${list[position].EI.exercise.name} with unit ${list[position].EI.exercise.unit}")
+        var setAdapter = PlayerSetAdapter(context, list[position].EI.exercise.unit)
 
         val eid = list[position].EI.exercise.EID
         var previousExecution: Log? = null

@@ -54,10 +54,12 @@ CONTRAST + 3
 
 
 STUFF TO DO
-[X] - get log hjighlighting fixed in player. (Partially done, dosent really work...)
-[ ] - add timer to workout player
+[X] - get log highlighting fixed in player. (Partially done, doesn't really work...)
+[X] - add timer to workout player
+[ ] - differentiate between kg and lbs
+[ ] - Workout editor, exercise order shifting
 [ ] - implement supersets, dropsets, rest pause, and myo.
 [ ] - exercise notes
+[ ] - Workout Finished Screen
 [ ] - asthetic up rest of app
-[ ] - differentiate between kg and lbs
 [ ] - Progress graphing functionality

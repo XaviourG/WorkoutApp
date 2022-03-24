@@ -73,9 +73,10 @@
 
     <TextView
         android:id="@+id/tvMid"
-        android:layout_width="wrap_content"
+        android:layout_width="52dp"
         android:layout_height="wrap_content"
         android:text="(kg/lbs) x"
+        android:textAlignment="center"
         android:fontFamily="@font/kanit_font"
         android:textColor="@color/dark"
         android:textSize="12dp"

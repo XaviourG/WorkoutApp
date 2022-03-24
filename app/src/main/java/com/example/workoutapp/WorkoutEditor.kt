@@ -50,7 +50,7 @@ class WorkoutEditor : AppCompatActivity() {
         binding.rvBuildSpace.adapter = wlAdapter
         binding.rvBuildSpace.layoutManager = LinearLayoutManager(this)
 
-        srAdapter = SearchResultsAdapter(wlAdapter, exerciseViewModel)
+        srAdapter = SearchResultsAdapter(this, wlAdapter, exerciseViewModel)
         binding.rvSearchResults.adapter = srAdapter
         binding.rvSearchResults.layoutManager = LinearLayoutManager(this)
 

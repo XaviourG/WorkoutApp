@@ -20,7 +20,7 @@ import com.example.workoutapp.databinding.FragmentExerciseBinding
 import com.example.workoutapp.databinding.FragmentPlayerSetBinding
 import com.example.workoutapp.databinding.FragmentSetBinding
 
-class PlayerSetAdapter(private val context: Context) : RecyclerView.Adapter<PlayerSetAdapter.PlayerSetViewHolder>() {
+class PlayerSetAdapter(private val context: Context, private val unit: Int) : RecyclerView.Adapter<PlayerSetAdapter.PlayerSetViewHolder>() {
 
     private var sets = mutableListOf<String>()
     private var prevs = mutableListOf<String>()
@@ -36,7 +36,14 @@ class PlayerSetAdapter(private val context: Context) : RecyclerView.Adapter<Play
     }
 
     override fun onBindViewHolder(holder: PlayerSetAdapter.PlayerSetViewHolder, position: Int) {
-        //Do nothing I suppose, we just want the empty fields.
+        //setting units
+        if(unit == 0){ //kg
+            holder.binding.tvMid.setText("(kg)x")
+        } else { //lbs
+            holder.binding.tvMid.setText("(lbs)x")
+        }
+
+        //Checkmark highlighting and log updating functionality
         holder.binding.btnTick.setOnClickListener{
             if(holder.binding.etLoad.text.toString() == ""){ //can't log
                 val alertBuilder = AlertDialog.Builder(context)

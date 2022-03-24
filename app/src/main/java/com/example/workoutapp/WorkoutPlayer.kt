@@ -51,6 +51,7 @@ class WorkoutPlayer : AppCompatActivity() {
                 for (w in it) {
                     if (w.WID == wid) {
                         workout = w
+                        println("!!!!!!!!!!!! setting workout to: $w")
                         wpAdapter.setWorkout(workout)
                         binding.tvTitle.setText(workout.title)
                     }

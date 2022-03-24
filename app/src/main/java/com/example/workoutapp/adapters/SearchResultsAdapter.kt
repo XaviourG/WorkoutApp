@@ -1,5 +1,7 @@
 package com.example.workoutapp.adapters
 
+import android.app.AlertDialog
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +17,7 @@ import com.example.workoutapp.databinding.FragmentExerciseBinding
 import com.example.workoutapp.databinding.WorkoutListingBinding
 
 
-class SearchResultsAdapter(private val wlAdapter: WorkoutBuildAdapter,
+class SearchResultsAdapter(private val context: Context, private val wlAdapter: WorkoutBuildAdapter,
                            private val viewModel: ExerciseViewModel) : RecyclerView.Adapter<SearchResultsAdapter.SearchResultsViewHolder>() {
 
     var shownData = emptyList<Exercise>()
@@ -45,9 +47,26 @@ class SearchResultsAdapter(private val wlAdapter: WorkoutBuildAdapter,
         holder.binding.tvExType.text = shownData[position].exType
         if(shownData[position].name.contains("Create New Exercise:")){
             holder.binding.tvExName.setOnClickListener {
-                val newExercise = Exercise(name = shownData[position].name.substring(21))
-                viewModel.insert(newExercise)
-                wlAdapter.addExercise(newExercise)
+                if(shownData[position].name.contains("kg")) {
+                    var exTitle = shownData[position].name.substring(21)
+                    val bits = exTitle.split("kg")
+                    exTitle = bits[0] + bits[1]
+                    val newExercise = Exercise(name = exTitle, unit = 0)
+                    viewModel.insert(newExercise)
+                    wlAdapter.addExercise(newExercise)
+                } else if (shownData[position].name.contains("lbs")) {
+                    var exTitle = shownData[position].name.substring(21)
+                    val bits = exTitle.split("lbs")
+                    exTitle = bits[0] + bits[1]
+                    val newExercise = Exercise(name = exTitle, unit = 1)
+                    viewModel.insert(newExercise)
+                    wlAdapter.addExercise(newExercise)
+                } else {
+                    val alertBuilder = AlertDialog.Builder(context)
+                    alertBuilder.setTitle("Cannot Create Exercise")
+                    alertBuilder.setMessage("Please include \"kg\" or \"lbs\" in the title.")
+                    alertBuilder.show()
+                }
             }
         } else {
             holder.binding.tvExName.setOnClickListener {

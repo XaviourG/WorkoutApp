@@ -30,14 +30,15 @@ class Converters {
         var newList = mutableListOf<ExerciseInstance>()
         for(s in list){
             println("Is this the sabatour? $s")
-            var bits = s.split("-")
+            var bits = s.split("!")
+            var unit: Int = bits[2].toInt()
             var sets: Array<String> = bits[1].split("_").toTypedArray<String>()
             var eid = bits[0].split(".")[0].toInt()
             var name = bits[0].split(".")[1]
-            var exercise = Exercise(EID = eid, name = name)
+            var exercise = Exercise(EID = eid, name = name, unit = unit)
             var exerciseInstance = ExerciseInstance(
                 exercise = exercise,
-                sets = sets
+                sets = sets,
             )
             newList.add(exerciseInstance)
         }
@@ -51,7 +52,8 @@ class Converters {
         for(ex in exerciseInstanceList){
             println("Yeah nah the EID is = ${ex.exercise.EID}")
             var s: String = ex.exercise.EID.toString().plus(".").plus(ex.exercise.name)
-                .plus("-").plus(ex.sets.joinToString(separator = "_"))
+                .plus("!").plus(ex.sets.joinToString(separator = "_")).plus("!")
+                .plus(ex.exercise.unit)
             println("Saving new exercise as $s")
             list.add(s)
         }
