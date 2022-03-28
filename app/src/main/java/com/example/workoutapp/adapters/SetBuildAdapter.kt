@@ -24,84 +24,54 @@ class SetBuildAdapter(private val unit: Int) : RecyclerView.Adapter<SetBuildAdap
     }
 
     override fun onBindViewHolder(holder: SetBuildAdapter.SetBuildViewHolder, position: Int) {
-        //Hide the set type buttons
-        holder.binding.btnReg.visibility = View.INVISIBLE
-        holder.binding.btnSS.visibility = View.INVISIBLE
-        holder.binding.btnDS.visibility = View.INVISIBLE
-        holder.binding.btnMyo.visibility = View.INVISIBLE
+
+        //Type View
+        var params = holder.itemView.layoutParams
+        params.height = 150
+        holder.itemView.layoutParams = params
+        hideEverything(holder.binding)
+        showRegularSet(holder.binding)
+
+
         //Let type button reveal options and hide everything else
         holder.binding.btnType.setOnClickListener {
-            //show options
-            holder.binding.btnReg.visibility = View.VISIBLE
-            holder.binding.btnSS.visibility = View.VISIBLE
-            holder.binding.btnDS.visibility = View.VISIBLE
-            holder.binding.btnMyo.visibility = View.VISIBLE
-            //hide other stuff
-            holder.binding.tvTimes.visibility = View.INVISIBLE
-            holder.binding.etLoad.visibility = View.INVISIBLE
-            holder.binding.etReps.visibility = View.INVISIBLE
-            holder.binding.btnType.visibility = View.INVISIBLE
-            holder.binding.btnDeleteSet.visibility = View.INVISIBLE
+            hideEverything(holder.binding)
+            showTypeOptions(holder.binding)
         }
         holder.binding.btnReg.setOnClickListener {
-            //This will eventually change the set type but for now...
-
-            //hide options
-            holder.binding.btnReg.visibility = View.INVISIBLE
-            holder.binding.btnSS.visibility = View.INVISIBLE
-            holder.binding.btnDS.visibility = View.INVISIBLE
-            holder.binding.btnMyo.visibility = View.INVISIBLE
-            //show other stuff
-            holder.binding.tvTimes.visibility = View.VISIBLE
-            holder.binding.etLoad.visibility = View.VISIBLE
-            holder.binding.etReps.visibility = View.VISIBLE
-            holder.binding.btnType.visibility = View.VISIBLE
-            holder.binding.btnDeleteSet.visibility = View.VISIBLE
-        }
-        holder.binding.btnSS.setOnClickListener {
-            //This will eventually change the set type but for now...
-
-            //hide options
-            holder.binding.btnReg.visibility = View.INVISIBLE
-            holder.binding.btnSS.visibility = View.INVISIBLE
-            holder.binding.btnDS.visibility = View.INVISIBLE
-            holder.binding.btnMyo.visibility = View.INVISIBLE
-            //show other stuff
-            holder.binding.tvTimes.visibility = View.VISIBLE
-            holder.binding.etLoad.visibility = View.VISIBLE
-            holder.binding.etReps.visibility = View.VISIBLE
-            holder.binding.btnType.visibility = View.VISIBLE
-            holder.binding.btnDeleteSet.visibility = View.VISIBLE
+            params.height = 150
+            holder.itemView.layoutParams = params
+            hideEverything(holder.binding)
+            showRegularSet(holder.binding)
+            //Update set type
+            var data = sets[position].first.split(":").toTypedArray()
+            data[2] = "none"
+            val newString = "${data[0]}:${data[1]}:${data[2]}"
+            sets[position] = Pair(newString, holder)
         }
         holder.binding.btnDS.setOnClickListener {
-            //This will eventually change the set type but for now...
-
-            //hide options
-            holder.binding.btnReg.visibility = View.INVISIBLE
-            holder.binding.btnSS.visibility = View.INVISIBLE
-            holder.binding.btnDS.visibility = View.INVISIBLE
-            holder.binding.btnMyo.visibility = View.INVISIBLE
-            //show other stuff
-            holder.binding.tvTimes.visibility = View.VISIBLE
-            holder.binding.etLoad.visibility = View.VISIBLE
-            holder.binding.etReps.visibility = View.VISIBLE
-            holder.binding.btnType.visibility = View.VISIBLE
-            holder.binding.btnDeleteSet.visibility = View.VISIBLE
+            //Redo the view
+            params.height = 300
+            holder.itemView.layoutParams = params
+            hideEverything(holder.binding)
+            showDropset(holder.binding)
+            //Update set type
+            var data = sets[position].first.split(":").toTypedArray()
+            data[2] = "drop"
+            val newString = "${data[0]}:${data[1]}:${data[2]}"
+            sets[position] = Pair(newString, holder)
         }
         holder.binding.btnMyo.setOnClickListener {
-            //This will eventually change the set type but for now...
-
-            //hide options
-            holder.binding.btnReg.visibility = View.INVISIBLE
-            holder.binding.btnSS.visibility = View.INVISIBLE
-            holder.binding.btnDS.visibility = View.INVISIBLE
-            holder.binding.btnMyo.visibility = View.INVISIBLE
-            //show other stuff
-            holder.binding.tvTimes.visibility = View.VISIBLE
-            holder.binding.etLoad.visibility = View.VISIBLE
-            holder.binding.etReps.visibility = View.VISIBLE
-            holder.binding.btnType.visibility = View.VISIBLE
-            holder.binding.btnDeleteSet.visibility = View.VISIBLE
+            params.height = 150
+            holder.itemView.layoutParams = params
+            hideEverything(holder.binding)
+            showRegularSet(holder.binding)
+            holder.binding.tvMyo.visibility = View.VISIBLE
+            //Update set type
+            var data = sets[position].first.split(":").toTypedArray()
+            data[2] = "myo"
+            val newString = "${data[0]}:${data[1]}:${data[2]}"
+            sets[position] = Pair(newString, holder)
         }
 
 
@@ -124,9 +94,15 @@ class SetBuildAdapter(private val unit: Int) : RecyclerView.Adapter<SetBuildAdap
         } else {
             holder.binding.etReps.setText(info[1])
         }
-        if(info[2] == "none"){ // default value do nothing
-        } else {
-            TODO() //implement modified set handling
+        if(info[2] == "drop") { // drop set
+            //Redo the view
+            params.height = 300
+            holder.itemView.layoutParams = params
+            hideEverything(holder.binding)
+            showDropset(holder.binding)
+        } else if(info[2] == "myo") { //myo rep set
+            holder.binding.tvMyo.visibility = View.VISIBLE
+        } else{ // must be regular do nothing
         }
 
         //set correct unit kg/lbs
@@ -158,10 +134,53 @@ class SetBuildAdapter(private val unit: Int) : RecyclerView.Adapter<SetBuildAdap
             else {
                 var set = s.second!!.binding.etLoad.text.toString() + ":" +
                         s.second!!.binding.etReps.text.toString() + ":" +
-                        "none" // eventually modified set functionality
+                        s.first.split(":")[2] // eventually modified set functionality
                 setList.add(set)
             }
         }
         return setList.toTypedArray()
     }
+}
+
+fun hideEverything(binding: FragmentSetBinding) {
+    binding.btnReg.visibility = View.INVISIBLE
+    binding.btnSS.visibility = View.INVISIBLE
+    binding.btnDS.visibility = View.INVISIBLE
+    binding.btnMyo.visibility = View.INVISIBLE
+    binding.etDropLoad.visibility = View.INVISIBLE
+    binding.etDropReps.visibility = View.INVISIBLE
+    binding.tvDropMid.visibility = View.INVISIBLE
+    binding.tvDS.visibility = View.INVISIBLE
+    binding.tvTimes.visibility = View.INVISIBLE
+    binding.etLoad.visibility = View.INVISIBLE
+    binding.etReps.visibility = View.INVISIBLE
+    binding.btnType.visibility = View.INVISIBLE
+    binding.btnDeleteSet.visibility = View.INVISIBLE
+    binding.tvMyo.visibility = View.INVISIBLE
+}
+
+fun showTypeOptions(binding: FragmentSetBinding) {
+    binding.btnReg.visibility = View.VISIBLE
+    binding.btnSS.visibility = View.VISIBLE
+    binding.btnDS.visibility = View.VISIBLE
+    binding.btnMyo.visibility = View.VISIBLE
+}
+
+fun showRegularSet(binding: FragmentSetBinding) {
+    //Standard Stuff
+    binding.tvTimes.visibility = View.VISIBLE
+    binding.etLoad.visibility = View.VISIBLE
+    binding.etReps.visibility = View.VISIBLE
+    binding.btnType.visibility = View.VISIBLE
+    binding.btnDeleteSet.visibility = View.VISIBLE
+}
+
+fun showDropset(binding: FragmentSetBinding) {
+    //Dropset specific stuff
+    binding.etDropLoad.visibility = View.VISIBLE
+    binding.etDropReps.visibility = View.VISIBLE
+    binding.tvDropMid.visibility = View.VISIBLE
+    binding.tvDS.visibility = View.VISIBLE
+    //Standard Stuff
+    showRegularSet(binding)
 }
