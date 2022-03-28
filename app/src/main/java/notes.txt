@@ -52,15 +52,24 @@ IMAGE SHIFTS FOR MABLE BUTTONS
 BRIGHTNESS + 1
 CONTRAST + 3
 
+Superset Ideation?
+- matching sidebar across exercises
+- matching background across sets
+- Arrow with 'superset' wirtten on it stretching from first title to second, then continuing to last set
+How do we set a superset?
+- A superset menu button on the bottom
+- part of the set type menu -> that leads to another meny asking superset with above or below?
+- adds superset line, adds superset above or below to workout?
+
 
 STUFF TO DO
 [X] - get log highlighting fixed in player
 [X] - add timer to workout player
 [X] - differentiate between kg and lbs
 [X] - Workout editor, exercise order shifting
-[ ] - implement dropsets,
-[ ] - implement rest pause,
-[ ] - implement myo.
+[X] - implement dropsets,
+[-] - implement rest pause,
+[-] - implement myo.
 [ ] - implement supersets,
 [ ] - exercise notes
 [ ] - Workout Finished Screen

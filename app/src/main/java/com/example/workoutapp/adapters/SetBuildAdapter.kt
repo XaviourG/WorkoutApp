@@ -73,7 +73,6 @@ class SetBuildAdapter(private val unit: Int) : RecyclerView.Adapter<SetBuildAdap
             }
         }
         var info = sets[position].first.split(":")
-        println("INFO == $info")
         if(info[0] == "0"){ // default value do nothing
         } else {
             holder.binding.etLoad.setText(info[0])

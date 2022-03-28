@@ -45,31 +45,31 @@ abstract class ExerciseDatabase : RoomDatabase() {
                     // when RoomDatabase is created
                     // populate here
                     exerciseDatabase.exerciseDao().insertExercise(Exercise(
-                        name = "Bench Press", primeMover = "Chest", exType = "Barbell"))
+                        name = "Bench Press"))
                     exerciseDatabase.exerciseDao().insertExercise(Exercise(
-                        name = "Back Squat (HighBar)", primeMover = "Legs", exType = "Barbell"))
+                        name = "Back Squat (HighBar)"))
                     exerciseDatabase.exerciseDao().insertExercise(Exercise(
-                        name = "Back Squat (LowBar)", primeMover = "Legs", exType = "Barbell"))
+                        name = "Back Squat (LowBar)"))
                     exerciseDatabase.exerciseDao().insertExercise(Exercise(
-                        name = "Front Squat", primeMover = "Legs", exType = "Barbell"))
+                        name = "Front Squat"))
                     exerciseDatabase.exerciseDao().insertExercise(Exercise(
-                        name = "Deadlift", primeMover = "Legs", exType = "Barbell"))
+                        name = "Deadlift"))
                     exerciseDatabase.exerciseDao().insertExercise(Exercise(
-                        name = "Overhead Press", primeMover = "Shoulder", exType = "Barbell"))
+                        name = "Overhead Press"))
                     exerciseDatabase.exerciseDao().insertExercise(Exercise(
-                        name = "Barbell Row", primeMover = "Back", exType = "Barbell"))
+                        name = "Barbell Row"))
                     exerciseDatabase.exerciseDao().insertExercise(Exercise(
-                        name = "Barbell Row (Smith)", primeMover = "Back", exType = "Smith Machine"))
+                        name = "Barbell Row (Smith)"))
                     exerciseDatabase.exerciseDao().insertExercise(Exercise(
-                        name = "Barbell Bicep Curl", primeMover = "Bicep", exType = "Barbell"))
+                        name = "Barbell Bicep Curl"))
                     exerciseDatabase.exerciseDao().insertExercise(Exercise(
-                        name = "Hammer Curl", primeMover = "Bicep", exType = "Dumbbell"))
+                        name = "Hammer Curl"))
                     exerciseDatabase.exerciseDao().insertExercise(Exercise(
-                        name = "Dip", primeMover = "Tricep", exType = "Calisthenics"))
+                        name = "Dip"))
                     exerciseDatabase.exerciseDao().insertExercise(Exercise(
-                        name = "Chest Dip", primeMover = "Chest", exType = "Calisthenics"))
+                        name = "Chest Dip"))
                     exerciseDatabase.exerciseDao().insertExercise(Exercise(
-                        name = "Lateral Raise", primeMover = "Shoulder", exType = "Dumbbell"))
+                        name = "Lateral Raise"))
 
                 }
             }

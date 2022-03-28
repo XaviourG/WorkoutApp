@@ -59,15 +59,13 @@ class WorkoutEditor : AppCompatActivity() {
             srAdapter.setData(it)
         }
         })
-        workout = Workout(title="FakeWorkout",exercises=mutableListOf<ExerciseInstance>())
+        workout = Workout(title="FakeWorkout",exercises=mutableListOf<ExerciseInstance>(),supersets = mutableListOf<String>())
         var wid = intent.getIntExtra("WID",1)
         exerciseViewModel.allWorkouts.observe(this, {
                 list -> list.let{
-            println("Searching for wid:$wid in >> $it")
             for(w in it){
                 if(w.WID == wid){
                     workout = w
-                    println("FOUND WORKOUT: $workout")
                     wlAdapter.setWorkout(workout)
                     binding.etTitle.setText(workout.title)
                     //exerciseViewModel.deleteWorkout(workout)
@@ -105,7 +103,7 @@ class WorkoutEditor : AppCompatActivity() {
         binding.btnDone.setOnClickListener{
             var title = binding.etTitle.text.toString()
             wlAdapter.updateSets()
-            val workout = Workout(WID=wid, title=title, exercises = wlAdapter.getExerciseList())
+            val workout = Workout(WID=wid, title=title, exercises = wlAdapter.getExerciseList(),supersets = wlAdapter.getSupersets())
             //exerciseViewModel.insertWorkout(workout)
             exerciseViewModel.updateWorkout(workout)
             val i = Intent(this@WorkoutEditor, WorkoutListActivity::class.java)

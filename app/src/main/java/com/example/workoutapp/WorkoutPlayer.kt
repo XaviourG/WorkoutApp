@@ -44,14 +44,13 @@ class WorkoutPlayer : AppCompatActivity() {
         binding.rvPlayer.adapter = wpAdapter
         binding.rvPlayer.layoutManager = LinearLayoutManager(this)
 
-        workout = Workout(title="FakeWorkout",exercises=mutableListOf<ExerciseInstance>())
+        workout = Workout(title="FakeWorkout",exercises=mutableListOf<ExerciseInstance>(),supersets= mutableListOf<String>())
         var wid = intent.getIntExtra("WID",1)
         exerciseViewModel.allWorkouts.observe(this, { list ->
             list.let {
                 for (w in it) {
                     if (w.WID == wid) {
                         workout = w
-                        println("!!!!!!!!!!!! setting workout to: $w")
                         wpAdapter.setWorkout(workout)
                         binding.tvTitle.setText(workout.title)
                     }

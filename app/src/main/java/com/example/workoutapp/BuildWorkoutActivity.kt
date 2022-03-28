@@ -91,7 +91,7 @@ class BuildWorkoutActivity : AppCompatActivity() {
         binding.btnSave.setOnClickListener{
             var title = binding.etTitle.text.toString()
             wlAdapter.updateSets()
-            val workout = Workout(title=title, exercises = wlAdapter.getExerciseList())
+            val workout = Workout(title=title, exercises = wlAdapter.getExerciseList(), supersets = wlAdapter.getSupersets())
             exerciseViewModel.insertWorkout(workout)
             val i = Intent(this@BuildWorkoutActivity, WorkoutListActivity::class.java)
             startActivity(i)

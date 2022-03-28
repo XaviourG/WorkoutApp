@@ -44,7 +44,6 @@ class SearchResultsAdapter(private val context: Context, private val wlAdapter: 
 
     override fun onBindViewHolder(holder: SearchResultsViewHolder, position: Int) {
         holder.binding.tvExName.text = shownData[position].name
-        holder.binding.tvExType.text = shownData[position].exType
         if(shownData[position].name.contains("Create New Exercise:")){
             holder.binding.tvExName.setOnClickListener {
                 if(shownData[position].name.contains("kg")) {

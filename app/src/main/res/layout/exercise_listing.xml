@@ -46,6 +46,37 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/btnSuperset"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:text="SS"
+        android:textSize="8dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintEnd_toStartOf="@id/btnDeleteExercise"
+        app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/btnSSAbove"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:text="With Above"
+        android:textSize="8dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintEnd_toStartOf="@id/btnDeleteExercise"
+        app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/btnSSBelow"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:text="With Below"
+        android:textSize="8dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toStartOf="@id/btnSSAbove"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
         android:id="@+id/btnMoveUp"
         android:layout_width="40dp"
         android:layout_height="32dp"

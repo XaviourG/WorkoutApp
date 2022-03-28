@@ -1,6 +1,8 @@
 package com.example.workoutapp.adapters
 
+import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +26,7 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
         var adapter: SetBuildAdapter? = null
     )
 
+    private var supersets = mutableListOf<String>()
     var list = mutableListOf<Inst>()
 
     class WorkoutBuildViewHolder(val binding: ExerciseListingBinding)
@@ -36,7 +39,16 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
     }
 
     override fun onBindViewHolder(holder: WorkoutBuildAdapter.WorkoutBuildViewHolder, position: Int) {
+        //Hide SS Features
+        holder.binding.btnSSAbove.visibility = View.INVISIBLE
+        holder.binding.btnSSBelow.visibility = View.INVISIBLE
         holder.binding.tvName.text = list[position].EI.exercise.name
+        if(supersets[position] == "none"){ // do nothing
+        } else {
+            holder.binding.tvName.setText(list[position].EI.exercise.name + "    -[${supersets[position]}]")
+        }
+
+
         holder.binding.btnDeleteExercise.setOnClickListener {
             removeExerciseByPos(position)
         }
@@ -69,6 +81,58 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
             }
         }
 
+        //SS Functionality
+        holder.binding.btnSuperset.setOnClickListener {
+            //show options
+            holder.binding.btnSuperset.visibility = View.INVISIBLE
+            holder.binding.btnSSAbove.visibility = View.VISIBLE
+            holder.binding.btnSSBelow.visibility = View.VISIBLE
+        }
+        holder.binding.btnSSAbove.setOnClickListener {
+            //Restore View
+            holder.binding.btnSSAbove.visibility = View.INVISIBLE
+            holder.binding.btnSSBelow.visibility = View.INVISIBLE
+            holder.binding.btnSuperset.visibility = View.VISIBLE
+            //Add superset
+            if(position == 0 ) { //nothing above exists do nothing
+            } else {
+                if((supersets[position] == "none") or (supersets[position] == "up")) {
+                    supersets[position] = "up"
+                } else {
+                    supersets[position] = "mid"
+                }
+
+                if((supersets[position] == "none") or (supersets[position] == "down")) {
+                    supersets[position - 1] = "down"
+                } else { //already part of superset, make a mid point
+                    supersets[position - 1] = "mid"
+                }
+                notifyDataSetChanged()
+            }
+        }
+        holder.binding.btnSSBelow.setOnClickListener {
+            //Restore View
+            holder.binding.btnSSAbove.visibility = View.INVISIBLE
+            holder.binding.btnSSBelow.visibility = View.INVISIBLE
+            holder.binding.btnSuperset.visibility = View.VISIBLE
+            //Add superset
+            if(position == list.size - 1 ) { //nothing below exists do nothing
+            } else {
+                if((supersets[position] == "none") or (supersets[position] == "down")) {
+                    supersets[position] = "down"
+                } else {
+                    supersets[position] = "mid"
+                }
+
+                if((supersets[position] == "none") or (supersets[position] == "up")) {
+                    supersets[position + 1] = "up"
+                } else { //already part of superset, make a mid point
+                    supersets[position + 1] = "mid"
+                }
+                notifyDataSetChanged()
+            }
+        }
+
         list[position].adapter = setAdapter
     }
 
@@ -85,6 +149,7 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
                             ex.EID = exercise.EID
                             var inst = Inst(ExerciseInstance(ex))
                             list.add(inst)
+                            supersets.add("none")
                             notifyItemInserted(list.size - 1)
                             break
                         }
@@ -95,6 +160,7 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
         else{
             var inst = Inst(ExerciseInstance(ex))
             list.add(inst)
+            supersets.add("none") //ADD SUPERSET PRE HANDLING HERE
             notifyItemInserted(list.size - 1)
         }
     }
@@ -102,6 +168,7 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
     fun removeExerciseByPos(position: Int){
         updateSets()
         list.removeAt(position)
+        supersets.removeAt(position)
         //notifyItemRemoved(position)
         notifyDataSetChanged()
     }
@@ -116,15 +183,24 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
         return list.map {it.EI}
     }
     fun setWorkout(workout: Workout){
+
         var newList = mutableListOf<Inst>()
-        println("Iterating through ${workout}")
         for(ex in workout.exercises) {
             var newInst = Inst(ex)
             newList.add(newInst)
         }
-        println("Set workout to newList: $newList")
         list = newList
+
+        var newSS = mutableListOf<String>()
+        for(SS in workout.supersets) {
+            newSS.add(SS)
+        }
+        supersets = newSS
+
         notifyDataSetChanged()
     }
 
+    fun getSupersets(): List<String> {
+        return supersets.toList()
+    }
 }
