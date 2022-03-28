@@ -61,18 +61,6 @@ class SetBuildAdapter(private val unit: Int) : RecyclerView.Adapter<SetBuildAdap
             val newString = "${data[0]}:${data[1]}:${data[2]}"
             sets[position] = Pair(newString, holder)
         }
-        holder.binding.btnMyo.setOnClickListener {
-            params.height = 150
-            holder.itemView.layoutParams = params
-            hideEverything(holder.binding)
-            showRegularSet(holder.binding)
-            holder.binding.tvMyo.visibility = View.VISIBLE
-            //Update set type
-            var data = sets[position].first.split(":").toTypedArray()
-            data[2] = "myo"
-            val newString = "${data[0]}:${data[1]}:${data[2]}"
-            sets[position] = Pair(newString, holder)
-        }
 
 
         sets[position] = Pair(sets[position].first, holder)
@@ -100,8 +88,6 @@ class SetBuildAdapter(private val unit: Int) : RecyclerView.Adapter<SetBuildAdap
             holder.itemView.layoutParams = params
             hideEverything(holder.binding)
             showDropset(holder.binding)
-        } else if(info[2] == "myo") { //myo rep set
-            holder.binding.tvMyo.visibility = View.VISIBLE
         } else{ // must be regular do nothing
         }
 
@@ -144,9 +130,7 @@ class SetBuildAdapter(private val unit: Int) : RecyclerView.Adapter<SetBuildAdap
 
 fun hideEverything(binding: FragmentSetBinding) {
     binding.btnReg.visibility = View.INVISIBLE
-    binding.btnSS.visibility = View.INVISIBLE
     binding.btnDS.visibility = View.INVISIBLE
-    binding.btnMyo.visibility = View.INVISIBLE
     binding.etDropLoad.visibility = View.INVISIBLE
     binding.etDropReps.visibility = View.INVISIBLE
     binding.tvDropMid.visibility = View.INVISIBLE
@@ -156,14 +140,11 @@ fun hideEverything(binding: FragmentSetBinding) {
     binding.etReps.visibility = View.INVISIBLE
     binding.btnType.visibility = View.INVISIBLE
     binding.btnDeleteSet.visibility = View.INVISIBLE
-    binding.tvMyo.visibility = View.INVISIBLE
 }
 
 fun showTypeOptions(binding: FragmentSetBinding) {
     binding.btnReg.visibility = View.VISIBLE
-    binding.btnSS.visibility = View.VISIBLE
     binding.btnDS.visibility = View.VISIBLE
-    binding.btnMyo.visibility = View.VISIBLE
 }
 
 fun showRegularSet(binding: FragmentSetBinding) {

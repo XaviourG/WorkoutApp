@@ -62,41 +62,23 @@
 
     <Button
         android:id="@+id/btnReg"
-        android:layout_width="50dp"
+        android:layout_width="130dp"
         android:layout_height="50dp"
-        android:textSize="6dp"
-        android:layout_marginStart="50dp"
-        android:text="Reg"
+        android:layout_marginStart="30dp"
+        android:text="Regular Set"
+        android:textSize="12dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteY="1dp" />
-    <Button
-        android:id="@+id/btnSS"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:textSize="6dp"
-        android:layout_marginStart="20dp"
-        android:text="SS"
-        app:layout_constraintStart_toEndOf="@id/btnReg"
         app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/btnDS"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:textSize="6dp"
-        android:layout_marginStart="20dp"
-        android:text="DS"
-        app:layout_constraintStart_toEndOf="@id/btnSS"
+        android:layout_width="130dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="30dp"
+        android:text="Drop Set"
+        android:textSize="12dp"
+        app:layout_constraintStart_toEndOf="@+id/btnReg"
         app:layout_constraintTop_toTopOf="parent" />
-    <Button
-        android:id="@+id/btnMyo"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:textSize="6dp"
-        android:layout_marginStart="20dp"
-        android:text="Myo"
-        app:layout_constraintStart_toEndOf="@id/btnDS"
-        app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
         android:id="@+id/etDropLoad"
@@ -160,19 +142,6 @@
         android:fontFamily="@font/kanit_font"
         app:layout_constraintEnd_toStartOf="@+id/etDropLoad"
         app:layout_constraintTop_toBottomOf="@+id/etLoad" />
-
-    <TextView
-        android:id="@+id/tvMyo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/kanit_font"
-        android:text="Myo:"
-        android:textColor="@color/dark"
-        android:textSize="16dp"
-        android:textStyle="italic"
-        android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toStartOf="@+id/etLoad"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
