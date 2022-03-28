@@ -16,7 +16,7 @@
         android:textSize="16dp"
         android:textColorHint="@color/light_gold"
         android:textAlignment="center"
-        android:hint="Load (KG)"
+        android:hint="Load"
         android:inputType="text"
         app:layout_constraintStart_toEndOf="@+id/tvPrevEx"
         app:layout_constraintTop_toTopOf="parent" />
@@ -95,7 +95,7 @@
         android:textSize="16dp"
         android:textColorHint="@color/light_gold"
         android:textAlignment="center"
-        android:hint="Load (KG)"
+        android:hint="Load"
         android:layout_marginStart="20dp"
         android:inputType="text"
         app:layout_constraintStart_toEndOf="@+id/tvPrevEx"

@@ -203,13 +203,13 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int) : Re
 
         if(prevs[position] == "--"){//No existing log show goals
             var info = goals[position].split(":")
-            if(info[0] == "0"){ // default value do nothing
-                holder.binding.etLoad.setHint("?")
+            if(info[0] == ""){ // default value do nothing
+                holder.binding.etLoad.setHint("Load")
             } else {
                 holder.binding.etLoad.setHint(info[0])
             }
-            if(info[1] == "0"){ // default value do nothing
-                holder.binding.etReps.setHint("?")
+            if(info[1] == ""){ // default value do nothing
+                holder.binding.etReps.setHint("Reps")
             } else {
                 holder.binding.etReps.setHint(info[1])
             }
