@@ -36,11 +36,27 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int) : Re
     }
 
     override fun onBindViewHolder(holder: PlayerSetAdapter.PlayerSetViewHolder, position: Int) {
+        //Manage View
+        var params = holder.itemView.layoutParams
+        if(goals[position].split(":")[2] == "drop") { // show drop set
+            params.height = 300
+            holder.itemView.layoutParams = params
+            hideEverything(holder.binding)
+            showDropSet(holder.binding)
+        } else { //show regular set
+            params.height = 150
+            holder.itemView.layoutParams = params
+            hideEverything(holder.binding)
+            showRegSet(holder.binding)
+        }
+
         //setting units
         if(unit == 0){ //kg
             holder.binding.tvMid.setText("(kg)x")
+            holder.binding.tvDropMid.setText("(kg)x")
         } else { //lbs
             holder.binding.tvMid.setText("(lbs)x")
+            holder.binding.tvDropMid.setText("(lbs)x")
         }
 
         //Checkmark highlighting and log updating functionality
@@ -55,6 +71,13 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int) : Re
                 alertBuilder.setTitle("Cannot Log")
                 alertBuilder.setMessage("Reps field is empty.")
                 alertBuilder.show()
+            } else if ((goals[position].split(":")[2] == "drop") and
+                        ((holder.binding.etDropLoad.text.toString() == "") or
+                        (holder.binding.etDropReps.text.toString() == ""))) {
+                val alertBuilder = AlertDialog.Builder(context)
+                alertBuilder.setTitle("Cannot Log")
+                alertBuilder.setMessage("Dropset field empty.")
+                alertBuilder.show()
             } else {
                 holder.binding.etLoad.setTextColor(Color.WHITE)
                 holder.binding.etLoad.setShadowLayer(10f, 0f, 0f, Color.BLACK)
@@ -62,8 +85,22 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int) : Re
                 holder.binding.etReps.setShadowLayer(10f, 0f, 0f, Color.BLACK)
                 holder.binding.btnTick.setTextColor(Color.WHITE)
                 holder.binding.btnTick.setShadowLayer(10f, 0f, 0f, Color.BLACK)
-                sets[position] =
-                    holder.binding.etLoad.text.toString() + ":" + holder.binding.etReps.text.toString() + ":" + "none"
+                if(goals[position].split(":")[2] == "drop") { //dropset stuff
+                    //highlight dropset stuff
+                    holder.binding.etDropLoad.setTextColor(Color.WHITE)
+                    holder.binding.etDropLoad.setShadowLayer(10f, 0f, 0f, Color.BLACK)
+                    holder.binding.etDropReps.setTextColor(Color.WHITE)
+                    holder.binding.etDropReps.setShadowLayer(10f, 0f, 0f, Color.BLACK)
+                    //dropset values are stored load1+load2:reps1+reps2:drop
+                    sets[position] =
+                        holder.binding.etLoad.text.toString() + "+" +
+                                holder.binding.etDropLoad.text.toString() + ":" +
+                                holder.binding.etReps.text.toString() + "+" +
+                                holder.binding.etDropReps.text.toString() + ":drop"
+                } else {
+                    sets[position] =
+                        holder.binding.etLoad.text.toString() + ":" + holder.binding.etReps.text.toString() + ":" + "none"
+                }
             }
         }
         holder.binding.tvPrevEx.text = prevs[position]
@@ -86,6 +123,10 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int) : Re
                 holder.binding.etReps.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
                 holder.binding.btnTick.setTextColor(dark)
                 holder.binding.btnTick.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+                holder.binding.etDropLoad.setTextColor(dark)
+                holder.binding.etDropLoad.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+                holder.binding.etDropReps.setTextColor(dark)
+                holder.binding.etDropReps.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
             }
         })
 
@@ -106,6 +147,57 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int) : Re
                 holder.binding.etReps.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
                 holder.binding.btnTick.setTextColor(dark)
                 holder.binding.btnTick.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+                holder.binding.etDropLoad.setTextColor(dark)
+                holder.binding.etDropLoad.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+                holder.binding.etDropReps.setTextColor(dark)
+                holder.binding.etDropReps.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+            }
+        })
+        holder.binding.etDropLoad.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //Do nothing
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //Do nothing
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                //If text is at all edited, unhighlight it.
+                holder.binding.etLoad.setTextColor(dark)
+                holder.binding.etLoad.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+                holder.binding.etReps.setTextColor(dark)
+                holder.binding.etReps.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+                holder.binding.btnTick.setTextColor(dark)
+                holder.binding.btnTick.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+                holder.binding.etDropLoad.setTextColor(dark)
+                holder.binding.etDropLoad.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+                holder.binding.etDropReps.setTextColor(dark)
+                holder.binding.etDropReps.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+            }
+        })
+
+        holder.binding.etDropReps.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //Do nothing
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //Do nothing
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                //If text is at all edited, unhighlight it.
+                holder.binding.etLoad.setTextColor(dark)
+                holder.binding.etLoad.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+                holder.binding.etReps.setTextColor(dark)
+                holder.binding.etReps.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+                holder.binding.btnTick.setTextColor(dark)
+                holder.binding.btnTick.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+                holder.binding.etDropLoad.setTextColor(dark)
+                holder.binding.etDropLoad.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+                holder.binding.etDropReps.setTextColor(dark)
+                holder.binding.etDropReps.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
             }
         })
 
@@ -122,13 +214,25 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int) : Re
                 holder.binding.etReps.setHint(info[1])
             }
         } else { //last performance exists, show that instead
-            var info = prevs[position].split("kg x")
-            holder.binding.etLoad.setHint(info[0])
-            holder.binding.etReps.setHint(info[1])
-        }
-        if(sets[position].split(":")[2] == "none"){ // default value do nothing
-        } else {
-            TODO() //implement modified set handling
+
+            if(goals[position].contains("drop")){ // drop set
+                val info = prevs[position].split("\n")
+                val set1 = info[0].split("kg x")
+                val set2 = info[1].split("kg x")
+                holder.binding.etLoad.setHint(set1[0])
+                holder.binding.etReps.setHint(set1[1])
+                holder.binding.etDropLoad.setHint(set2[0])
+                holder.binding.etDropReps.setHint(set2[1])
+            } else {
+                // default set
+                val info = prevs[position].split("kg x")
+                holder.binding.etLoad.setHint(info[0])
+                if(info[1].contains("\n")) { //last exec was dropset now reg set
+                    holder.binding.etReps.setHint(info[1].split("\n")[0])
+                } else {
+                    holder.binding.etReps.setHint(info[1])
+                }
+            }
         }
     }
 
@@ -153,7 +257,7 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int) : Re
         var s = ""
         var logPresent = false
         for(l in sets) {
-            if ((l == "0:0:none")) {
+            if ((l == "0:0:none") or (l == "0:0:drop")) {
                 //don't add
             } else {
                 logPresent = true
@@ -170,17 +274,55 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int) : Re
         var performances = log.performance.split("|")
         performances = performances.subList(0, performances.size - 1) //always a "" on end.
         for(p in performances){
+            if(i == sets.size) { break } //workout edited to have less sets handling
             var bits = p.split(":")
             if (bits[0] == ""){}
-            else if(p == "0:0:none"){
+            else if((p == "0:0:none") or (p == "0:0:drop")){
                 prevs[i] = "--"
             }
             else {
-                prevs[i] =
-                    bits[0] + "kg x" + bits[1]
+                if(bits[2] == "drop") {
+                    val loads = bits[0].toString().split("+")
+                    val reps = bits[1].toString().split("+")
+                    prevs[i] =
+                        loads[0] + "kg x" + reps[0] + "\n" +
+                                loads[1] + "kg x" + reps[1]
+                } else {
+                    prevs[i] =
+                        bits[0] + "kg x" + bits[1]
+                }
             }
             i++
         }
         notifyDataSetChanged()
     }
+}
+fun hideEverything(b: FragmentPlayerSetBinding) {
+    //Hide Regular Stuff
+    b.tvPrevEx.visibility = View.INVISIBLE
+    b.etLoad.visibility = View.INVISIBLE
+    b.tvMid.visibility = View.INVISIBLE
+    b.etReps.visibility = View.INVISIBLE
+    b.btnTick.visibility = View.INVISIBLE
+    //Hide Dropset Stuff
+    b.tvDS.visibility = View.INVISIBLE
+    b.etDropLoad.visibility = View.INVISIBLE
+    b.tvDropMid.visibility = View.INVISIBLE
+    b.etDropReps.visibility = View.INVISIBLE
+}
+
+fun showRegSet(b: FragmentPlayerSetBinding) {
+    b.tvPrevEx.visibility = View.VISIBLE
+    b.etLoad.visibility = View.VISIBLE
+    b.tvMid.visibility = View.VISIBLE
+    b.etReps.visibility = View.VISIBLE
+    b.btnTick.visibility = View.VISIBLE
+}
+
+fun showDropSet(b: FragmentPlayerSetBinding) {
+    showRegSet(b)
+    b.tvDS.visibility = View.VISIBLE
+    b.etDropLoad.visibility = View.VISIBLE
+    b.tvDropMid.visibility = View.VISIBLE
+    b.etDropReps.visibility = View.VISIBLE
 }
