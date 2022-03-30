@@ -23,7 +23,9 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
 
     data class Inst(
         val EI: ExerciseInstance,
-        var adapter: SetBuildAdapter? = null
+        var adapter: SetBuildAdapter? = null,
+        var notes: String? = "",
+        var holder: WorkoutBuildViewHolder? = null
     )
 
     private var supersets = mutableListOf<String>()
@@ -39,6 +41,11 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
     }
 
     override fun onBindViewHolder(holder: WorkoutBuildAdapter.WorkoutBuildViewHolder, position: Int) {
+        list[position].holder = holder
+
+        //Show notes
+        holder.binding.etNotes.setText(list[position].notes)
+
         //Hide SS Features
         holder.binding.btnSSAbove.visibility = View.INVISIBLE
         holder.binding.btnSSBelow.visibility = View.INVISIBLE
@@ -163,6 +170,7 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
             supersets.add("none") //ADD SUPERSET PRE HANDLING HERE
             notifyItemInserted(list.size - 1)
         }
+
     }
 
     fun removeExerciseByPos(position: Int){
@@ -182,12 +190,16 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
     fun getExerciseList(): List<ExerciseInstance> {
         return list.map {it.EI}
     }
+
     fun setWorkout(workout: Workout){
 
         var newList = mutableListOf<Inst>()
-        for(ex in workout.exercises) {
-            var newInst = Inst(ex)
+        var i = 0
+        while(i < workout.exercises.size){
+            var newInst = Inst(workout.exercises[i])
+            newInst.notes = workout.notes!![i]
             newList.add(newInst)
+            i++
         }
         list = newList
 
@@ -202,5 +214,13 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
 
     fun getSupersets(): List<String> {
         return supersets.toList()
+    }
+
+    fun getNotes(): List<String> {
+        for(inst in list){
+            inst.notes = inst.holder!!.binding.etNotes.text.toString()
+        }
+
+        return list.map {it.notes!!}
     }
 }

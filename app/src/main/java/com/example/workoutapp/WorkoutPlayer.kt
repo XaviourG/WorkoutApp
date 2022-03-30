@@ -44,7 +44,7 @@ class WorkoutPlayer : AppCompatActivity() {
         binding.rvPlayer.adapter = wpAdapter
         binding.rvPlayer.layoutManager = LinearLayoutManager(this)
 
-        workout = Workout(title="FakeWorkout",exercises=mutableListOf<ExerciseInstance>(),supersets= mutableListOf<String>())
+        workout = Workout(title="FakeWorkout",exercises=mutableListOf<ExerciseInstance>(),supersets= mutableListOf<String>(), notes = mutableListOf<String>())
         var wid = intent.getIntExtra("WID",1)
         exerciseViewModel.allWorkouts.observe(this, { list ->
             list.let {

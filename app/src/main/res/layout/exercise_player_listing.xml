@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -8,14 +9,14 @@
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Exercise Name"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="40dp"
         android:fontFamily="@font/kanit_font"
+        android:shadowColor="@color/gold"
+        android:shadowRadius="1"
+        android:text="Exercise Name"
         android:textColor="@color/black"
         android:textSize="20dp"
-        android:shadowRadius="1"
-        android:shadowColor="@color/gold"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,9 +24,24 @@
         android:id="@+id/rvSets"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginStart="40dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.631"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNotes" />
+
+    <TextView
+        android:id="@+id/tvNotes"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="30dp"
+        android:fontFamily="@font/kanit_font"
+        android:text=""
+        android:textColor="@color/dark_gold"
+        android:textStyle="italic"
+        android:textSize="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvName" />
 </androidx.constraintlayout.widget.ConstraintLayout>

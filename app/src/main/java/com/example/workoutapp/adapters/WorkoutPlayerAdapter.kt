@@ -17,7 +17,8 @@ class WorkoutPlayerAdapter(private val context : AppCompatActivity, private val 
 
     data class ModifiedInst(
         val EI: ExerciseInstance,
-        var adapter: PlayerSetAdapter? = null
+        var adapter: PlayerSetAdapter? = null,
+        var note: String = ""
     )
 
     var list = mutableListOf<ModifiedInst>()
@@ -34,6 +35,7 @@ class WorkoutPlayerAdapter(private val context : AppCompatActivity, private val 
     override fun onBindViewHolder(holder: WorkoutPlayerAdapter.WorkoutPlayerViewHolder, position: Int) {
         println("!! CREATING ${list[position]} in Recycler view!")
         holder.binding.tvName.text = list[position].EI.exercise.name
+        holder.binding.tvNotes.text = list[position].note
 
         println("[-] Creating set for ${list[position].EI.exercise.name} with unit ${list[position].EI.exercise.unit}")
         var setAdapter = PlayerSetAdapter(context, list[position].EI.exercise.unit)
@@ -72,26 +74,15 @@ class WorkoutPlayerAdapter(private val context : AppCompatActivity, private val 
     }
     fun setWorkout(workout: Workout){
         var newList = mutableListOf<ModifiedInst>()
-        println("Iterating through $workout")
-        for(ex in workout.exercises) {
-            var newInst = ModifiedInst(ex)
+        var i = 0
+        while(i < workout.exercises.size){
+            var newInst = ModifiedInst(workout.exercises[i])
+            newInst.note = workout.notes!![i]
             newList.add(newInst)
-        }
-        /*
-        var i=0
-        for(inst in newList){
-            list.add(inst)
-            notifyItemInserted(i)
             i++
         }
-        */
-
-
-        //*
         list = newList
-        println("!!! Recycler View Updated to: $newList")
         notifyDataSetChanged()
-        //*/
     }
 
     fun getLogs(): MutableList<Log> {

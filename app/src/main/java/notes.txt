@@ -70,7 +70,7 @@ STUFF TO DO
 [X] - implement dropsets,
 [-] - implement rest pause,
 [-] - implement myo.
-[ ] - implement supersets,
+[?] - implement supersets,
 [ ] - exercise notes
 [ ] - Workout Finished Screen
 [ ] - asthetic up rest of app

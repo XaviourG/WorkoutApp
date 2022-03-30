@@ -10,5 +10,5 @@ data class Workout(
     @ColumnInfo(name = "title") val title: String,
     @ColumnInfo(name = "exercises") val exercises: List<ExerciseInstance>,
     @ColumnInfo(name = "supersets") val supersets: List<String>,
-    @ColumnInfo(name = "notes") val notes: String? = null
+    @ColumnInfo(name = "notes") val notes: List<String>?
 )

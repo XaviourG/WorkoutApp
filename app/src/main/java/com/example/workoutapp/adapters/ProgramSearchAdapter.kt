@@ -32,7 +32,6 @@ class ProgramSearchAdapter(private val context: Context, private val programBuil
 
     override fun onBindViewHolder(holder: ProgramSearchViewHolder, position: Int) {
         holder.binding.tvExName.text = shownData[position].title
-        holder.binding.tvExType.text = shownData[position].notes
         holder.binding.tvExName.setOnClickListener {
             programBuildAdapter.addWorkout(shownData[position])
             context.hideKeyboard(holder.binding.root)
