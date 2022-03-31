@@ -11,11 +11,11 @@
         android:bottomRightRadius="10dp"/>
 
     <stroke
-        android:color="@color/grey"
+        android:color="@color/purple"
         android:width="4dp"/>
 
     <solid
-        android:color="@color/grey"
+        android:color="@color/purple"
         />
 
 </shape>

@@ -39,7 +39,7 @@ class ProgramListAdapter (private val context: Context, private val exerciseView
         holder.binding.tvDescription.text = programs[position].description
 
         if(programs[position].active){
-            holder.binding.tvProgramTitle.setTextColor(context.getColor(R.color.hot_pink))
+            holder.binding.tvProgramTitle.setTextColor(context.getColor(R.color.purple))
             holder.itemView.setBackgroundResource(R.drawable.item_border_highlight)
         } else {
             holder.binding.tvProgramTitle.setTextColor(context.getColor(R.color.dark_grey))

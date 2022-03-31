@@ -5,27 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
+    <android.widget.Button
         android:id="@+id/btnEdit"
         android:layout_width="90dp"
-        android:layout_height="wrap_content"
+        android:layout_height="90dp"
         android:text="Edit"
+        android:textColor="@color/white"
+        android:background="@drawable/popup_buttons"
         app:layout_constraintBottom_toTopOf="@+id/btnCancel"
         app:layout_constraintStart_toStartOf="@+id/btnCancel" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/btnStart"
         android:layout_width="90dp"
-        android:layout_height="wrap_content"
+        android:layout_height="90dp"
         android:text="Start!"
+        android:textColor="@color/purple"
+        android:background="@drawable/popup_buttons"
         app:layout_constraintBottom_toTopOf="@+id/btnCancel"
         app:layout_constraintEnd_toEndOf="@+id/btnCancel" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/btnCancel"
         android:layout_width="180dp"
-        android:layout_height="wrap_content"
+        android:layout_height="90dp"
         android:text="Cancel"
+        android:textColor="@color/off_white"
+        android:background="@drawable/popup_buttons"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

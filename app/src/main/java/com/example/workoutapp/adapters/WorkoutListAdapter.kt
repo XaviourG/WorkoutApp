@@ -2,6 +2,7 @@ package com.example.workoutapp.adapters
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.text.Layout
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -56,14 +57,15 @@ class WorkoutListAdapter(private val context: Context)
             with(workouts[position]) {
                 binding.tvWorkoutListing.text = title
                 binding.tvWorkoutListing.setOnClickListener {
-                    holder.binding.tvWorkoutListing.setTextColor(context.getColor(R.color.hot_pink))
+                    holder.binding.tvWorkoutListing.setTextColor(context.getColor(R.color.purple))
                     holder.binding.tvWorkoutListing.setBackgroundResource(R.drawable.item_border_highlight)
                     val popup = PopupWindow(context)
                     val binding2 = WorkoutListingPopupBinding.inflate(LayoutInflater.from(context))
+                    popup.setBackgroundDrawable(context.getDrawable(R.drawable.nothing))
                     //val view = LayoutInflater.from(context).inflate(R.layout.workout_listing_popup, null)
                     popup.contentView = binding2.root
                     binding2.btnCancel.setOnClickListener{
-                        holder.binding.tvWorkoutListing.setTextColor(context.getColor(R.color.dark_grey))
+                        holder.binding.tvWorkoutListing.setTextColor(context.getColor(R.color.white))
                         holder.binding.tvWorkoutListing.setBackgroundResource(R.drawable.item_border)
                         popup.dismiss() }
                     binding2.btnEdit.setOnClickListener{

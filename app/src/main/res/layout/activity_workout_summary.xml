@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".WorkoutSummary"
-    android:background="@color/black">
+    android:background="@color/dark_grey">
 
     <android.widget.Button
         android:id="@+id/btnX"
@@ -15,9 +15,9 @@
         android:fontFamily="@font/kanit_font"
         android:gravity="center"
         android:shadowRadius="2"
-        android:text="x"
-        android:textColor="@color/hot_pink"
-        android:textSize="30dp"
+        android:text="→"
+        android:textColor="@color/purple"
+        android:textSize="40dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -33,7 +33,7 @@
         android:gravity="center"
         android:text="Workout Title"
         android:textSize="35dp"
-        android:textColor="@color/white"
+        android:textColor="@color/off_white"
         app:layout_constraintEnd_toStartOf="@+id/btnX"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -59,7 +59,7 @@
         android:gravity="center"
         android:text="HH:MM:SS"
         android:textSize="25dp"
-        android:textColor="@color/pink"
+        android:textColor="@color/purple"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTimeHeader" />
@@ -86,7 +86,7 @@
         android:gravity="center"
         android:textSize="25dp"
         android:text="LOAD"
-        android:textColor="@color/pink"
+        android:textColor="@color/purple"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvLoadHeader" />
