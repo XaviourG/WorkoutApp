@@ -69,9 +69,35 @@ class WorkoutPlayer : AppCompatActivity() {
             val elapsed = binding.tvTime.text.toString()
             println("Workout Completed in: $elapsed")
             stopTimer()
+            var totalLoad = 0f
             for(l in wpAdapter.getLogs()){
+                //Insert log into database
                 exerciseViewModel.insertLog(l)
+                //Calculate total load
+                var exLoad = 0f
+                var execs = l.performance.split("|")
+                for (ex in execs) {
+                    if (ex == ""){
+                    } else {
+                        val bits = ex.split(":")
+                        if(bits[2].contains("drop")) {
+                            val loads = bits[0].split("+")
+                            val reps = bits[1].split("+")
+                            exLoad += ((loads[0].toFloat() * reps[0].toInt()) + (loads[1].toFloat() * reps[1].toInt()))
+                        } else {
+                            exLoad += (bits[0].toFloat() * bits[1].toInt())
+                        }
+                    }
+                }
+                //kg or lbs handing
+
+                if(EIDisKG(l.exerciseID)){
+                    totalLoad += exLoad
+                } else { //is in lbs so
+                    totalLoad += (exLoad / 2.205f)
+                }
             }
+            println("Total Volume: ${totalLoad}kg")
 
             //eventually make this go to a finished page
             val i = Intent(this@WorkoutPlayer, MainActivity::class.java)
@@ -119,6 +145,15 @@ class WorkoutPlayer : AppCompatActivity() {
         timeHandler?.removeCallbacks(mStatusChecker)
     }
 
+    fun EIDisKG(eid: Int): Boolean {
+        for(ex in workout.exercises){
+            if(ex.exercise.EID == eid) {
+                return (ex.exercise.unit == 0)
+            }
+        }
+        println("EXERCISE NOT FOUND IN WORKOUT ERROR (Toal Load Calc)")
+        return true
+    }
 
 
 }

@@ -74,4 +74,4 @@ STUFF TO DO
 [X] - exercise notes
 [ ] - Workout Finished Screen
 [ ] - asthetic up rest of app
-[ ] - Progress graphing functionality
+[ ] - Progress graphing functionality?
