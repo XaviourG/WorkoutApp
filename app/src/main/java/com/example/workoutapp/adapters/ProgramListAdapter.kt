@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.workoutapp.ProgramEditorActivity
+import com.example.workoutapp.R
 import com.example.workoutapp.WorkoutEditor
 import com.example.workoutapp.data.exercisedb.ExerciseViewModel
 import com.example.workoutapp.data.exercisedb.Program
@@ -38,10 +39,11 @@ class ProgramListAdapter (private val context: Context, private val exerciseView
         holder.binding.tvDescription.text = programs[position].description
 
         if(programs[position].active){
-            holder.binding.tvProgramTitle.setTextColor(Color.RED)
-            //holder.binding.tvProgramTitle.setTextAppearance()
+            holder.binding.tvProgramTitle.setTextColor(context.getColor(R.color.hot_pink))
+            holder.itemView.setBackgroundResource(R.drawable.item_border_highlight)
         } else {
-            holder.binding.tvProgramTitle.setTextColor(Color.BLACK)
+            holder.binding.tvProgramTitle.setTextColor(context.getColor(R.color.dark_grey))
+            holder.itemView.setBackgroundResource(R.drawable.item_border)
         }
 
         //Popup

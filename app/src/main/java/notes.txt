@@ -71,7 +71,7 @@ STUFF TO DO
 [-] - implement rest pause,
 [-] - implement myo.
 [?] - implement supersets,
-[ ] - exercise notes
+[X] - exercise notes
 [ ] - Workout Finished Screen
 [ ] - asthetic up rest of app
 [ ] - Progress graphing functionality

@@ -12,6 +12,8 @@ import com.example.workoutapp.data.exercisedb.Workout
 import com.example.workoutapp.databinding.ActivityWorkoutListBinding
 import android.util.Log
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import kotlinx.coroutines.delay
 
 
@@ -25,6 +27,12 @@ class WorkoutListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //repress top bar
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        this.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        getSupportActionBar()!!.hide()
+
         binding = ActivityWorkoutListBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)

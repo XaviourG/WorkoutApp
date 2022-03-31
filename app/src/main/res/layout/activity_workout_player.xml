@@ -17,7 +17,6 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         android:fontFamily="@font/kanit_font"
-
         android:textSize="35dp"
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"

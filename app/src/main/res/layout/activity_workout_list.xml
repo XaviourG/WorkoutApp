@@ -5,19 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".WorkoutListActivity">
+
     <Button
         android:id="@+id/btnHomeWL"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Home"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/kanit_font"
+        android:gravity="center"
+        android:shadowColor="@color/gold"
+        android:shadowRadius="2"
+        android:text="←"
+        android:textColor="@color/black"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvWorkoutList"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -25,13 +35,32 @@
         app:layout_constraintTop_toBottomOf="@+id/btnNewWorkout"
         app:layout_constraintVertical_bias="0.448" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/btnNewWorkout"
         android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:text="+ New Workout"
-        android:layout_marginTop="15dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="+"
+        android:textSize="35dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnHomeWL" />
+        app:layout_constraintTop_toBottomOf="@+id/btnHomeWL"
+        android:textColor="@color/light_grey"
+        android:background="@drawable/button"/>
+
+    <TextView
+        android:id="@+id/tvPageTitle"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="WORKOUTS"
+        android:layout_marginEnd="60dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/kanit_font"
+        android:textSize="26dp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnHomeWL"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

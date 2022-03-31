@@ -4,9 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2890625" />
+        <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/drawable/button.xml" value="0.2890625" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/drawable/gold_trim_button.xml" value="0.48385416666666664" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2890625" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/drawable/item_border.xml" value="0.48385416666666664" />
+        <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/drawable/item_border_highlight.xml" value="0.2890625" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/drawable/search_bar_bg.xml" value="0.2890625" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/drawable/up_arrow_btn.xml" value="0.48385416666666664" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/font/kanit_font.xml" value="0.4979166666666667" />
@@ -24,7 +26,7 @@
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/fragment_player_dropset.xml" value="0.5142857142857143" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/fragment_player_set.xml" value="0.5142857142857143" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/fragment_player_superset.xml" value="0.27291666666666664" />
-        <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/fragment_program_listing.xml" value="0.18143459915611815" />
+        <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/fragment_program_listing.xml" value="0.5142857142857143" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/fragment_set.xml" value="0.42857142857142855" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/fragment_workout_listing_editable.xml" value="0.3828571428571429" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/player_finish_button.xml" value="0.3020833333333333" />
