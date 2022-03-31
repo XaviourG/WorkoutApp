@@ -56,11 +56,15 @@ class WorkoutListAdapter(private val context: Context)
             with(workouts[position]) {
                 binding.tvWorkoutListing.text = title
                 binding.tvWorkoutListing.setOnClickListener {
+                    holder.binding.tvWorkoutListing.setTextColor(context.getColor(R.color.hot_pink))
+                    holder.binding.tvWorkoutListing.setBackgroundResource(R.drawable.item_border_highlight)
                     val popup = PopupWindow(context)
                     val binding2 = WorkoutListingPopupBinding.inflate(LayoutInflater.from(context))
                     //val view = LayoutInflater.from(context).inflate(R.layout.workout_listing_popup, null)
                     popup.contentView = binding2.root
                     binding2.btnCancel.setOnClickListener{
+                        holder.binding.tvWorkoutListing.setTextColor(context.getColor(R.color.dark_grey))
+                        holder.binding.tvWorkoutListing.setBackgroundResource(R.drawable.item_border)
                         popup.dismiss() }
                     binding2.btnEdit.setOnClickListener{
                         val i = Intent(context,

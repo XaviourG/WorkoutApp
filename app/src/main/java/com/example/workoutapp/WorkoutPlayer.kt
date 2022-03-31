@@ -100,7 +100,11 @@ class WorkoutPlayer : AppCompatActivity() {
             println("Total Volume: ${totalLoad}kg")
 
             //eventually make this go to a finished page
-            val i = Intent(this@WorkoutPlayer, MainActivity::class.java)
+            val i = Intent(this@WorkoutPlayer, WorkoutSummary::class.java)
+            i.putExtra("totalLoad", totalLoad)
+            i.putExtra("timeElapsed", elapsed)
+            i.putExtra("title", workout.title)
+            //i.putExtra("PRs", mutableListOf<String>().toTypedArray())
             startActivity(i)
         }
         //Starting timer

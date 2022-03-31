@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WorkoutSummary">
+
+    <android.widget.Button
+        android:id="@+id/btnX"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/kanit_font"
+        android:gravity="center"
+        android:shadowColor="@color/gold"
+        android:shadowRadius="2"
+        android:text="x"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="150dp"
+        android:fontFamily="@font/kanit_bold"
+        android:gravity="center"
+        android:text="Workout Title"
+        android:textSize="35dp"
+        app:layout_constraintEnd_toStartOf="@+id/btnX"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tvTimeHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Workout Completed In:"
+        android:fontFamily="@font/kanit_font"
+        android:textSize="25dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+    <TextView
+        android:id="@+id/tvTimeElapsed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/kanit_font"
+        android:gravity="center"
+        android:text="HH:MM:SS"
+        android:textSize="25dp"
+        android:textColor="@color/pink"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTimeHeader" />
+
+
+    <TextView
+        android:id="@+id/tvLoadHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="Total Working Volume:"
+        android:fontFamily="@font/kanit_font"
+        android:gravity="center"
+        android:textSize="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTimeElapsed" />
+    <TextView
+        android:id="@+id/tvTotalLoad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/kanit_font"
+        android:gravity="center"
+        android:textSize="25dp"
+        android:text="LOAD"
+        android:textColor="@color/pink"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLoadHeader" />
+</androidx.constraintlayout.widget.ConstraintLayout>
