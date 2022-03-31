@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WorkoutSummary">
+    tools:context=".WorkoutSummary"
+    android:background="@color/black">
 
     <android.widget.Button
         android:id="@+id/btnX"
@@ -13,10 +14,9 @@
         android:background="@android:color/transparent"
         android:fontFamily="@font/kanit_font"
         android:gravity="center"
-        android:shadowColor="@color/gold"
         android:shadowRadius="2"
         android:text="x"
-        android:textColor="@color/black"
+        android:textColor="@color/hot_pink"
         android:textSize="30dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,6 +33,7 @@
         android:gravity="center"
         android:text="Workout Title"
         android:textSize="35dp"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/btnX"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -45,6 +46,7 @@
         android:text="Workout Completed In:"
         android:fontFamily="@font/kanit_font"
         android:textSize="25dp"
+        android:textColor="@color/white"
         android:layout_marginTop="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,6 +72,7 @@
         android:layout_marginTop="25dp"
         android:text="Total Working Volume:"
         android:fontFamily="@font/kanit_font"
+        android:textColor="@color/white"
         android:gravity="center"
         android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
