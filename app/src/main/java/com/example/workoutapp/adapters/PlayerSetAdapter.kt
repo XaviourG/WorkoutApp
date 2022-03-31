@@ -60,6 +60,7 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int) : Re
         }
 
         //Checkmark highlighting and log updating functionality
+        val purple = ContextCompat.getColor(context, R.color.purple)
         holder.binding.btnTick.setOnClickListener{
             if(holder.binding.etLoad.text.toString() == ""){ //can't log
                 val alertBuilder = AlertDialog.Builder(context)
@@ -79,17 +80,17 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int) : Re
                 alertBuilder.setMessage("Dropset field empty.")
                 alertBuilder.show()
             } else {
-                holder.binding.etLoad.setTextColor(Color.WHITE)
+                holder.binding.etLoad.setTextColor(purple)
                 holder.binding.etLoad.setShadowLayer(10f, 0f, 0f, Color.BLACK)
-                holder.binding.etReps.setTextColor(Color.WHITE)
+                holder.binding.etReps.setTextColor(purple)
                 holder.binding.etReps.setShadowLayer(10f, 0f, 0f, Color.BLACK)
-                holder.binding.btnTick.setTextColor(Color.WHITE)
+                holder.binding.btnTick.setTextColor(purple)
                 holder.binding.btnTick.setShadowLayer(10f, 0f, 0f, Color.BLACK)
                 if(goals[position].split(":")[2] == "drop") { //dropset stuff
                     //highlight dropset stuff
-                    holder.binding.etDropLoad.setTextColor(Color.WHITE)
+                    holder.binding.etDropLoad.setTextColor(purple)
                     holder.binding.etDropLoad.setShadowLayer(10f, 0f, 0f, Color.BLACK)
-                    holder.binding.etDropReps.setTextColor(Color.WHITE)
+                    holder.binding.etDropReps.setTextColor(purple)
                     holder.binding.etDropReps.setShadowLayer(10f, 0f, 0f, Color.BLACK)
                     //dropset values are stored load1+load2:reps1+reps2:drop
                     sets[position] =
@@ -105,7 +106,7 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int) : Re
         }
         holder.binding.tvPrevEx.text = prevs[position]
 
-        val dark = ContextCompat.getColor(context, R.color.dark)
+        val dark = ContextCompat.getColor(context, R.color.white)
         holder.binding.etLoad.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 //Do nothing

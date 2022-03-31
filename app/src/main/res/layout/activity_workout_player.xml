@@ -5,16 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".WorkoutPlayer"
-    android:background="@drawable/main_bg">
+    android:background="@color/dark_grey">
 
     <android.widget.Button
         android:id="@+id/btnX"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:text="←"
+        android:text="‹"
         android:shadowRadius="2"
-        android:shadowColor="@color/gold"
-        android:textColor="@color/black"
+        android:textColor="@color/purple"
         android:textStyle="bold"
         android:fontFamily="@font/kanit_font"
         android:textSize="35dp"
@@ -50,22 +49,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvPlayer"
-        android:background="@drawable/button_finish"/>
+        android:background="@drawable/loud_button"/>
 
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:fontFamily="@font/kanit_font"
-        android:gravity="center"
-        android:shadowColor="@color/gold"
-        android:shadowRadius="1"
-        android:text="WORKOUT TITLE"
-        android:textColor="@color/black"
-        android:textSize="26dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/kanit_bold"
+        android:gravity="center"
+        android:shadowColor="@color/white"
+        android:shadowRadius="2"
+        android:text="WORKOUT TITLE"
+        android:textColor="@color/off_white"
+        android:textSize="30dp"
+        app:layout_constraintStart_toEndOf="@+id/btnX"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -75,9 +73,9 @@
         android:text="00:00"
         android:fontFamily="@font/kanit_font"
         android:gravity="end"
-        android:shadowColor="@color/gold"
+        android:shadowColor="@color/white"
         android:shadowRadius="1"
-        android:textColor="@color/dark_gold"
+        android:textColor="@color/light_grey"
         android:textSize="18dp"
         android:layout_marginTop="19dp"
         android:layout_marginEnd="10dp"
