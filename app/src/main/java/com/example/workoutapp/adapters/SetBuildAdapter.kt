@@ -1,6 +1,7 @@
 package com.example.workoutapp.adapters
 
 import android.opengl.Visibility
+import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,7 @@ import com.example.workoutapp.data.exercisedb.Exercise
 import com.example.workoutapp.databinding.FragmentExerciseBinding
 import com.example.workoutapp.databinding.FragmentSetBinding
 
-class SetBuildAdapter(private val unit: Int) : RecyclerView.Adapter<SetBuildAdapter.SetBuildViewHolder>() {
+class SetBuildAdapter(private val unit: Int, private val parent: WorkoutBuildAdapter) : RecyclerView.Adapter<SetBuildAdapter.SetBuildViewHolder>() {
 
     var sets = mutableListOf<Pair<String, SetBuildViewHolder?>>()
     class SetBuildViewHolder(val binding: FragmentSetBinding)
@@ -96,6 +97,32 @@ class SetBuildAdapter(private val unit: Int) : RecyclerView.Adapter<SetBuildAdap
         } else {//set to lbs
             holder.binding.tvTimes.setText("(lbs)x")
         }
+
+
+
+        //methods for set consistency with scrolling
+        val pSets = parent.getSetsFromAdapter(this)
+
+        for(set in pSets){
+            addSet(set)
+        }
+
+        //make sure sets are updated with parent
+        val ref = this
+        holder.binding.etLoad.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                parent.setSetsByAdapter(getSets(), ref)
+            }
+
+        })
     }
 
     override fun getItemCount(): Int {
@@ -104,11 +131,13 @@ class SetBuildAdapter(private val unit: Int) : RecyclerView.Adapter<SetBuildAdap
 
     fun addSet(set: String = "0:0:none") {
         sets.add(Pair(set, null))
+        parent.setSetsByAdapter(getSets(), this)
         notifyItemInserted(sets.size - 1)
     }
 
     fun rmSetByPos(position: Int) {
         sets.removeAt(position)
+        parent.setSetsByAdapter(getSets(), this)
         notifyDataSetChanged()
     }
 

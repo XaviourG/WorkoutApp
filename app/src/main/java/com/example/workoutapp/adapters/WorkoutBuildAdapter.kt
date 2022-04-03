@@ -24,11 +24,11 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
     data class Inst(
         val EI: ExerciseInstance,
         var adapter: SetBuildAdapter? = null,
+        var sets: Array<String>? = null,
         var notes: String? = "",
         var holder: WorkoutBuildViewHolder? = null
     )
 
-    private var supersets = mutableListOf<String>()
     var list = mutableListOf<Inst>()
 
     class WorkoutBuildViewHolder(val binding: ExerciseListingBinding)
@@ -50,21 +50,24 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
         //holder.binding.btnSSAbove.visibility = View.INVISIBLE
         //holder.binding.btnSSBelow.visibility = View.INVISIBLE
         holder.binding.tvName.text = list[position].EI.exercise.name
-        if(supersets[position] == "none"){ // do nothing
-        } else {
-            holder.binding.tvName.setText(list[position].EI.exercise.name + "    -[${supersets[position]}]")
-        }
-
 
         holder.binding.btnDeleteExercise.setOnClickListener {
             removeExerciseByPos(position)
         }
-        var setAdapter = SetBuildAdapter(list[position].EI.exercise.unit)
+        var setAdapter = SetBuildAdapter(list[position].EI.exercise.unit, this)
         holder.binding.rvSets.adapter = setAdapter
         holder.binding.rvSets.layoutManager = LinearLayoutManager(context)
-        for(set in list[position].EI.sets) {
+        if(list[position].sets == null){
+            list[position].sets = arrayOf<String>()
+            list[position].sets = list[position].EI.sets
+        } else { //if the sets array is not initialised, then that was first load, match the record
+            //if its already been initialised then we just present the updated sets array
+        }
+        for(set in list[position].sets!!) {
             setAdapter.addSet(set)
         }
+
+
         holder.binding.btnAddSet.setOnClickListener {
             setAdapter.addSet()
         }
@@ -161,7 +164,6 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
                             ex.EID = exercise.EID
                             var inst = Inst(ExerciseInstance(ex))
                             list.add(inst)
-                            supersets.add("none")
                             notifyItemInserted(list.size - 1)
                             break
                         }
@@ -172,7 +174,6 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
         else{
             var inst = Inst(ExerciseInstance(ex))
             list.add(inst)
-            supersets.add("none") //ADD SUPERSET PRE HANDLING HERE
             notifyItemInserted(list.size - 1)
         }
 
@@ -181,7 +182,6 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
     fun removeExerciseByPos(position: Int){
         updateSets()
         list.removeAt(position)
-        supersets.removeAt(position)
         //notifyItemRemoved(position)
         notifyDataSetChanged()
     }
@@ -207,18 +207,7 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
             i++
         }
         list = newList
-
-        var newSS = mutableListOf<String>()
-        for(SS in workout.supersets) {
-            newSS.add(SS)
-        }
-        supersets = newSS
-
         notifyDataSetChanged()
-    }
-
-    fun getSupersets(): List<String> {
-        return supersets.toList()
     }
 
     fun getNotes(): List<String> {
@@ -227,5 +216,22 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
         }
 
         return list.map {it.notes!!}
+    }
+
+    fun getSetsFromAdapter(sba: SetBuildAdapter): Array<String> {
+        for(inst in list) {
+            if(inst.adapter == sba){
+                return inst.sets!!
+            }
+        }
+        return arrayOf<String>()
+    }
+
+    fun setSetsByAdapter(sets: Array<String>, sba: SetBuildAdapter) {
+        for(inst in list) {
+            if(inst.adapter == sba){
+                inst.sets = sets
+            }
+        }
     }
 }

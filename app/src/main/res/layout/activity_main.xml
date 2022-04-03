@@ -117,7 +117,7 @@
         android:id="@+id/tvLogo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="--X--"
+        android:text="APP NAME"
         android:gravity="center"
         android:textColor="@color/white"
         android:fontFamily="@font/kanit_bold"
