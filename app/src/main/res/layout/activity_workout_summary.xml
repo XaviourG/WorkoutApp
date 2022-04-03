@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".WorkoutSummary"
-    android:background="@color/dark_grey">
+    android:background="@color/mid_grey">
 
     <android.widget.Button
         android:id="@+id/btnX"
