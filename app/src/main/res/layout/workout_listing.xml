@@ -26,6 +26,6 @@
         app:layout_constraintTop_toTopOf="parent"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:background="@drawable/item_border"/>
+        android:background="@drawable/card"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

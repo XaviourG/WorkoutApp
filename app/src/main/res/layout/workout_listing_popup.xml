@@ -11,6 +11,7 @@
         android:layout_height="90dp"
         android:text="Edit"
         android:textColor="@color/white"
+        android:fontFamily="@font/kanit_font"
         android:background="@drawable/popup_buttons"
         app:layout_constraintBottom_toTopOf="@+id/btnCancel"
         app:layout_constraintStart_toStartOf="@+id/btnCancel" />
@@ -19,6 +20,7 @@
         android:id="@+id/btnStart"
         android:layout_width="90dp"
         android:layout_height="90dp"
+        android:fontFamily="@font/kanit_font"
         android:text="Start!"
         android:textColor="@color/purple"
         android:background="@drawable/popup_buttons"
@@ -30,6 +32,7 @@
         android:layout_width="180dp"
         android:layout_height="90dp"
         android:text="Cancel"
+        android:fontFamily="@font/kanit_font"
         android:textColor="@color/off_white"
         android:background="@drawable/popup_buttons"
         app:layout_constraintBottom_toBottomOf="parent"

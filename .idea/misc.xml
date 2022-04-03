@@ -5,8 +5,11 @@
       <map>
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2890625" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/drawable/button.xml" value="0.2890625" />
+        <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/drawable/card.xml" value="0.2890625" />
+        <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/drawable/dwn_btn.xml" value="0.2890625" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/drawable/gold_trim_button.xml" value="0.48385416666666664" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/drawable/grey_underline.xml" value="0.2890625" />
+        <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.2890625" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2890625" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/drawable/item_border.xml" value="0.48385416666666664" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/drawable/item_border_highlight.xml" value="0.2890625" />
@@ -15,13 +18,14 @@
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/drawable/popup_buttons.xml" value="0.2890625" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/drawable/search_bar_bg.xml" value="0.2890625" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/drawable/up_arrow_btn.xml" value="0.48385416666666664" />
+        <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/drawable/up_btn.xml" value="0.2890625" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/font/kanit_font.xml" value="0.4979166666666667" />
-        <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/activity_build_workout.xml" value="0.15196078431372548" />
+        <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/activity_build_workout.xml" value="0.1" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/activity_main.xml" value="0.46770833333333334" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/activity_progam_editor.xml" value="0.22745694022289767" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/activity_program.xml" value="0.27291666666666664" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/activity_workout.xml" value="0.27291666666666664" />
-        <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/activity_workout_editor.xml" value="0.14492753623188406" />
+        <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/activity_workout_editor.xml" value="0.1" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/activity_workout_list.xml" value="0.27291666666666664" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/activity_workout_player.xml" value="0.2857142857142857" />
         <entry key="..\:/Code/android-java-masterclass/WorkoutApp/app/src/main/res/layout/activity_workout_summary.xml" value="0.27291666666666664" />

@@ -11,8 +11,8 @@
         android:bottomRightRadius="5dp"/>
 
     <stroke
-        android:color="@color/light_grey"
+        android:color="@color/mid_grey"
         android:width="4dp"/>
     <solid
-        android:color="@color/light_grey"/>
+        android:color="@color/mid_grey"/>
 </shape>

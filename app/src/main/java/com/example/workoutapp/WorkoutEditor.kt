@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextWatcher
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.SearchView
@@ -41,6 +43,12 @@ class WorkoutEditor : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //repress top bar
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        this.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        getSupportActionBar()!!.hide()
+
         binding = ActivityWorkoutEditorBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
@@ -53,6 +61,11 @@ class WorkoutEditor : AppCompatActivity() {
         srAdapter = SearchResultsAdapter(this, wlAdapter, exerciseViewModel)
         binding.rvSearchResults.adapter = srAdapter
         binding.rvSearchResults.layoutManager = LinearLayoutManager(this)
+
+        binding.btnX.setOnClickListener {
+            val i = Intent(this@WorkoutEditor, WorkoutListActivity::class.java)
+            startActivity(i)
+        }
 
         exerciseViewModel.allExercises.observe(this, {
                 list -> list.let{

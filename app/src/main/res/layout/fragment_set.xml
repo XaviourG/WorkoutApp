@@ -11,6 +11,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="5dp"
+        android:backgroundTint="@color/light_grey"
+        android:textColor="@color/off_white"
+        android:textColorHint="@color/light_grey"
+        android:fontFamily="@font/kanit_font"
+        android:textSize="18dp"
         android:ems="6"
         android:hint="Load"
         android:inputType="number"
@@ -25,17 +30,26 @@
         android:layout_marginTop="5dp"
         android:ems="6"
         android:hint="Reps"
+        android:backgroundTint="@color/light_grey"
+        android:textColor="@color/off_white"
+        android:textColorHint="@color/light_grey"
+        android:fontFamily="@font/kanit_font"
+        android:textSize="18dp"
         android:inputType="number"
         android:textAlignment="center"
         app:layout_constraintStart_toEndOf="@+id/tvTimes"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/btnDeleteSet"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="5dp"
+        android:textColor="@color/purple"
+        android:fontFamily="@font/kanit_bold"
+        android:textSize="22dp"
         android:text="x"
+        android:background="@drawable/nothing"
         android:layout_marginStart="5dp"
         app:layout_constraintStart_toEndOf="@+id/btnType"
         app:layout_constraintTop_toTopOf="parent" />
@@ -45,40 +59,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="(kg/lbs) x"
-        android:textSize="16dp"
+        android:textSize="14dp"
+        android:textColor="@color/off_white"
+        android:fontFamily="@font/kanit_font"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toEndOf="@+id/etLoad"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/btnType"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="5dp"
+        android:fontFamily="@font/kanit_bold"
         android:text="⋮"
+        android:textSize="22dp"
+        android:textColor="@color/purple"
+        android:background="@drawable/nothing"
         app:layout_constraintStart_toEndOf="@+id/etReps"
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <Button
-        android:id="@+id/btnReg"
-        android:layout_width="130dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="30dp"
-        android:text="Regular Set"
-        android:textSize="12dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnDS"
-        android:layout_width="130dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="30dp"
-        android:text="Drop Set"
-        android:textSize="12dp"
-        app:layout_constraintStart_toEndOf="@+id/btnReg"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etDropLoad"
@@ -86,12 +88,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:ems="6"
-        android:fontFamily="@font/kanit_font"
-        android:textColor="@color/dark"
-        android:textSize="16dp"
-        android:textColorHint="@color/light_gold"
         android:textAlignment="center"
         android:hint="Load"
+        android:backgroundTint="@color/light_grey"
+        android:textColor="@color/off_white"
+        android:textColorHint="@color/light_grey"
+        android:fontFamily="@font/kanit_font"
+        android:textSize="18dp"
         android:layout_marginStart="40dp"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="@+id/etLoad"
@@ -103,15 +106,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:ems="6"
-        android:fontFamily="@font/kanit_font"
         android:hint="Reps"
         android:inputType="text"
         android:textAlignment="center"
-        android:textColor="@color/dark"
-        android:textColorHighlight="@color/gold"
-        android:textColorHint="@color/light_gold"
-        android:textColorLink="@color/gold"
-        android:textSize="16dp"
+        android:backgroundTint="@color/light_grey"
+        android:textColor="@color/off_white"
+        android:textColorHint="@color/light_grey"
+        android:fontFamily="@font/kanit_font"
+        android:textSize="18dp"
         app:layout_constraintStart_toEndOf="@+id/tvDropMid"
         app:layout_constraintTop_toBottomOf="@id/etReps" />
 
@@ -123,9 +125,8 @@
         android:fontFamily="@font/kanit_font"
         android:text="(kg/lbs) x"
         android:textAlignment="center"
-        android:textColor="@color/dark"
-        android:textColorHint="@color/gold"
-        android:textSize="12dp"
+        android:textColor="@color/off_white"
+        android:textSize="14dp"
         app:layout_constraintStart_toEndOf="@+id/etDropLoad"
         app:layout_constraintTop_toBottomOf="@id/etReps" />
 
@@ -134,14 +135,42 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="DS:"
-        android:textColor="@color/dark"
+        android:textColor="@color/off_white"
         android:textSize="16dp"
         android:textStyle="italic"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="5dp"
-        android:fontFamily="@font/kanit_font"
+        android:fontFamily="@font/kanit_bold"
         app:layout_constraintEnd_toStartOf="@+id/etDropLoad"
         app:layout_constraintTop_toBottomOf="@+id/etLoad" />
+
+    <android.widget.Button
+        android:id="@+id/btnReg"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        android:text="Reg Set"
+        android:textSize="16dp"
+        android:fontFamily="@font/kanit_font"
+        android:textColor="@color/white"
+        android:background="@drawable/loud_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.widget.Button
+        android:id="@+id/btnDS"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="30dp"
+        android:text="Drop Set"
+        android:textSize="16dp"
+        android:fontFamily="@font/kanit_font"
+        android:textColor="@color/white"
+        android:background="@drawable/loud_button"
+        app:layout_constraintStart_toEndOf="@+id/btnReg"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

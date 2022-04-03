@@ -3,14 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/card"
+    android:layout_marginTop="15dp"
+    android:layout_marginBottom="15dp">
 
     <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/kanit_font"
+        android:textColor="@color/white"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="7dp"
+        android:textSize="18dp"
         android:text="Exercise Name"
         app:layout_constraintStart_toEndOf="@+id/btnMoveUp"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,72 +30,54 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etNotes" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/btnAddSet"
         android:layout_width="150dp"
-        android:layout_height="30dp"
+        android:layout_height="26dp"
         android:text="Add Set"
         android:textSize="10dp"
+        android:textColor="@color/white"
+        android:layout_marginBottom="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rvSets" />
+        app:layout_constraintTop_toBottomOf="@id/rvSets"
+        android:background="@color/dark_grey"/>
 
-    <Button
+    <android.widget.Button
         android:id="@+id/btnDeleteExercise"
-        android:layout_width="50dp"
+        android:drawableTop="@drawable/ic_baseline_delete_24"
+        android:layout_width="70dp"
         android:layout_height="40dp"
-        android:text="DEL"
-        android:textSize="8dp"
-        android:layout_marginTop="28dp"
+        android:text=""
+        android:textSize="14dp"
+        android:fontFamily="@font/kanit_bold"
+        android:textColor="@color/purple"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/nothing"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnSuperset"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:text="SS"
-        android:textSize="8dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="15dp"
-        app:layout_constraintEnd_toStartOf="@id/btnDeleteExercise"
-        app:layout_constraintTop_toTopOf="parent" />
-    <Button
-        android:id="@+id/btnSSAbove"
-        android:layout_width="70dp"
-        android:layout_height="40dp"
-        android:text="With Above"
-        android:textSize="8dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="15dp"
-        app:layout_constraintEnd_toStartOf="@id/btnDeleteExercise"
-        app:layout_constraintTop_toTopOf="parent" />
-    <Button
-        android:id="@+id/btnSSBelow"
-        android:layout_width="70dp"
-        android:layout_height="40dp"
-        android:text="With Below"
-        android:textSize="8dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toStartOf="@id/btnSSAbove"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
+    <android.widget.Button
         android:id="@+id/btnMoveUp"
         android:layout_width="40dp"
-        android:layout_height="32dp"
+        android:layout_height="40dp"
         android:text="˄"
-        android:layout_marginTop="32dp"
+        android:textSize="30dp"
+        android:textColor="@color/purple"
+        android:layout_marginTop="2dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/item_border"/>
+        android:background="@drawable/nothing"/>
 
-    <Button
+    <android.widget.Button
         android:id="@+id/btnMoveDown"
+        android:gravity="center"
         android:layout_width="40dp"
-        android:layout_height="32dp"
-        android:background="@drawable/item_border"
+        android:layout_height="40dp"
+        android:textSize="30dp"
+        android:background="@drawable/nothing"
+        android:textColor="@color/purple"
         android:text="˅"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -97,6 +85,10 @@
 
     <EditText
         android:id="@+id/etNotes"
+        android:fontFamily="@font/kanit_font"
+        android:textColor="@color/light_grey"
+        android:backgroundTint="@color/light_grey"
+        android:textColorHint="@color/grey"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:ems="10"

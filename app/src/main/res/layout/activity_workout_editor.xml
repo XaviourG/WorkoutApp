@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BuildWorkoutActivity">
+    tools:context=".BuildWorkoutActivity"
+    android:background="@color/dark_grey">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -21,12 +22,32 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnDone"
-        android:layout_width="wrap_content"
+        android:id="@+id/btnX"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:text="DONE"
-        app:layout_constraintEnd_toEndOf="@id/tbBuild"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/kanit_font"
+        android:gravity="center"
+        android:text="‹"
+        android:textColor="@color/purple"
+        android:textSize="30dp"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <android.widget.Button
+        android:id="@+id/btnDone"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:text="SAVE"
+        android:fontFamily="@font/kanit_font"
+        android:textColor="@color/white"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="@id/tbBuild"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/loud_button"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvBuildSpace"
@@ -48,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/search_bar_bg"
         app:defaultQueryHint="Add Exercise"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,24 +81,84 @@
         android:id="@+id/rvSearchResults"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="350dp"
         app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/dark_grey"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/svBuild" />
 
     <EditText
         android:id="@+id/etTitle"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text=""
+        android:hint="Workout Title"
+        android:textSize="22dp"
+        android:fontFamily="@font/kanit_bold"
+        android:backgroundTint="@color/grey"
+        android:textColor="@color/white"
+        android:textColorHint="@color/light_grey"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toEndOf="@+id/btnX"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <!--
+    <Button
+        android:id="@+id/btnAddEx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Add Exercise"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvBuildSpace" />
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/svBuild"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/search_bar_bg"
+        app:layout_constraintTop_toBottomOf="@+id/tbBuild"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSearchResults"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/svBuild" />
+
+
+    <Button
+        android:id="@+id/btnTestPrintDB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Print DB"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnTestInsert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add to DB"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/ptTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="New Workout"
-        android:hint="Workout Title"
-        android:layout_marginTop="5dp"
-        app:layout_constraintEnd_toStartOf="@+id/btnSave"
-        app:layout_constraintStart_toEndOf="@+id/btnX"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:hint="Exercise Name"
+        app:layout_constraintBottom_toTopOf="@+id/btnTestInsert"
+        app:layout_constraintStart_toStartOf="parent" />
+    -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

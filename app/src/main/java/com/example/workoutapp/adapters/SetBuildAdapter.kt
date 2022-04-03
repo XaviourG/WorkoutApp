@@ -125,6 +125,16 @@ class SetBuildAdapter(private val unit: Int) : RecyclerView.Adapter<SetBuildAdap
         }
         return setList.toTypedArray()
     }
+
+    fun setSets(arr: Array<String>) {
+        println("Sets pre opp >>> $sets")
+        sets.clear()
+        notifyDataSetChanged()
+        for(set in arr){
+             addSet(set)
+        }
+        println("Sets post opp >>> $sets")
+    }
 }
 
 fun hideEverything(binding: FragmentSetBinding) {

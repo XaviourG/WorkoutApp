@@ -47,8 +47,8 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
         holder.binding.etNotes.setText(list[position].notes)
 
         //Hide SS Features
-        holder.binding.btnSSAbove.visibility = View.INVISIBLE
-        holder.binding.btnSSBelow.visibility = View.INVISIBLE
+        //holder.binding.btnSSAbove.visibility = View.INVISIBLE
+        //holder.binding.btnSSBelow.visibility = View.INVISIBLE
         holder.binding.tvName.text = list[position].EI.exercise.name
         if(supersets[position] == "none"){ // do nothing
         } else {
@@ -72,10 +72,15 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
         holder.binding.btnMoveUp.setOnClickListener {
             if(position == 0) { //Can't move upwards do nothing
             } else { //Swap this with the entity above it and notify.
+                //val setsTop = list[position-1].adapter!!.getSets()
+                //val setsBot = list[position].adapter!!.getSets()
                 val tmp = list[position-1]
                 list[position-1] = list[position]
                 list[position] = tmp
                 notifyDataSetChanged()
+                //list[position].adapter!!.setSets(setsTop)
+                //list[position-1].adapter!!.setSets(setsBot)
+                //notifyDataSetChanged()
             }
         }
         holder.binding.btnMoveDown.setOnClickListener {
@@ -88,7 +93,7 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
             }
         }
 
-        //SS Functionality
+        /* SS Functionality
         holder.binding.btnSuperset.setOnClickListener {
             //show options
             holder.binding.btnSuperset.visibility = View.INVISIBLE
@@ -138,7 +143,7 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
                 }
                 notifyDataSetChanged()
             }
-        }
+        }*/
 
         list[position].adapter = setAdapter
     }

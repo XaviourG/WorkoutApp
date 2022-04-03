@@ -66,7 +66,7 @@ class WorkoutListAdapter(private val context: Context)
                     popup.contentView = binding2.root
                     binding2.btnCancel.setOnClickListener{
                         holder.binding.tvWorkoutListing.setTextColor(context.getColor(R.color.white))
-                        holder.binding.tvWorkoutListing.setBackgroundResource(R.drawable.item_border)
+                        holder.binding.tvWorkoutListing.setBackgroundResource(R.drawable.card)
                         popup.dismiss() }
                     binding2.btnEdit.setOnClickListener{
                         val i = Intent(context,
