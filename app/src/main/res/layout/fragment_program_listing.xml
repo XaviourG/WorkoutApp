@@ -6,9 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="60dp"
     android:orientation="vertical"
-    android:background="@drawable/item_border"
+    android:background="@drawable/card"
     android:layout_marginBottom="10dp"
-    android:layout_marginTop="10dp">
+    android:layout_marginTop="10dp"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="15dp">
 
 
     <TextView
@@ -18,7 +20,8 @@
         android:text="program title"
         android:textAlignment="center"
         android:textSize="24dp"
-        android:textColor="@color/dark_grey"
+        android:textColor="@color/off_white"
+        android:fontFamily="@font/kanit_bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,8 +35,10 @@
         android:layout_marginEnd="30dp"
         android:layout_height="wrap_content"
         android:textStyle="italic"
+        android:fontFamily="@font/kanit_font"
         android:textSize="12dp"
         android:textAlignment="center"
+        android:textColor="@color/off_white"
         app:layout_constraintTop_toTopOf="@+id/tvProgramTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

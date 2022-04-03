@@ -6,61 +6,57 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@drawable/main_bg"
+    android:background="@color/dark_grey"
     >
 
     <android.widget.Button
         android:id="@+id/btnNextWorkout"
         android:layout_width="0dp"
         android:layout_height="150dp"
-        android:text="Start next Workout!"
-        android:shadowRadius="1"
-        android:shadowColor="@color/gold"
-        android:fontFamily="@font/kanit_font"
-        android:textSize="18dp"
-        android:layout_marginBottom="30dp"
-        android:textColor="@color/black"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/card"
+        android:text="Start next Workout!"
+        android:textColor="@color/white"
+        android:textSize="24dp"
         app:layout_constraintBottom_toTopOf="@+id/btnWorkouts"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/button_bg_next_workout"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <android.widget.Button
         android:id="@+id/btnWorkouts"
-        android:layout_width="250dp"
+        android:layout_width="310dp"
         android:layout_height="75dp"
-        android:layout_marginBottom="15dp"
-        android:layout_marginStart="20dp"
-        android:text="Workouts"
-        android:shadowRadius="1"
-        android:shadowColor="@color/gold"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/card"
         android:fontFamily="@font/kanit_font"
-        android:textColor="@color/black"
-        android:textSize="18dp"
+        android:text="Workouts"
+        android:textColor="@color/white"
+        android:textSize="22dp"
         app:layout_constraintBottom_toTopOf="@+id/btnMyProgram"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/workouts_button"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <android.widget.Button
         android:id="@+id/btnMyProgram"
         android:layout_width="250dp"
         android:layout_height="75dp"
-        android:layout_marginBottom="50dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginBottom="48dp"
+        android:gravity="center_horizontal"
+        android:paddingTop="15dp"
 
-        android:text="My Program"
-        android:textColor="@color/black"
-        android:shadowRadius="1"
-        android:shadowColor="@color/gold"
+        android:background="@drawable/card"
         android:fontFamily="@font/kanit_font"
-        android:textSize="18dp"
+        android:text="My Program"
+        android:textColor="@color/white"
 
+        android:textSize="22dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/progress_button_light"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.mikhaellopez.circularprogressbar.CircularProgressBar
         android:id="@+id/progressBar"
@@ -68,24 +64,77 @@
         android:layout_height="250dp"
         app:layout_constraintBottom_toTopOf="@+id/btnNextWorkout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.473" />
 
     <TextView
         android:id="@+id/tvTotalLoad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/kanit_font"
         android:text="No Active Program"
         android:textAlignment="center"
-        android:shadowRadius="1"
-        android:shadowColor="@color/gold"
-        android:fontFamily="@font/kanit_font"
+        android:textColor="@color/off_white"
         android:textSize="20dp"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@+id/progressBar"
         app:layout_constraintEnd_toEndOf="@+id/progressBar"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="@+id/progressBar"
-        app:layout_constraintTop_toTopOf="@+id/progressBar" />
+        app:layout_constraintTop_toTopOf="@+id/progressBar"
+        app:layout_constraintVertical_bias="0.493" />
+
+    <TextView
+        android:id="@+id/tvNextWorkout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        android:text=""
+        android:elevation="2dp"
+        android:fontFamily="@font/kanit_font"
+        android:textSize="18dp"
+        android:textColor="@color/purple"
+        app:layout_constraintEnd_toEndOf="@+id/btnNextWorkout"
+        app:layout_constraintStart_toStartOf="@+id/btnNextWorkout"
+        app:layout_constraintTop_toTopOf="@+id/btnNextWorkout" />
+
+    <TextView
+        android:id="@+id/tvProgram"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text=""
+        android:elevation="2dp"
+        android:fontFamily="@font/kanit_font"
+        android:textSize="16dp"
+        android:textColor="@color/purple"
+        app:layout_constraintEnd_toEndOf="@+id/btnMyProgram"
+        app:layout_constraintStart_toStartOf="@+id/btnMyProgram"
+        app:layout_constraintTop_toTopOf="@+id/btnMyProgram" />
+
+    <TextView
+        android:id="@+id/tvLogo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="APP NAME"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/kanit_bold"
+        android:textSize="60dp"
+        android:textStyle="italic"
+
+        android:shadowColor="@color/purple"
+        android:shadowDx="1.5"
+        android:shadowDy="1.3"
+        android:shadowRadius="15"
+
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        android:background="@color/dark_grey"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

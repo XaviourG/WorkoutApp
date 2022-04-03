@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
                         if(p.active){
                             setProgram(p)
                             setNextWorkoutText(p.workoutIDs[p.position])
-                            binding.btnMyProgram.text = "My Program \n- " + p.title +" -"
+                            binding.tvProgram.text = "- ${p.title} -"
                             binding.tvTotalLoad.text = "Program Cycle:\nWorkout ${p.position+1}/${p.workoutIDs.size}"
                             val progress: Float = (p.position).toFloat() / p.workoutIDs.size
                             binding.progressBar.apply {
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
                                 backgroundProgressBarWidth = 3f
                                 //progressBarColor = Color.WHITE
                                 progressBarColorDirection = CircularProgressBar.GradientDirection.LEFT_TO_RIGHT
-                                progressBarColorStart = Color.parseColor("#b29456") //#c09a6b
+                                progressBarColorStart = Color.parseColor("#9615DB") //#c09a6b
                                 progressBarColorEnd = Color.WHITE
                                 startAngle = 45f
                             }
@@ -104,8 +104,8 @@ class MainActivity : AppCompatActivity() {
             list -> list.let {
                 for(w in it){
                     if(w.WID == wid){
-                        binding.btnNextWorkout.text = "Start Next Workout! \n- " +
-                                w.title + " -"
+                        binding.btnNextWorkout.text = "Start Next Workout!\n"
+                        binding.tvNextWorkout.setText("- ${w.title} -")
                         break
                     }
                 }

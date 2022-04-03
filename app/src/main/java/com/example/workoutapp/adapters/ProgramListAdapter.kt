@@ -42,8 +42,8 @@ class ProgramListAdapter (private val context: Context, private val exerciseView
             holder.binding.tvProgramTitle.setTextColor(context.getColor(R.color.purple))
             holder.itemView.setBackgroundResource(R.drawable.item_border_highlight)
         } else {
-            holder.binding.tvProgramTitle.setTextColor(context.getColor(R.color.dark_grey))
-            holder.itemView.setBackgroundResource(R.drawable.item_border)
+            holder.binding.tvProgramTitle.setTextColor(context.getColor(R.color.off_white))
+            holder.itemView.setBackgroundResource(R.drawable.card)
         }
 
         //Popup

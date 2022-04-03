@@ -5,33 +5,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BuildWorkoutActivity">
+    tools:context=".BuildWorkoutActivity"
+    android:background="@color/dark_grey">
 
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbBuild"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/btnX"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="X"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:text="‹"
+        android:textColor="@color/purple"
+        android:fontFamily="@font/kanit_bold"
+        android:textSize="35dp"
         app:layout_constraintStart_toStartOf="@+id/tbBuild"
-        app:layout_constraintTop_toTopOf="parent" />
-    <Button
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/nothing"/>
+    <android.widget.Button
         android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SAVE"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/kanit_font"
+        android:background="@drawable/loud_button"
         app:layout_constraintEnd_toEndOf="@id/tbBuild"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -75,13 +86,19 @@
 
     <EditText
         android:id="@+id/etTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
         android:text=""
+        android:fontFamily="@font/kanit_bold"
+        android:textColor="@color/white"
+        android:textColorHint="@color/off_white"
+        android:backgroundTint="@color/off_white"
         android:hint="Program Title"
-        android:layout_marginTop="5dp"
+        android:textSize="22dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
         app:layout_constraintEnd_toStartOf="@+id/btnSave"
         app:layout_constraintStart_toEndOf="@+id/btnX"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -96,6 +113,9 @@
         android:ems="10"
         android:inputType="text"
         android:text=""
+        android:textColor="@color/off_white"
+        android:textColorHint="@color/light_grey"
+        android:backgroundTint="@color/off_white"
         android:hint="Program Description Here"
         app:layout_constraintBottom_toBottomOf="@+id/rvBuildSpace"
         app:layout_constraintEnd_toEndOf="parent"

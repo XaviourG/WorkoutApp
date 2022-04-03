@@ -4,21 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProgramActivity">
+    tools:context=".ProgramActivity"
+    android:background="@color/dark_grey">
 
     <Button
         android:id="@+id/btnHome"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@android:color/transparent"
-        android:fontFamily="@font/kanit_font"
+        android:fontFamily="@font/kanit_bold"
         android:gravity="center"
-        android:shadowColor="@color/gold"
-        android:shadowRadius="2"
-        android:text="←"
-        android:textColor="@color/black"
+        android:text="‹"
+        android:textColor="@color/purple"
         android:textSize="35dp"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,9 +28,9 @@
         android:text="PROGRAMS"
         android:layout_marginEnd="60dp"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/kanit_font"
-        android:textSize="26dp"
-        android:textColor="@color/black"
+        android:fontFamily="@font/kanit_bold"
+        android:textSize="28dp"
+        android:textColor="@color/off_white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnHome"
         app:layout_constraintTop_toTopOf="parent" />
@@ -54,10 +52,12 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:text="+ New Program"
-        android:textColor="@color/light_grey"
+        android:textColor="@color/white"
+        android:fontFamily="@font/kanit_font"
+        android:textSize="16dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnHome"
-        android:background="@drawable/button"/>
+        android:background="@drawable/loud_button"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
