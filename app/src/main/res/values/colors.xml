@@ -4,11 +4,13 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="purple">#9615DB</color>
+    <color name="purple_trans">#BF9615DB</color>
+    <color name="dark_purple">#5F0F8A</color>
     <color name="light_grey">#A1A5A6</color>
     <color name="grey">#4c4d4f</color>
     <color name="dark_grey">#18191a</color>
     <color name="off_white">#D2D3D3</color>
-    <color name="mid_grey">#0D0C0E</color>
+    <color name="mid_grey">#161417</color>
 
     <color name="gold">#58CD36</color>
     <color name="dark_gold">#58CD36</color>
