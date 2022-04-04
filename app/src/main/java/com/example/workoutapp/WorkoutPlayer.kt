@@ -75,9 +75,10 @@ class WorkoutPlayer : AppCompatActivity() {
                 exerciseViewModel.insertLog(l)
                 //Calculate total load
                 var exLoad = 0f
+                println("\n \n CALCUALTING TOTAL LOAD OF ${l} \n \n")
                 var execs = l.performance.split("|")
                 for (ex in execs) {
-                    if (ex == ""){
+                    if ((ex == "") or (ex.contains("::"))){
                     } else {
                         val bits = ex.split(":")
                         if(bits[2].contains("drop")) {

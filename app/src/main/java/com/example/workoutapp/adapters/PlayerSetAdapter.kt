@@ -16,11 +16,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.workoutapp.R
 import com.example.workoutapp.data.exercisedb.Exercise
 import com.example.workoutapp.data.exercisedb.Log
+import com.example.workoutapp.data.exercisedb.Workout
 import com.example.workoutapp.databinding.FragmentExerciseBinding
 import com.example.workoutapp.databinding.FragmentPlayerSetBinding
 import com.example.workoutapp.databinding.FragmentSetBinding
 
-class PlayerSetAdapter(private val context: Context, private val unit: Int) : RecyclerView.Adapter<PlayerSetAdapter.PlayerSetViewHolder>() {
+class PlayerSetAdapter(private val context: Context, private val unit: Int, private val wpa: WorkoutPlayerAdapter) : RecyclerView.Adapter<PlayerSetAdapter.PlayerSetViewHolder>() {
 
     private var sets = mutableListOf<String>()
     private var prevs = mutableListOf<String>()
@@ -60,7 +61,6 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int) : Re
         }
 
         //Checkmark highlighting and log updating functionality
-        val purple = ContextCompat.getColor(context, R.color.purple)
         holder.binding.btnTick.setOnClickListener{
             if(holder.binding.etLoad.text.toString() == ""){ //can't log
                 val alertBuilder = AlertDialog.Builder(context)
@@ -80,18 +80,8 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int) : Re
                 alertBuilder.setMessage("Dropset field empty.")
                 alertBuilder.show()
             } else {
-                holder.binding.etLoad.setTextColor(purple)
-                holder.binding.etLoad.setShadowLayer(10f, 0f, 0f, Color.BLACK)
-                holder.binding.etReps.setTextColor(purple)
-                holder.binding.etReps.setShadowLayer(10f, 0f, 0f, Color.BLACK)
-                holder.binding.btnTick.setTextColor(purple)
-                holder.binding.btnTick.setShadowLayer(10f, 0f, 0f, Color.BLACK)
+                highlight(holder.binding)
                 if(goals[position].split(":")[2] == "drop") { //dropset stuff
-                    //highlight dropset stuff
-                    holder.binding.etDropLoad.setTextColor(purple)
-                    holder.binding.etDropLoad.setShadowLayer(10f, 0f, 0f, Color.BLACK)
-                    holder.binding.etDropReps.setTextColor(purple)
-                    holder.binding.etDropReps.setShadowLayer(10f, 0f, 0f, Color.BLACK)
                     //dropset values are stored load1+load2:reps1+reps2:drop
                     sets[position] =
                         holder.binding.etLoad.text.toString() + "+" +
@@ -102,11 +92,13 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int) : Re
                     sets[position] =
                         holder.binding.etLoad.text.toString() + ":" + holder.binding.etReps.text.toString() + ":" + "none"
                 }
+                var newLog = wpa.getConsistencyLog(this)
+                newLog[position] = sets[position]
+                wpa.updateConsistencyLog(newLog, this)
             }
         }
         holder.binding.tvPrevEx.text = prevs[position]
 
-        val dark = ContextCompat.getColor(context, R.color.white)
         holder.binding.etLoad.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 //Do nothing
@@ -118,16 +110,7 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int) : Re
 
             override fun afterTextChanged(p0: Editable?) {
                 //If text is at all edited, unhighlight it.
-                holder.binding.etLoad.setTextColor(dark)
-                holder.binding.etLoad.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
-                holder.binding.etReps.setTextColor(dark)
-                holder.binding.etReps.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
-                holder.binding.btnTick.setTextColor(dark)
-                holder.binding.btnTick.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
-                holder.binding.etDropLoad.setTextColor(dark)
-                holder.binding.etDropLoad.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
-                holder.binding.etDropReps.setTextColor(dark)
-                holder.binding.etDropReps.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+                unhighlight(holder.binding)
             }
         })
 
@@ -142,16 +125,7 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int) : Re
 
             override fun afterTextChanged(p0: Editable?) {
                 //If text is at all edited, unhighlight it.
-                holder.binding.etLoad.setTextColor(dark)
-                holder.binding.etLoad.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
-                holder.binding.etReps.setTextColor(dark)
-                holder.binding.etReps.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
-                holder.binding.btnTick.setTextColor(dark)
-                holder.binding.btnTick.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
-                holder.binding.etDropLoad.setTextColor(dark)
-                holder.binding.etDropLoad.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
-                holder.binding.etDropReps.setTextColor(dark)
-                holder.binding.etDropReps.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+                unhighlight(holder.binding)
             }
         })
         holder.binding.etDropLoad.addTextChangedListener(object : TextWatcher {
@@ -165,16 +139,7 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int) : Re
 
             override fun afterTextChanged(p0: Editable?) {
                 //If text is at all edited, unhighlight it.
-                holder.binding.etLoad.setTextColor(dark)
-                holder.binding.etLoad.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
-                holder.binding.etReps.setTextColor(dark)
-                holder.binding.etReps.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
-                holder.binding.btnTick.setTextColor(dark)
-                holder.binding.btnTick.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
-                holder.binding.etDropLoad.setTextColor(dark)
-                holder.binding.etDropLoad.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
-                holder.binding.etDropReps.setTextColor(dark)
-                holder.binding.etDropReps.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+                unhighlight(holder.binding)
             }
         })
 
@@ -189,16 +154,7 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int) : Re
 
             override fun afterTextChanged(p0: Editable?) {
                 //If text is at all edited, unhighlight it.
-                holder.binding.etLoad.setTextColor(dark)
-                holder.binding.etLoad.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
-                holder.binding.etReps.setTextColor(dark)
-                holder.binding.etReps.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
-                holder.binding.btnTick.setTextColor(dark)
-                holder.binding.btnTick.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
-                holder.binding.etDropLoad.setTextColor(dark)
-                holder.binding.etDropLoad.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
-                holder.binding.etDropReps.setTextColor(dark)
-                holder.binding.etDropReps.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+                unhighlight(holder.binding)
             }
         })
 
@@ -235,10 +191,46 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int) : Re
                 }
             }
         }
+
+        //update from consistency log
+        var log = wpa.getConsistencyLog(this)[position].split(":")
+        if(log[1] == ""){ // log is empty, do nothing
+        } else { //log exists, use it
+            holder.binding.etLoad.setText(log[0])
+            holder.binding.etReps.setText(log[1])
+            highlight(holder.binding)
+        }
     }
 
     override fun getItemCount(): Int {
         return sets.size
+    }
+
+    fun highlight(b: FragmentPlayerSetBinding) {
+        val purple = ContextCompat.getColor(context, R.color.purple)
+        b.etLoad.setTextColor(purple)
+        b.etLoad.setShadowLayer(10f, 0f, 0f, Color.BLACK)
+        b.etReps.setTextColor(purple)
+        b.etReps.setShadowLayer(10f, 0f, 0f, Color.BLACK)
+        b.btnTick.setTextColor(purple)
+        b.btnTick.setShadowLayer(10f, 0f, 0f, Color.BLACK)
+        b.etDropLoad.setTextColor(purple)
+        b.etDropLoad.setShadowLayer(10f, 0f, 0f, Color.BLACK)
+        b.etDropReps.setTextColor(purple)
+        b.etDropReps.setShadowLayer(10f, 0f, 0f, Color.BLACK)
+    }
+    fun unhighlight(b: FragmentPlayerSetBinding) {
+        val dark = ContextCompat.getColor(context, R.color.white)
+        b.etLoad.setTextColor(dark)
+        b.etLoad.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+        b.etReps.setTextColor(dark)
+        b.etReps.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+        b.btnTick.setTextColor(dark)
+        b.btnTick.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+        b.etDropLoad.setTextColor(dark)
+        b.etDropLoad.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
+        b.etDropReps.setTextColor(dark)
+        b.etDropReps.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
     }
 
     fun addSet(goal: String = "0:0:none") {
@@ -257,8 +249,9 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int) : Re
     fun getLog(): String {
         var s = ""
         var logPresent = false
-        for(l in sets) {
-            if ((l == "0:0:none") or (l == "0:0:drop")) {
+        var consistencyLog = wpa.getConsistencyLog(this)
+        for(l in consistencyLog) {
+            if ((l == "::none") or (l == "::drop")) {
                 //don't add
             } else {
                 logPresent = true

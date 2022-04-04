@@ -107,6 +107,7 @@ class SetBuildAdapter(private val unit: Int, private val wba: WorkoutBuildAdapte
         }
 
         //Set edit text listeners
+        val isDropSet = (wba.getSetsByAdapter(this)[position].split(":")[2] == "drop")
         holder.binding.etLoad.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 //do nothing
@@ -121,7 +122,7 @@ class SetBuildAdapter(private val unit: Int, private val wba: WorkoutBuildAdapte
                 var sets = wba.getSetsByAdapter(this@SetBuildAdapter)
                 var data = sets[position].split(":")
                 val load = holder.binding.etLoad.text.toString()
-                if(unit == 0) { //regular set format as such
+                if(!isDropSet) { //regular set format as such
                     sets[position] = "${load}:${data[1]}:${data[2]}"
                 } else { //drop set must format properly
                     val dropLoad = data[0].split("+")[1]
@@ -145,7 +146,7 @@ class SetBuildAdapter(private val unit: Int, private val wba: WorkoutBuildAdapte
                 var sets = wba.getSetsByAdapter(this@SetBuildAdapter)
                 var data = sets[position].split(":")
                 val reps = holder.binding.etReps.text.toString()
-                if(unit == 0) { //regular set format as such
+                if(!isDropSet) { //regular set format as such
                     sets[position] = "${data[0]}:${reps}:${data[2]}"
                 } else { //drop set must format properly
                     val dropReps = data[1].split("+")[1]
@@ -155,7 +156,7 @@ class SetBuildAdapter(private val unit: Int, private val wba: WorkoutBuildAdapte
             }
 
         })
-        if(unit == 1) { //set dropset listeners
+        if(isDropSet) { //set dropset listeners
             holder.binding.etDropLoad.addTextChangedListener(object: TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                     //do nothing
