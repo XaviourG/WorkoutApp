@@ -1,6 +1,7 @@
 package com.example.workoutapp.adapters
 
 import android.opengl.Visibility
+import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
@@ -8,12 +9,12 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.workoutapp.data.exercisedb.Exercise
+import com.example.workoutapp.data.exercisedb.Workout
 import com.example.workoutapp.databinding.FragmentExerciseBinding
 import com.example.workoutapp.databinding.FragmentSetBinding
 
-class SetBuildAdapter(private val unit: Int) : RecyclerView.Adapter<SetBuildAdapter.SetBuildViewHolder>() {
+class SetBuildAdapter(private val unit: Int, private val wba: WorkoutBuildAdapter) : RecyclerView.Adapter<SetBuildAdapter.SetBuildViewHolder>() {
 
-    var sets = mutableListOf<Pair<String, SetBuildViewHolder?>>()
     class SetBuildViewHolder(val binding: FragmentSetBinding)
         : RecyclerView.ViewHolder(binding.root)
 
@@ -24,55 +25,63 @@ class SetBuildAdapter(private val unit: Int) : RecyclerView.Adapter<SetBuildAdap
     }
 
     override fun onBindViewHolder(holder: SetBuildAdapter.SetBuildViewHolder, position: Int) {
-
+        holder.setIsRecyclable(false) //Disable Recycling
         //Type View
         var params = holder.itemView.layoutParams
         params.height = 150
         holder.itemView.layoutParams = params
         hideEverything(holder.binding)
         showRegularSet(holder.binding)
-
-
         //Let type button reveal options and hide everything else
         holder.binding.btnType.setOnClickListener {
             hideEverything(holder.binding)
             showTypeOptions(holder.binding)
         }
+        //Selecting non-drop set, update wba sets
         holder.binding.btnReg.setOnClickListener {
             params.height = 150
             holder.itemView.layoutParams = params
             hideEverything(holder.binding)
             showRegularSet(holder.binding)
             //Update set type
-            var data = sets[position].first.split(":").toTypedArray()
+            var sets = wba.getSetsByAdapter(this)
+            var data = sets[position].split(":").toTypedArray()
             data[2] = "none"
             val newString = "${data[0]}:${data[1]}:${data[2]}"
-            sets[position] = Pair(newString, holder)
+            sets[position] = newString
+            wba.updateSetsByAdapter(sets, this)
         }
+        //Selecting Drop Set, update wba sets
         holder.binding.btnDS.setOnClickListener {
             //Redo the view
-            params.height = 300
+            params.height = 270
             holder.itemView.layoutParams = params
             hideEverything(holder.binding)
             showDropset(holder.binding)
             //Update set type
-            var data = sets[position].first.split(":").toTypedArray()
+            var sets = wba.getSetsByAdapter(this)
+            var data = sets[position].split(":").toTypedArray()
             data[2] = "drop"
             val newString = "${data[0]}:${data[1]}:${data[2]}"
-            sets[position] = Pair(newString, holder)
+            sets[position] = newString
+            wba.updateSetsByAdapter(sets, this)
         }
-
-
-        sets[position] = Pair(sets[position].first, holder)
+        //Deleting a Set, update wba
         holder.binding.btnDeleteSet.setOnClickListener{
+            var sets = wba.getSetsByAdapter( this)
             if(sets.size == 1){
                 //If you remove all sets the damn thing crashes, pop up here saying
                 // "Please remove exercise" or just automatically doing that maybe.
             } else {
-                rmSetByPos(position)
+                sets.removeAt(position)
+                wba.updateSetsByAdapter(sets, this)
+                notifyDataSetChanged()
             }
         }
-        var info = sets[position].first.split(":")
+
+        //Update set fields from wba sets
+        var sets = wba.getSetsByAdapter(this)
+        var info = sets[position].split(":")
         if(info[0] == "0"){ // default value do nothing
         } else {
             holder.binding.etLoad.setText(info[0])
@@ -96,44 +105,109 @@ class SetBuildAdapter(private val unit: Int) : RecyclerView.Adapter<SetBuildAdap
         } else {//set to lbs
             holder.binding.tvTimes.setText("(lbs)x")
         }
+
+        //Set edit text listeners
+        holder.binding.etLoad.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //do nothing
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //do nothing
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                //update wba sets
+                var sets = wba.getSetsByAdapter(this@SetBuildAdapter)
+                var data = sets[position].split(":")
+                val load = holder.binding.etLoad.text.toString()
+                if(unit == 0) { //regular set format as such
+                    sets[position] = "${load}:${data[1]}:${data[2]}"
+                } else { //drop set must format properly
+                    val dropLoad = data[0].split("+")[1]
+                    sets[position] = "${load}+${dropLoad}:${data[1]}:${data[2]}"
+                }
+                wba.updateSetsByAdapter(sets, this@SetBuildAdapter)
+            }
+
+        })
+        holder.binding.etReps.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //do nothing
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //do nothing
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                //update wba sets
+                var sets = wba.getSetsByAdapter(this@SetBuildAdapter)
+                var data = sets[position].split(":")
+                val reps = holder.binding.etReps.text.toString()
+                if(unit == 0) { //regular set format as such
+                    sets[position] = "${data[0]}:${reps}:${data[2]}"
+                } else { //drop set must format properly
+                    val dropReps = data[1].split("+")[1]
+                    sets[position] = "${data[0]}:${reps}+${dropReps}:${data[2]}"
+                }
+                wba.updateSetsByAdapter(sets, this@SetBuildAdapter)
+            }
+
+        })
+        if(unit == 1) { //set dropset listeners
+            holder.binding.etDropLoad.addTextChangedListener(object: TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    //do nothing
+                }
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    //do nothing
+                }
+
+                override fun afterTextChanged(p0: Editable?) {
+                    //update wba sets
+                    var sets = wba.getSetsByAdapter(this@SetBuildAdapter)
+                    var data = sets[position].split(":")
+                    val dropLoad = holder.binding.etDropLoad.text.toString()
+                    val load = data[0].split("+")[0]
+                    sets[position] = "${load}+${dropLoad}:${data[1]}:${data[2]}"
+                    wba.updateSetsByAdapter(sets, this@SetBuildAdapter)
+                }
+
+            })
+            holder.binding.etDropReps.addTextChangedListener(object: TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    //do nothing
+                }
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    //do nothing
+                }
+
+                override fun afterTextChanged(p0: Editable?) {
+                    //update wba sets
+                    var sets = wba.getSetsByAdapter(this@SetBuildAdapter)
+                    var data = sets[position].split(":")
+                    val dropReps = holder.binding.etDropReps.text.toString()
+                    val reps = data[1].split("+")[0]
+                    sets[position] = "${data[0]}:${reps}+${dropReps}:${data[2]}"
+                    wba.updateSetsByAdapter(sets, this@SetBuildAdapter)
+                }
+
+            })
+        }
     }
 
     override fun getItemCount(): Int {
-        return sets.size
+        return wba.getSetsByAdapter(this).size
     }
 
-    fun addSet(set: String = "0:0:none") {
-        sets.add(Pair(set, null))
+    fun addSet(set: String = "::none") {
+        var sets = wba.getSetsByAdapter(this)
+        sets.add(set)
+        wba.updateSetsByAdapter(sets, this)
         notifyItemInserted(sets.size - 1)
-    }
-
-    fun rmSetByPos(position: Int) {
-        sets.removeAt(position)
-        notifyDataSetChanged()
-    }
-
-    fun getSets(): Array<String>{
-        var setList = arrayListOf<String>()
-        for(s in sets){
-            if(s.second == null){}
-            else {
-                var set = s.second!!.binding.etLoad.text.toString() + ":" +
-                        s.second!!.binding.etReps.text.toString() + ":" +
-                        s.first.split(":")[2] // eventually modified set functionality
-                setList.add(set)
-            }
-        }
-        return setList.toTypedArray()
-    }
-
-    fun setSets(arr: Array<String>) {
-        println("Sets pre opp >>> $sets")
-        sets.clear()
-        notifyDataSetChanged()
-        for(set in arr){
-             addSet(set)
-        }
-        println("Sets post opp >>> $sets")
     }
 }
 

@@ -29,7 +29,6 @@ class Converters {
         var list = listString.split("|")
         var newList = mutableListOf<ExerciseInstance>()
         for(s in list){
-            println("Is this the sabatour? $s")
             var bits = s.split("!")
             var unit: Int = bits[2].toInt()
             var sets: Array<String> = bits[1].split("_").toTypedArray<String>()
@@ -50,11 +49,9 @@ class Converters {
     : String {
         var list = mutableListOf<String>()
         for(ex in exerciseInstanceList){
-            println("Yeah nah the EID is = ${ex.exercise.EID}")
             var s: String = ex.exercise.EID.toString().plus(".").plus(ex.exercise.name)
                 .plus("!").plus(ex.sets.joinToString(separator = "_")).plus("!")
                 .plus(ex.exercise.unit)
-            println("Saving new exercise as $s")
             list.add(s)
         }
         return list.joinToString(separator = "|")
