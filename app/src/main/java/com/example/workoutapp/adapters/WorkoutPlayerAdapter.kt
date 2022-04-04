@@ -18,7 +18,8 @@ class WorkoutPlayerAdapter(private val context : AppCompatActivity, private val 
     data class ModifiedInst(
         val EI: ExerciseInstance,
         var adapter: PlayerSetAdapter? = null,
-        var note: String = ""
+        var note: String = "",
+        var consistencyLog: MutableList<String>? = null
     )
 
     var list = mutableListOf<ModifiedInst>()
@@ -38,10 +39,20 @@ class WorkoutPlayerAdapter(private val context : AppCompatActivity, private val 
         holder.binding.tvNotes.text = list[position].note
 
         println("[-] Creating set for ${list[position].EI.exercise.name} with unit ${list[position].EI.exercise.unit}")
-        var setAdapter = PlayerSetAdapter(context, list[position].EI.exercise.unit)
+        var setAdapter = PlayerSetAdapter(context, list[position].EI.exercise.unit, this)
 
         val eid = list[position].EI.exercise.EID
         var previousExecution: Log? = null
+
+        //consistency log functionality
+        if(list[position].consistencyLog == null) { //Then this is first generation
+            //set consistency log to all blanks for all sets
+            var blankCL = mutableListOf<String>()
+            for(set in list[position].EI.sets) {
+                blankCL.add("::none")
+            }
+            list[position].consistencyLog = blankCL
+        }
 
         holder.binding.rvSets.adapter = setAdapter
         holder.binding.rvSets.layoutManager = LinearLayoutManager(context)
@@ -107,6 +118,25 @@ class WorkoutPlayerAdapter(private val context : AppCompatActivity, private val 
         return logs
 
         //to make this work we need a new set build adapter with ticks to lock in logs!
+    }
+
+    fun getConsistencyLog(playerSetAdapter: PlayerSetAdapter): MutableList<String> {
+        for(inst in list){
+            if(inst.adapter == playerSetAdapter){
+                return inst.consistencyLog!!
+            }
+        }
+        //It should never make it here
+        println("SOMETHING HAS GONE WAY FUCKING WRONG AT WorkoutPlayerAdapter")
+        return arrayListOf<String>()
+    }
+
+    fun updateConsistencyLog(newLog: MutableList<String>, playerSetAdapter: PlayerSetAdapter) {
+        for(inst in list){
+            if(inst.adapter == playerSetAdapter){
+                inst.consistencyLog = newLog
+            }
+        }
     }
 
 }

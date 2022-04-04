@@ -27,7 +27,7 @@ class ExerciseViewModel(private val exerciseRepository: ExerciseRepository) : Vi
 
     fun updateWorkouts() = viewModelScope.launch {
         workouts = exerciseRepository.updateWorkouts()
-        println("WORKOUTS UPDATED!!!! TO : $workouts")
+        //println("WORKOUTS UPDATED!!!! TO : $workouts")
     }
 
     fun insertLog(log: Log) = viewModelScope.launch {

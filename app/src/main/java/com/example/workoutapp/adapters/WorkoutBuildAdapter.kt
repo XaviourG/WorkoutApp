@@ -24,11 +24,12 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
     data class Inst(
         val EI: ExerciseInstance,
         var adapter: SetBuildAdapter? = null,
-        var sets: Array<String>? = null,
         var notes: String? = "",
+        var sets: ArrayList<String>? = null,
         var holder: WorkoutBuildViewHolder? = null
     )
 
+    private var supersets = mutableListOf<String>()
     var list = mutableListOf<Inst>()
 
     class WorkoutBuildViewHolder(val binding: ExerciseListingBinding)
@@ -41,6 +42,7 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
     }
 
     override fun onBindViewHolder(holder: WorkoutBuildAdapter.WorkoutBuildViewHolder, position: Int) {
+        holder.setIsRecyclable(false)
         list[position].holder = holder
 
         //Show notes
@@ -50,24 +52,30 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
         //holder.binding.btnSSAbove.visibility = View.INVISIBLE
         //holder.binding.btnSSBelow.visibility = View.INVISIBLE
         holder.binding.tvName.text = list[position].EI.exercise.name
+        if(supersets[position] == "none"){ // do nothing
+        } else {
+            holder.binding.tvName.setText(list[position].EI.exercise.name + "    -[${supersets[position]}]")
+        }
+
 
         holder.binding.btnDeleteExercise.setOnClickListener {
             removeExerciseByPos(position)
         }
+
+        if(list[position].sets == null){
+            println("Creating new set array for position:$position")
+            //This must be a new exercise, load from Exercise Instance if possible
+            list[position].sets = list[position].EI.sets.toCollection(ArrayList())
+            println("Set array = ${list[position].sets}")
+        }
+
         var setAdapter = SetBuildAdapter(list[position].EI.exercise.unit, this)
         holder.binding.rvSets.adapter = setAdapter
         holder.binding.rvSets.layoutManager = LinearLayoutManager(context)
-        if(list[position].sets == null){
-            list[position].sets = arrayOf<String>()
-            list[position].sets = list[position].EI.sets
-        } else { //if the sets array is not initialised, then that was first load, match the record
-            //if its already been initialised then we just present the updated sets array
-        }
         for(set in list[position].sets!!) {
+            println("Adding Set >>> ${set}")
             setAdapter.addSet(set)
         }
-
-
         holder.binding.btnAddSet.setOnClickListener {
             setAdapter.addSet()
         }
@@ -96,58 +104,6 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
             }
         }
 
-        /* SS Functionality
-        holder.binding.btnSuperset.setOnClickListener {
-            //show options
-            holder.binding.btnSuperset.visibility = View.INVISIBLE
-            holder.binding.btnSSAbove.visibility = View.VISIBLE
-            holder.binding.btnSSBelow.visibility = View.VISIBLE
-        }
-        holder.binding.btnSSAbove.setOnClickListener {
-            //Restore View
-            holder.binding.btnSSAbove.visibility = View.INVISIBLE
-            holder.binding.btnSSBelow.visibility = View.INVISIBLE
-            holder.binding.btnSuperset.visibility = View.VISIBLE
-            //Add superset
-            if(position == 0 ) { //nothing above exists do nothing
-            } else {
-                if((supersets[position] == "none") or (supersets[position] == "up")) {
-                    supersets[position] = "up"
-                } else {
-                    supersets[position] = "mid"
-                }
-
-                if((supersets[position] == "none") or (supersets[position] == "down")) {
-                    supersets[position - 1] = "down"
-                } else { //already part of superset, make a mid point
-                    supersets[position - 1] = "mid"
-                }
-                notifyDataSetChanged()
-            }
-        }
-        holder.binding.btnSSBelow.setOnClickListener {
-            //Restore View
-            holder.binding.btnSSAbove.visibility = View.INVISIBLE
-            holder.binding.btnSSBelow.visibility = View.INVISIBLE
-            holder.binding.btnSuperset.visibility = View.VISIBLE
-            //Add superset
-            if(position == list.size - 1 ) { //nothing below exists do nothing
-            } else {
-                if((supersets[position] == "none") or (supersets[position] == "down")) {
-                    supersets[position] = "down"
-                } else {
-                    supersets[position] = "mid"
-                }
-
-                if((supersets[position] == "none") or (supersets[position] == "up")) {
-                    supersets[position + 1] = "up"
-                } else { //already part of superset, make a mid point
-                    supersets[position + 1] = "mid"
-                }
-                notifyDataSetChanged()
-            }
-        }*/
-
         list[position].adapter = setAdapter
     }
 
@@ -164,6 +120,7 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
                             ex.EID = exercise.EID
                             var inst = Inst(ExerciseInstance(ex))
                             list.add(inst)
+                            supersets.add("none")
                             notifyItemInserted(list.size - 1)
                             break
                         }
@@ -174,25 +131,23 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
         else{
             var inst = Inst(ExerciseInstance(ex))
             list.add(inst)
+            supersets.add("none") //ADD SUPERSET PRE HANDLING HERE
             notifyItemInserted(list.size - 1)
         }
 
     }
 
     fun removeExerciseByPos(position: Int){
-        updateSets()
         list.removeAt(position)
+        supersets.removeAt(position)
         //notifyItemRemoved(position)
         notifyDataSetChanged()
     }
 
-    fun updateSets(){
-        for(inst in list){
-            inst.EI.sets = inst.adapter!!.getSets()
-        }
-    }
-
     fun getExerciseList(): List<ExerciseInstance> {
+        for(inst in list) {
+            inst.EI.sets = inst.sets!!.toTypedArray()
+        }
         return list.map {it.EI}
     }
 
@@ -207,7 +162,19 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
             i++
         }
         list = newList
+        println("\n \n WORKOUT SET TO >>> $list \n \n")
+
+        var newSS = mutableListOf<String>()
+        for(SS in workout.supersets) {
+            newSS.add(SS)
+        }
+        supersets = newSS
+
         notifyDataSetChanged()
+    }
+
+    fun getSupersets(): List<String> {
+        return supersets.toList()
     }
 
     fun getNotes(): List<String> {
@@ -218,17 +185,20 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
         return list.map {it.notes!!}
     }
 
-    fun getSetsFromAdapter(sba: SetBuildAdapter): Array<String> {
-        for(inst in list) {
+    fun getSetsByAdapter(sba: SetBuildAdapter): ArrayList<String> {
+        //The setBuildAdapter calls this and gives itself to be allocated the appropriate set array.
+        for(inst in list){
             if(inst.adapter == sba){
                 return inst.sets!!
             }
         }
-        return arrayOf<String>()
+        //It should never make it here
+        println("SOMETHING HAS GONE WAY FUCKING WRONG AT WorkoutBuildAdapter:getSetsByAdapter")
+        return arrayListOf<String>()
     }
-
-    fun setSetsByAdapter(sets: Array<String>, sba: SetBuildAdapter) {
-        for(inst in list) {
+    fun updateSetsByAdapter(sets: ArrayList<String>, sba: SetBuildAdapter) {
+        //The setBuildAdapter must pass all set changes through the WorkoutBuildAdapter.
+        for(inst in list){
             if(inst.adapter == sba){
                 inst.sets = sets
             }
