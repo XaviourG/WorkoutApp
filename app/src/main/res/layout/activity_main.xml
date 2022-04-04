@@ -60,11 +60,11 @@
         android:id="@+id/progressBar"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnNextWorkout"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvLogo"
         app:layout_constraintVertical_bias="0.473" />
 
     <TextView
@@ -117,24 +117,25 @@
         android:id="@+id/tvLogo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="APP NAME"
-        android:gravity="center"
-        android:textColor="@color/white"
+        android:layout_marginTop="16dp"
+        android:background="@color/dark_grey"
         android:fontFamily="@font/kanit_bold"
-        android:textSize="60dp"
-        android:textStyle="italic"
-
+        android:gravity="center"
         android:shadowColor="@color/purple"
         android:shadowDx="1.5"
+
         android:shadowDy="1.3"
         android:shadowRadius="15"
+        android:text="@string/logo"
+        android:textColor="@color/white"
 
 
+        android:textSize="60dp"
+        android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="10dp"
-        android:background="@color/dark_grey"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

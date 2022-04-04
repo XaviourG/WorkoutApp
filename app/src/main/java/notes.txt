@@ -75,4 +75,5 @@ STUFF TO DO
 [X] - Workout Finished Screen
 [X] - asthetic up rest of app
 [ ] - sound fx
+[ ] - deal with the 100something warnings...
 [ ] - Progress graphing functionality?
