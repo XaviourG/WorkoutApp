@@ -50,28 +50,44 @@ class ProgramListAdapter (private val context: Context, private val exerciseView
         holder.binding.tvProgramTitle.setOnClickListener {
             val popup = PopupWindow(context)
             val popupBinding = WorkoutListingPopupBinding.inflate(LayoutInflater.from(context))
-            popupBinding.btnStart.text = "Activate"
+            if(programs[position].active){
+                popupBinding.btnStart.text = "Deactivate"
+            } else {
+                popupBinding.btnStart.text = "Activate"
+            }
             popup.contentView = popupBinding.root
 
             popupBinding.btnCancel.setOnClickListener {
                 popup.dismiss()
             }
-            popupBinding.btnStart.setOnClickListener {
-                //de-activate the active program (if it exists)
-                for(p in programs){
-                    if(p.active){
-                        p.active = false
-                        exerciseViewModel.updateProgram(p)
-                        break
-                    }
+
+            if(programs[position].active){ //Deactivation
+                popupBinding.btnStart.setOnClickListener {
+                    //set this program to un-active
+                    programs[position].active = false
+                    //update database
+                    exerciseViewModel.updateProgram(programs[position])
+                    notifyDataSetChanged()
+                    popup.dismiss() //replace with setProgram functionality
                 }
-                //set this program to active
-                programs[position].active = true
-                println("Activated: ${programs[position]}")
-                //update database
-                exerciseViewModel.updateProgram(programs[position])
-                notifyDataSetChanged()
-                popup.dismiss() //replace with setProgram functionality
+            } else { //Activation & deactivation of active
+                popupBinding.btnStart.setOnClickListener {
+                    //de-activate the active program (if it exists)
+                    for(p in programs){
+                        if(p.active){
+                            p.active = false
+                            exerciseViewModel.updateProgram(p)
+                            break
+                        }
+                    }
+                    //set this program to active
+                    programs[position].active = true
+                    println("Activated: ${programs[position]}")
+                    //update database
+                    exerciseViewModel.updateProgram(programs[position])
+                    notifyDataSetChanged()
+                    popup.dismiss() //replace with setProgram functionality
+                }
             }
             popupBinding.btnEdit.setOnClickListener {
                 //edit program
