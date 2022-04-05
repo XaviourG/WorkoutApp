@@ -1,6 +1,8 @@
 package com.example.workoutapp.adapters
 
 import android.graphics.Color
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -103,6 +105,23 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
             }
         }
 
+        //notes listener
+        holder.binding.etNotes.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //do nothing
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //do nothing
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                //update notes
+                list[position].notes = holder.binding.etNotes.text.toString()
+            }
+
+        })
+
         list[position].adapter = setAdapter
     }
 
@@ -177,10 +196,6 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
     }
 
     fun getNotes(): List<String> {
-        for(inst in list){
-            inst.notes = inst.holder!!.binding.etNotes.text.toString()
-        }
-
         return list.map {it.notes!!}
     }
 
