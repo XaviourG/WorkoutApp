@@ -55,6 +55,11 @@ class SearchResultsAdapter(private val context: Context, private val wlAdapter: 
                     val newExercise = Exercise(name = exTitle, unit = 0)
                     viewModel.insert(newExercise)
                     wlAdapter.addExercise(newExercise)
+                    if(parent is BuildWorkoutActivity) {
+                        parent.closeSearch()
+                    } else if (parent is WorkoutEditor) {
+                        parent.closeSearch()
+                    }
                 } else if (shownData[position].name.contains("lbs")) {
                     var exTitle = shownData[position].name.substring(21)
                     val bits = exTitle.split("lbs")
@@ -62,6 +67,11 @@ class SearchResultsAdapter(private val context: Context, private val wlAdapter: 
                     val newExercise = Exercise(name = exTitle, unit = 1)
                     viewModel.insert(newExercise)
                     wlAdapter.addExercise(newExercise)
+                    if(parent is BuildWorkoutActivity) {
+                        parent.closeSearch()
+                    } else if (parent is WorkoutEditor) {
+                        parent.closeSearch()
+                    }
                 } else {
                     val alertBuilder = AlertDialog.Builder(context)
                     alertBuilder.setTitle("Cannot Create Exercise")
