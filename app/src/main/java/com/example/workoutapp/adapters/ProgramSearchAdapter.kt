@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.workoutapp.ProgramEditorActivity
 import com.example.workoutapp.data.exercisedb.Exercise
 import com.example.workoutapp.data.exercisedb.ExerciseViewModel
 import com.example.workoutapp.data.exercisedb.Workout
@@ -15,7 +16,7 @@ import com.example.workoutapp.databinding.FragmentExerciseBinding
 import kotlin.coroutines.coroutineContext
 
 class ProgramSearchAdapter(private val context: Context, private val programBuildAdapter: ProgramBuildAdapter,
-                           private val viewModel: ExerciseViewModel
+                           private val viewModel: ExerciseViewModel, private val parent: ProgramEditorActivity
 ) : RecyclerView.Adapter<ProgramSearchAdapter.ProgramSearchViewHolder>() {
 
     var shownData = emptyList<Workout>()
@@ -34,7 +35,7 @@ class ProgramSearchAdapter(private val context: Context, private val programBuil
         holder.binding.tvExName.text = shownData[position].title
         holder.binding.tvExName.setOnClickListener {
             programBuildAdapter.addWorkout(shownData[position])
-            context.hideKeyboard(holder.binding.root)
+            parent.closeSearch()
         }
     }
 

@@ -57,7 +57,7 @@ class BuildWorkoutActivity : AppCompatActivity() {
         binding.rvBuildSpace.adapter = wlAdapter
         binding.rvBuildSpace.layoutManager = LinearLayoutManager(this)
 
-        srAdapter = SearchResultsAdapter(this, wlAdapter, exerciseViewModel)
+        srAdapter = SearchResultsAdapter(this, wlAdapter, exerciseViewModel, this)
         binding.rvSearchResults.adapter = srAdapter
         binding.rvSearchResults.layoutManager = LinearLayoutManager(this)
 
@@ -72,6 +72,10 @@ class BuildWorkoutActivity : AppCompatActivity() {
         }
         })
         binding.rvSearchResults.visibility = View.GONE
+
+        binding.svBuild.setOnSearchClickListener {
+            srAdapter.filter("")
+            binding.rvSearchResults.visibility = View.VISIBLE }
 
         binding.svBuild.setOnQueryTextListener( object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
@@ -105,6 +109,14 @@ class BuildWorkoutActivity : AppCompatActivity() {
             startActivity(i)
         }
 
+    }
+
+    fun closeSearch(){
+        println("\n\n\n CLOSING!!\n\n")
+        binding.rvSearchResults.visibility = View.INVISIBLE
+        binding.svBuild.setQuery("", false)
+        binding.svBuild.setIconified(true)
+        hideKeyboard()
     }
 
     fun Fragment.hideKeyboard() {

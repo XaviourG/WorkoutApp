@@ -1,5 +1,6 @@
 package com.example.workoutapp.adapters
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,9 +9,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
-import com.example.workoutapp.R
+import com.example.workoutapp.*
 import com.example.workoutapp.data.exercisedb.Exercise
 import com.example.workoutapp.data.exercisedb.ExerciseViewModel
+import com.example.workoutapp.data.exercisedb.Program
 import com.example.workoutapp.data.exercisedb.Workout
 import com.example.workoutapp.databinding.ActivityBuildWorkoutBinding
 import com.example.workoutapp.databinding.FragmentExerciseBinding
@@ -18,7 +20,7 @@ import com.example.workoutapp.databinding.WorkoutListingBinding
 
 
 class SearchResultsAdapter(private val context: Context, private val wlAdapter: WorkoutBuildAdapter,
-                           private val viewModel: ExerciseViewModel) : RecyclerView.Adapter<SearchResultsAdapter.SearchResultsViewHolder>() {
+                           private val viewModel: ExerciseViewModel, private val parent: Activity) : RecyclerView.Adapter<SearchResultsAdapter.SearchResultsViewHolder>() {
 
     var shownData = emptyList<Exercise>()
     var fullData = emptyList<Exercise>()
@@ -72,6 +74,13 @@ class SearchResultsAdapter(private val context: Context, private val wlAdapter: 
                 wlAdapter.addExercise(shownData[position])
                 //var name = shownData[position].name
                 //println("Adding $name to workout!!!")
+
+                //close search results, clear search text & hide keyboard
+                if(parent is BuildWorkoutActivity) {
+                    parent.closeSearch()
+                } else if (parent is WorkoutEditor) {
+                    parent.closeSearch()
+                }
             }
         }
     }

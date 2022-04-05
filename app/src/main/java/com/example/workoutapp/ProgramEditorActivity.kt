@@ -55,7 +55,7 @@ class ProgramEditorActivity : AppCompatActivity() {
         binding.rvBuildSpace.adapter = programBuildAdapter
         binding.rvBuildSpace.layoutManager = LinearLayoutManager(this)
 
-        programSearchAdapter = ProgramSearchAdapter(this, programBuildAdapter, exerciseViewModel)
+        programSearchAdapter = ProgramSearchAdapter(this, programBuildAdapter, exerciseViewModel, this)
         binding.rvSearchResults.adapter = programSearchAdapter
         binding.rvSearchResults.layoutManager = LinearLayoutManager(this)
 
@@ -108,6 +108,10 @@ class ProgramEditorActivity : AppCompatActivity() {
 
         binding.rvSearchResults.visibility = View.GONE
 
+        binding.svBuild.setOnSearchClickListener {
+            programSearchAdapter.filter("")
+            binding.rvSearchResults.visibility = View.VISIBLE }
+
         binding.btnSave.setOnClickListener {
             if(programBuildAdapter.getWorkoutIDs().isEmpty()) {
                 //Its an empty program, don't build it
@@ -146,6 +150,14 @@ class ProgramEditorActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    fun closeSearch(){
+        println("\n\n\n CLOSING!!\n\n")
+        binding.rvSearchResults.visibility = View.INVISIBLE
+        binding.svBuild.setQuery("", false)
+        binding.svBuild.setIconified(true)
+        hideKeyboard()
     }
 
     fun Fragment.hideKeyboard() {

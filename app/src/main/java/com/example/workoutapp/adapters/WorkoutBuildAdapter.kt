@@ -219,4 +219,6 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
             }
         }
     }
+
+
 }
