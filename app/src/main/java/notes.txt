@@ -76,4 +76,5 @@ STUFF TO DO
 [X] - asthetic up rest of app
 [ ] - sound fx
 [ ] - deal with the 100something warnings...
+[ ] - editing workout within player?
 [ ] - Progress graphing functionality?

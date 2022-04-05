@@ -82,11 +82,11 @@ class SetBuildAdapter(private val unit: Int, private val wba: WorkoutBuildAdapte
         //Update set fields from wba sets
         var sets = wba.getSetsByAdapter(this)
         var info = sets[position].split(":")
-        if(info[0] == "0"){ // default value do nothing
+        if(info[0] == ""){ // default value do nothing
         } else {
             holder.binding.etLoad.setText(info[0])
         }
-        if(info[1] == "0"){ // default value do nothing
+        if(info[1] == ""){ // default value do nothing
         } else {
             holder.binding.etReps.setText(info[1])
         }

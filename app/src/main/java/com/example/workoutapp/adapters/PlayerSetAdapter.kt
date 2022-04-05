@@ -233,9 +233,9 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int, priv
         b.etDropReps.setShadowLayer(0f,0f,0f,Color.TRANSPARENT)
     }
 
-    fun addSet(goal: String = "0:0:none") {
+    fun addSet(goal: String = "::none") {
         //load.reps.modifier
-        sets.add("0:0:none") //alter none to reflect type
+        sets.add("::none") //alter none to reflect type
         prevs.add("--")
         goals.add(goal)
         notifyItemInserted(sets.size - 1)
@@ -271,7 +271,7 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int, priv
             if(i == sets.size) { break } //workout edited to have less sets handling
             var bits = p.split(":")
             if (bits[0] == ""){}
-            else if((p == "0:0:none") or (p == "0:0:drop")){
+            else if((p == "::none") or (p == "::drop")){
                 prevs[i] = "--"
             }
             else {

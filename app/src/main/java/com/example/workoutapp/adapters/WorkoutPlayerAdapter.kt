@@ -38,7 +38,6 @@ class WorkoutPlayerAdapter(private val context : AppCompatActivity, private val 
         holder.binding.tvName.text = list[position].EI.exercise.name
         holder.binding.tvNotes.text = list[position].note
 
-        println("[-] Creating set for ${list[position].EI.exercise.name} with unit ${list[position].EI.exercise.unit}")
         var setAdapter = PlayerSetAdapter(context, list[position].EI.exercise.unit, this)
 
         val eid = list[position].EI.exercise.EID
@@ -57,6 +56,7 @@ class WorkoutPlayerAdapter(private val context : AppCompatActivity, private val 
         holder.binding.rvSets.adapter = setAdapter
         holder.binding.rvSets.layoutManager = LinearLayoutManager(context)
         for(set in list[position].EI.sets) {
+            println("ADDING SET:: $set")
             setAdapter.addSet(set)
         }
 

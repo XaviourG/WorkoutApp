@@ -73,7 +73,6 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
         holder.binding.rvSets.adapter = setAdapter
         holder.binding.rvSets.layoutManager = LinearLayoutManager(context)
         for(set in list[position].sets!!) {
-            println("Adding Set >>> ${set}")
             setAdapter.addSet(set)
         }
         holder.binding.btnAddSet.setOnClickListener {
@@ -201,6 +200,7 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
         for(inst in list){
             if(inst.adapter == sba){
                 inst.sets = sets
+                break
             }
         }
     }
