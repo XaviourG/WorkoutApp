@@ -1,5 +1,6 @@
 package com.example.workoutapp.adapters
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -13,10 +14,7 @@ import android.widget.PopupWindow
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
-import com.example.workoutapp.R
-import com.example.workoutapp.WorkoutEditor
-import com.example.workoutapp.WorkoutListActivity
-import com.example.workoutapp.WorkoutPlayer
+import com.example.workoutapp.*
 import com.example.workoutapp.data.exercisedb.Exercise
 import com.example.workoutapp.data.exercisedb.ExerciseViewModel
 import com.example.workoutapp.data.exercisedb.Workout
@@ -25,7 +23,7 @@ import com.example.workoutapp.databinding.WorkoutListingBinding
 import com.example.workoutapp.databinding.WorkoutListingPopupBinding
 
 
-class WorkoutListAdapter(private val context: Context)
+class WorkoutListAdapter(private val context: Context, private val exerciseViewModel: ExerciseViewModel)
     : RecyclerView.Adapter<WorkoutListAdapter.WorkoutListViewHolder>() {
 
     private var workouts = listOf<Workout>()
@@ -53,6 +51,7 @@ class WorkoutListAdapter(private val context: Context)
      */
 
     override fun onBindViewHolder(holder: WorkoutListViewHolder, position: Int) {
+        var warned = false
         with(holder) {
             with(workouts[position]) {
                 binding.tvWorkoutListing.text = title
@@ -80,6 +79,25 @@ class WorkoutListAdapter(private val context: Context)
                         i.putExtra("WID", workouts[position].WID)
                         startActivity(context, i, null)
                     }
+                    binding2.btnDelete.setOnClickListener {
+                        //firstly a warning
+                        if(!warned) {
+                            val alertBuilder = AlertDialog.Builder(context)
+                            alertBuilder.setTitle("Are you certain?")
+                            alertBuilder.setMessage("Deletion is permanent!")
+                            alertBuilder.show()
+                            warned = true
+                            binding2!!.btnDelete.setShadowLayer(50f, 0f, 0f, Color.BLACK)
+                            binding2!!.btnDelete.setTextColor(Color.RED)
+                        } else {
+                            //delete program from database
+                            exerciseViewModel.deleteWorkout(workouts[position])
+                            //reload page to show new list
+                            val i = Intent(context, WorkoutListActivity::class.java)
+                            startActivity(context, i, null)
+                        }
+                    }
+
                     popup.showAtLocation(binding2.root, Gravity.CENTER, 0, 0)
 
                     /*

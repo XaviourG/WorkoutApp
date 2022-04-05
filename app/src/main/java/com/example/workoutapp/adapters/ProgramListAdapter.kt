@@ -1,5 +1,6 @@
 package com.example.workoutapp.adapters
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -10,6 +11,7 @@ import android.widget.PopupWindow
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.workoutapp.ProgramActivity
 import com.example.workoutapp.ProgramEditorActivity
 import com.example.workoutapp.R
 import com.example.workoutapp.WorkoutEditor
@@ -35,6 +37,7 @@ class ProgramListAdapter (private val context: Context, private val exerciseView
     }
 
     override fun onBindViewHolder(holder: ProgramListAdapter.ProgramListViewHolder, position: Int) {
+        var warned = false
         holder.binding.tvProgramTitle.text = programs[position].title
         holder.binding.tvDescription.text = programs[position].description
 
@@ -47,9 +50,11 @@ class ProgramListAdapter (private val context: Context, private val exerciseView
         }
 
         //Popup
+        var popupB: WorkoutListingPopupBinding? = null
         holder.binding.tvProgramTitle.setOnClickListener {
             val popup = PopupWindow(context)
             val popupBinding = WorkoutListingPopupBinding.inflate(LayoutInflater.from(context))
+            popupB = popupBinding
             if(programs[position].active){
                 popupBinding.btnStart.text = "Deactivate"
             } else {
@@ -96,6 +101,25 @@ class ProgramListAdapter (private val context: Context, private val exerciseView
                 startActivity(context, i, null)
             }
             popup.showAtLocation(popupBinding.root, Gravity.CENTER, 0, 0)
+
+            popupBinding.btnDelete.setOnClickListener {
+                //firstly a warning
+                if(!warned) {
+                    val alertBuilder = AlertDialog.Builder(context)
+                    alertBuilder.setTitle("Are you certain?")
+                    alertBuilder.setMessage("Deletion is permanent!")
+                    alertBuilder.show()
+                    warned = true
+                    popupB!!.btnDelete.setShadowLayer(50f, 0f, 0f, Color.BLACK)
+                    popupB!!.btnDelete.setTextColor(Color.RED)
+                } else {
+                    //delete program from database
+                    exerciseViewModel.deleteProgram(programs[position])
+                    //reload page to show new list
+                    val i = Intent(context, ProgramActivity::class.java)
+                    startActivity(context, i, null)
+                }
+            }
         }
     }
 

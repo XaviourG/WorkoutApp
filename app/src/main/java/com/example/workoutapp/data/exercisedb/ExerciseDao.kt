@@ -70,7 +70,7 @@ interface ExerciseDao {
     suspend fun insertProgram(program: Program)
 
     @Delete
-    fun deleteProgram(program: Program)
+    suspend fun deleteProgram(program: Program)
 
     @Update
     suspend fun updateProgram(program: Program)
