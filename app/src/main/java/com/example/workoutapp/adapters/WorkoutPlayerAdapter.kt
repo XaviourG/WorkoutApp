@@ -8,12 +8,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.workoutapp.MyApplication
 import androidx.activity.viewModels
+import com.example.workoutapp.WorkoutPlayer
 import com.example.workoutapp.data.exercisedb.*
 import com.example.workoutapp.databinding.ExerciseListingBinding
 import com.example.workoutapp.databinding.ExercisePlayerListingBinding
 import java.time.LocalDateTime
 
-class WorkoutPlayerAdapter(private val context : AppCompatActivity, private val exerciseViewModel: ExerciseViewModel) : RecyclerView.Adapter<WorkoutPlayerAdapter.WorkoutPlayerViewHolder>() {
+class WorkoutPlayerAdapter(private val context : AppCompatActivity, private val exerciseViewModel: ExerciseViewModel, private val parent: WorkoutPlayer) : RecyclerView.Adapter<WorkoutPlayerAdapter.WorkoutPlayerViewHolder>() {
 
     data class ModifiedInst(
         val EI: ExerciseInstance,
@@ -46,6 +47,7 @@ class WorkoutPlayerAdapter(private val context : AppCompatActivity, private val 
         //consistency log functionality
         if(list[position].consistencyLog == null) { //Then this is first generation
             //set consistency log to all blanks for all sets
+                println("Generating consistency log ###")
             var blankCL = mutableListOf<String>()
             for(set in list[position].EI.sets) {
                 blankCL.add("::none")
@@ -56,7 +58,6 @@ class WorkoutPlayerAdapter(private val context : AppCompatActivity, private val 
         holder.binding.rvSets.adapter = setAdapter
         holder.binding.rvSets.layoutManager = LinearLayoutManager(context)
         for(set in list[position].EI.sets) {
-            println("ADDING SET:: $set")
             setAdapter.addSet(set)
         }
 
@@ -121,6 +122,19 @@ class WorkoutPlayerAdapter(private val context : AppCompatActivity, private val 
     }
 
     fun getConsistencyLog(playerSetAdapter: PlayerSetAdapter): MutableList<String> {
+        //update from parent
+        if(parent.consistencyExists()) {
+            val cLog = parent.getConsistency()
+            var i = 0
+            while (i < list.size) {
+                if(cLog[i] != null) {
+                    list[i].consistencyLog = cLog[i]
+                }
+                i++
+            }
+        } else { //consistency log not initalised, lets do that
+            parent.updateConsistency(list.map {it.consistencyLog})
+        }
         for(inst in list){
             if(inst.adapter == playerSetAdapter){
                 return inst.consistencyLog!!
@@ -137,6 +151,7 @@ class WorkoutPlayerAdapter(private val context : AppCompatActivity, private val 
                 inst.consistencyLog = newLog
             }
         }
+        parent.updateConsistency(list.map {it.consistencyLog})
     }
 
 }

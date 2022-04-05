@@ -9,13 +9,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.WorkoutApp">
+        android:theme="@style/Theme.WorkoutApp"
+        android:alwaysRetainTaskState="true">
         <activity
             android:name=".WorkoutSummary"
             android:exported="true" />
         <activity
             android:name=".WorkoutPlayer"
-            android:exported="true" />
+            android:exported="true"
+            android:alwaysRetainTaskState="true"/>
         <activity
             android:name=".WorkoutEditor"
             android:exported="true" />

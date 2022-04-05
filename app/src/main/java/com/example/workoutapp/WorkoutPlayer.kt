@@ -27,6 +27,8 @@ class WorkoutPlayer : AppCompatActivity() {
     private var timeElapsed = 0L
     private var timeHandler: Handler? = null
 
+    private var consistency: List<MutableList<String>?>? = null
+
     private val exerciseViewModel: ExerciseViewModel by viewModels {
         ExerciseViewModel.ExerciseViewModelFactory((application as MyApplication).repository)
     }
@@ -40,7 +42,7 @@ class WorkoutPlayer : AppCompatActivity() {
         setContentView(view)
         getSupportActionBar()!!.hide()
 
-        wpAdapter = WorkoutPlayerAdapter(this, exerciseViewModel)
+        wpAdapter = WorkoutPlayerAdapter(this, exerciseViewModel, this)
         binding.rvPlayer.adapter = wpAdapter
         binding.rvPlayer.layoutManager = LinearLayoutManager(this)
 
@@ -112,6 +114,9 @@ class WorkoutPlayer : AppCompatActivity() {
         timeHandler = Handler(Looper.getMainLooper())
         mStatusChecker.run()
 
+        //consistency handling for app switching
+
+
     }
 
     private var mStatusChecker: Runnable = object : Runnable {
@@ -158,6 +163,18 @@ class WorkoutPlayer : AppCompatActivity() {
         }
         println("EXERCISE NOT FOUND IN WORKOUT ERROR (Toal Load Calc)")
         return true
+    }
+
+    fun updateConsistency(newConsistency: List<MutableList<String>?>){
+        consistency = newConsistency
+    }
+
+    fun getConsistency(): List<MutableList<String>?> {
+        return consistency!!
+    }
+
+    fun consistencyExists(): Boolean {
+        return !(consistency == null)
     }
 
 
