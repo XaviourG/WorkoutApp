@@ -40,12 +40,12 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int, priv
         //Manage View
         var params = holder.itemView.layoutParams
         if(goals[position].split(":")[2] == "drop") { // show drop set
-            params.height = 300
+            params.height = 310
             holder.itemView.layoutParams = params
             hideEverything(holder.binding)
             showDropSet(holder.binding)
         } else { //show regular set
-            params.height = 150
+            params.height = 160
             holder.itemView.layoutParams = params
             hideEverything(holder.binding)
             showRegSet(holder.binding)

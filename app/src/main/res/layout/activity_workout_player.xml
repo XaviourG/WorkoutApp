@@ -54,17 +54,17 @@
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="@font/kanit_bold"
         android:gravity="center"
-        android:text="WORKOUT TITLE"
-        android:textColor="@color/white"
         android:shadowColor="@color/purple"
         android:shadowDx="1.5"
         android:shadowDy="1.3"
         android:shadowRadius="4"
-        android:textSize="30dp"
+        android:text="WORKOUT TITLE"
+        android:textColor="@color/white"
+        android:textSize="34dp"
         app:layout_constraintStart_toEndOf="@+id/btnX"
         app:layout_constraintTop_toTopOf="parent" />
 
