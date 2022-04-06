@@ -68,6 +68,7 @@ class WorkoutPlayer : AppCompatActivity() {
         binding.btnX.setOnClickListener {
             stopTimer()
             val i = Intent(this@WorkoutPlayer, MainActivity::class.java)
+            i.putExtra("regress", true)
             startActivity(i)
         }
 

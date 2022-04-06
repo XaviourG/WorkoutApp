@@ -21,7 +21,7 @@ class WorkoutSummary : AppCompatActivity() {
         getSupportActionBar()!!.hide()
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.setStatusBarColor(ContextCompat.getColor(this,R.color.dark_grey))
+        window.setStatusBarColor(ContextCompat.getColor(this,R.color.mid_grey))
 
         binding = ActivityWorkoutSummaryBinding.inflate(layoutInflater)
         val view = binding.root
