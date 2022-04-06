@@ -138,7 +138,7 @@ class ProgramEditorActivity : AppCompatActivity() {
                             workoutIDs = programBuildAdapter.getWorkoutIDs(),
                             description = binding.etDescription.text.toString(),
                             active = program.active,
-                            position = program.position
+                            position = 0
                         )
                     )
                 }

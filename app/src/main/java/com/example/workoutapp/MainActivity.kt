@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
                             }
                             binding.tvProgram.text = "- ${p.title} -"
                             binding.tvTotalLoad.text = "Program Cycle:\nWorkout ${p.position+1}/${p.workoutIDs.size}"
-                            val progress: Float = (p.position).toFloat() / p.workoutIDs.size
+                            val progress: Float = (p.position+1).toFloat() / p.workoutIDs.size
                             binding.progressBar.apply {
                                 progressMax = 100f
                                 setProgressWithAnimation((progress*100),1000)

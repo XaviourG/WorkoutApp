@@ -158,19 +158,37 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int, priv
             }
         })
 
-        if(prevs[position] == "--"){//No existing log show goals
+        //if(prevs[position] == "--"){//No existing log show goals !! Now always show goal
             var info = goals[position].split(":")
             if(info[0] == ""){ // default value do nothing
+                if(info[2] == "drop"){
+                    holder.binding.etDropLoad.setHint("Load")
+                }
                 holder.binding.etLoad.setHint("Load")
-            } else {
-                holder.binding.etLoad.setHint(info[0])
+            } else { //goal exists show
+                if(info[2] == "drop"){
+                    val loads = info[0].split("+")
+                    holder.binding.etLoad.setHint(loads[0])
+                    holder.binding.etDropLoad.setHint(loads[1])
+                } else { //regular set
+                    holder.binding.etLoad.setHint(info[0])
+                }
             }
             if(info[1] == ""){ // default value do nothing
+                if(info[2] == "drop"){
+                    holder.binding.etDropReps.setHint("Reps")
+                }
                 holder.binding.etReps.setHint("Reps")
             } else {
-                holder.binding.etReps.setHint(info[1])
+                if(info[2] == "drop"){
+                    val reps = info[1].split("+")
+                    holder.binding.etReps.setHint(reps[0])
+                    holder.binding.etDropReps.setHint(reps[1])
+                } else { //regular set
+                    holder.binding.etReps.setHint(info[1])
+                }
             }
-        } else { //last performance exists, show that instead
+        /*} else { //last performance exists, show that instead
 
             if(goals[position].contains("drop")){ // drop set
                 val info = prevs[position].split("\n")
@@ -190,7 +208,7 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int, priv
                     holder.binding.etReps.setHint(info[1])
                 }
             }
-        }
+        }*/
 
         //update from consistency log
         var log = wpa.getConsistencyLog(this)[position].split(":")
