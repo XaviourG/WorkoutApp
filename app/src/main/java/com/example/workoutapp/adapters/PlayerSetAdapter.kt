@@ -169,7 +169,9 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int, priv
                 if(info[2] == "drop"){
                     val loads = info[0].split("+")
                     holder.binding.etLoad.setHint(loads[0])
-                    holder.binding.etDropLoad.setHint(loads[1])
+                    if(loads.size == 1) {} else {
+                        holder.binding.etDropLoad.setHint(loads[1])
+                    }
                 } else { //regular set
                     holder.binding.etLoad.setHint(info[0])
                 }
@@ -183,7 +185,9 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int, priv
                 if(info[2] == "drop"){
                     val reps = info[1].split("+")
                     holder.binding.etReps.setHint(reps[0])
-                    holder.binding.etDropReps.setHint(reps[1])
+                    if(reps.size == 1) {} else {
+                        holder.binding.etDropReps.setHint(reps[1])
+                    }
                 } else { //regular set
                     holder.binding.etReps.setHint(info[1])
                 }
@@ -214,8 +218,17 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int, priv
         var log = wpa.getConsistencyLog(this)[position].split(":")
         if(log[1] == ""){ // log is empty, do nothing
         } else { //log exists, use it
-            holder.binding.etLoad.setText(log[0])
-            holder.binding.etReps.setText(log[1])
+            if(log[1].contains("+")) { //is a drop set and must be loaded as such
+                val loads = log[0].split("+")
+                val reps = log[1].split("+")
+                holder.binding.etLoad.setText(loads[0])
+                holder.binding.etDropLoad.setText(loads[1])
+                holder.binding.etReps.setText(reps[0])
+                holder.binding.etDropReps.setText(reps[1])
+            } else { //load in as regular set
+                holder.binding.etLoad.setText(log[0])
+                holder.binding.etReps.setText(log[1])
+            }
             highlight(holder.binding)
         }
     }

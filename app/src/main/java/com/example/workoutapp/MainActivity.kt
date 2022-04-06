@@ -77,7 +77,6 @@ class MainActivity : AppCompatActivity() {
                     for(p in it){
                         if(p.active){
                             setProgram(p)
-                            setNextWorkoutText(p.workoutIDs[p.position])
                             //If we are here as a result of a back arrow, regress position by 1.
                             if(intent.getBooleanExtra("regress", false)){
                                 if (program.position <= 0) {
@@ -86,6 +85,7 @@ class MainActivity : AppCompatActivity() {
                                     program.position--
                                 }
                             }
+                            setNextWorkoutText(p.workoutIDs[p.position])
                             binding.tvProgram.text = "- ${p.title} -"
                             binding.tvTotalLoad.text = "Program Cycle:\nWorkout ${p.position+1}/${p.workoutIDs.size}"
                             val progress: Float = (p.position+1).toFloat() / p.workoutIDs.size
