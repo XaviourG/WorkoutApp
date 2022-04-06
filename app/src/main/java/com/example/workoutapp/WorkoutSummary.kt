@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Window
 import android.view.WindowManager
+import androidx.core.content.ContextCompat
 import com.example.workoutapp.databinding.ActivityWorkoutSummaryBinding
 
 class WorkoutSummary : AppCompatActivity() {
@@ -17,9 +18,10 @@ class WorkoutSummary : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         //repress top bar
-        requestWindowFeature(Window.FEATURE_NO_TITLE)
-        this.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         getSupportActionBar()!!.hide()
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.setStatusBarColor(ContextCompat.getColor(this,R.color.dark_grey))
 
         binding = ActivityWorkoutSummaryBinding.inflate(layoutInflater)
         val view = binding.root
