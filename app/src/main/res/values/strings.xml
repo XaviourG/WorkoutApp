@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Bedrock</string>
+    <string name="app_name">Sovereign</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="logo">BEDROCK</string>
+    <string name="logo">SOVEREIGN</string>
 </resources>
