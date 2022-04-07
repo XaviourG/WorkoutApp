@@ -50,6 +50,8 @@ class SetBuildAdapter(private val unit: Int, private val wba: WorkoutBuildAdapte
             val newString = "${data[0]}:${data[1]}:${data[2]}"
             sets[position] = newString
             wba.updateSetsByAdapter(sets, this)
+            //need to tell the view holder the data sets changed
+            notifyDataSetChanged()
         }
         //Selecting Drop Set, update wba sets
         holder.binding.btnDS.setOnClickListener {
@@ -65,6 +67,8 @@ class SetBuildAdapter(private val unit: Int, private val wba: WorkoutBuildAdapte
             val newString = "${data[0]}:${data[1]}:${data[2]}"
             sets[position] = newString
             wba.updateSetsByAdapter(sets, this)
+            //need to tell the view holder the data sets changed
+            notifyDataSetChanged()
         }
         //Deleting a Set, update wba
         holder.binding.btnDeleteSet.setOnClickListener{
@@ -82,21 +86,46 @@ class SetBuildAdapter(private val unit: Int, private val wba: WorkoutBuildAdapte
         //Update set fields from wba sets
         var sets = wba.getSetsByAdapter(this)
         var info = sets[position].split(":")
-        if(info[0] == ""){ // default value do nothing
-        } else {
-            holder.binding.etLoad.setText(info[0])
-        }
-        if(info[1] == ""){ // default value do nothing
-        } else {
-            holder.binding.etReps.setText(info[1])
-        }
         if(info[2] == "drop") { // drop set
             //Redo the view
             params.height = 300
             holder.itemView.layoutParams = params
             hideEverything(holder.binding)
             showDropset(holder.binding)
-        } else{ // must be regular do nothing
+            //set the fields
+            if(info[0].contains("+")) {
+                val loads = info[0].split("+")
+                if(loads[0] == ""){ // default value do nothing
+                } else {
+                    holder.binding.etLoad.setText(loads[0])
+                }
+                if(loads[1] == ""){ // default value do nothing
+                } else {
+                    holder.binding.etDropLoad.setText(loads[1])
+                }
+            }
+            if(info[1].contains("+")) {
+                val reps = info[1].split("+")
+                if(reps[0] == ""){ // default value do nothing
+                } else {
+                    holder.binding.etReps.setText(reps[0])
+                }
+                if(reps[1] == ""){ // default value do nothing
+                } else {
+                    holder.binding.etDropReps.setText(reps[1])
+                }
+            }
+
+
+        } else{ // must be regular
+            if(info[0] == ""){ // default value do nothing
+            } else {
+                holder.binding.etLoad.setText(info[0])
+            }
+            if(info[1] == ""){ // default value do nothing
+            } else {
+                holder.binding.etReps.setText(info[1])
+            }
         }
 
         //set correct unit kg/lbs
@@ -119,15 +148,21 @@ class SetBuildAdapter(private val unit: Int, private val wba: WorkoutBuildAdapte
 
             override fun afterTextChanged(p0: Editable?) {
                 //update wba sets
+                println("Updating LOAD!!!!")
                 var sets = wba.getSetsByAdapter(this@SetBuildAdapter)
+                println("GOT >> ${sets[position]}")
                 var data = sets[position].split(":")
                 val load = holder.binding.etLoad.text.toString()
                 if(!isDropSet) { //regular set format as such
                     sets[position] = "${load}:${data[1]}:${data[2]}"
                 } else { //drop set must format properly
-                    val dropLoad = data[0].split("+")[1]
+                    var dropLoad = ""
+                    if(data[0].contains("+")) {
+                        dropLoad = data[0].split("+")[1]
+                    }
                     sets[position] = "${load}+${dropLoad}:${data[1]}:${data[2]}"
                 }
+                println("UPDATED TOO >> ${sets[position]}")
                 wba.updateSetsByAdapter(sets, this@SetBuildAdapter)
             }
 
@@ -149,7 +184,10 @@ class SetBuildAdapter(private val unit: Int, private val wba: WorkoutBuildAdapte
                 if(!isDropSet) { //regular set format as such
                     sets[position] = "${data[0]}:${reps}:${data[2]}"
                 } else { //drop set must format properly
-                    val dropReps = data[1].split("+")[1]
+                    var dropReps = ""
+                    if(data[1].contains("+")) {
+                        dropReps = data[1].split("+")[1]
+                    }
                     sets[position] = "${data[0]}:${reps}+${dropReps}:${data[2]}"
                 }
                 wba.updateSetsByAdapter(sets, this@SetBuildAdapter)

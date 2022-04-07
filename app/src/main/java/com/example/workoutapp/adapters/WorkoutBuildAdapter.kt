@@ -75,6 +75,7 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
         holder.binding.rvSets.adapter = setAdapter
         holder.binding.rvSets.layoutManager = LinearLayoutManager(context)
         for(set in list[position].sets!!) {
+            println("------------------ ADDING SET <<>> TO ${list[position].EI.exercise.name}")
             setAdapter.addSet(set)
         }
         holder.binding.btnAddSet.setOnClickListener {
@@ -164,7 +165,9 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
 
     fun getExerciseList(): List<ExerciseInstance> {
         for(inst in list) {
-            inst.EI.sets = inst.sets!!.toTypedArray()
+            if(inst.sets != null) {
+                inst.EI.sets = inst.sets!!.toTypedArray()
+            }
         }
         return list.map {it.EI}
     }
@@ -177,10 +180,10 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
             var newInst = Inst(workout.exercises[i])
             newInst.notes = workout.notes!![i]
             newList.add(newInst)
+            println("ADDED TO WORKOUT >>> $newInst")
             i++
         }
         list = newList
-        println("\n \n WORKOUT SET TO >>> $list \n \n")
 
         var newSS = mutableListOf<String>()
         for(SS in workout.supersets) {
@@ -207,7 +210,7 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
             }
         }
         //It should never make it here
-        println("SOMETHING HAS GONE WAY FUCKING WRONG AT WorkoutBuildAdapter:getSetsByAdapter")
+        println("FAILED TO GET SETS CONSISTENCY BY ADAPTER")
         return arrayListOf<String>()
     }
     fun updateSetsByAdapter(sets: ArrayList<String>, sba: SetBuildAdapter) {
@@ -215,6 +218,8 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
         for(inst in list){
             if(inst.adapter == sba){
                 inst.sets = sets
+                println("${inst.EI.exercise.name} >>> Updated consistent sets to:")
+                println("\n ${inst.sets}")
                 break
             }
         }
