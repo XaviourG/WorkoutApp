@@ -92,13 +92,14 @@ class MainActivity : AppCompatActivity() {
                             binding.progressBar.apply {
                                 progressMax = 100f
                                 setProgressWithAnimation((progress*100),1000)
-                                progressBarWidth = 6f
-                                backgroundProgressBarWidth = 3f
+                                progressBarWidth = 8f
+                                backgroundProgressBarWidth = 4f
                                 //progressBarColor = Color.WHITE
                                 progressBarColorDirection = CircularProgressBar.GradientDirection.LEFT_TO_RIGHT
                                 progressBarColorStart = Color.parseColor("#9615DB") //#c09a6b
                                 progressBarColorEnd = Color.WHITE
                                 startAngle = 45f
+
                             }
 
                             break
