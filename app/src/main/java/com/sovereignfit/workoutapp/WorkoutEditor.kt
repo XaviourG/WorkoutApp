@@ -1,6 +1,7 @@
 package com.sovereignfit.workoutapp
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -110,12 +111,25 @@ class WorkoutEditor : AppCompatActivity() {
 
         //Save button pressed, display 'enter name' popup then save to database.
         binding.btnDone.setOnClickListener{
-            var title = binding.etTitle.text.toString()
-            val workout = Workout(WID=wid, title=title, exercises = wlAdapter.getExerciseList(),supersets = wlAdapter.getSupersets(), notes = wlAdapter.getNotes())
-            //exerciseViewModel.insertWorkout(workout)
-            exerciseViewModel.updateWorkout(workout)
-            val i = Intent(this@WorkoutEditor, WorkoutListActivity::class.java)
-            startActivity(i)
+            if(wlAdapter.isNotEmpty()) {
+                var title = binding.etTitle.text.toString()
+                val workout = Workout(
+                    WID = wid,
+                    title = title,
+                    exercises = wlAdapter.getExerciseList(),
+                    supersets = wlAdapter.getSupersets(),
+                    notes = wlAdapter.getNotes()
+                )
+                //exerciseViewModel.insertWorkout(workout)
+                exerciseViewModel.updateWorkout(workout)
+                val i = Intent(this@WorkoutEditor, WorkoutListActivity::class.java)
+                startActivity(i)
+            } else {
+                val alertBuilder = AlertDialog.Builder(this)
+                alertBuilder.setTitle("Invalid Workout")
+                alertBuilder.setMessage("A workout is not a workout without exercises!")
+                alertBuilder.show()
+            }
         }
 
     }

@@ -25,6 +25,9 @@ class Converters {
 
     @TypeConverter
     fun toExerciseList(listString: String): List<ExerciseInstance> {
+        if(listString == "") {
+            return mutableListOf<ExerciseInstance>()
+        }
         var list = listString.split("|")
         var newList = mutableListOf<ExerciseInstance>()
         for(s in list){

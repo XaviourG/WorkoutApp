@@ -33,7 +33,6 @@ class WorkoutListActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         title="Workout DB"
-        exerciseViewModel.updateWorkouts()
 
         /*
         val fakeList = mutableListOf<Workout>()

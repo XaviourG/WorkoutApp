@@ -219,5 +219,10 @@ class WorkoutBuildAdapter(private val context : AppCompatActivity,
         }
     }
 
+    fun isNotEmpty(): Boolean {
+        //checks is any exercises are present, if so return true, else false.
+        return (list.size >= 1)
+    }
+
 
 }
