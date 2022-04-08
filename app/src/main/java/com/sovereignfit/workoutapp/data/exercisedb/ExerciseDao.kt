@@ -74,4 +74,18 @@ interface ExerciseDao {
 
     @Update
     suspend fun updateProgram(program: Program)
+
+
+    //Methods for session
+    @Query("SELECT * FROM Session ORDER BY WID")
+    fun getAllSessions(): Flow<MutableList<Session>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertSession(session: Session)
+
+    @Delete
+    suspend fun deleteSession(session: Session)
+
+    @Update
+    suspend fun updateSession(session: Session)
 }

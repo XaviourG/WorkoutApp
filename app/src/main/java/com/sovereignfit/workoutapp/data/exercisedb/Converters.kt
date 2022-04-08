@@ -60,3 +60,39 @@ class Converters {
     }
 
 }
+
+@TypeConverter
+fun fromSets(s: String): List<MutableList<String>?>? {
+    var res: List<MutableList<String>?>? = null
+    if (s == "null"){// do nothing just return the null
+    } else {
+        res = mutableListOf<MutableList<String>?>()
+        for(subString in s.split("|")) {
+            if(subString == "null"){
+                res.add(null)
+            } else {
+                res.add(subString.split("_").toMutableList())
+            }
+        }
+    }
+    return res
+}
+
+@TypeConverter
+fun toSets(c: List<MutableList<String>?>?): String {
+    var res = ""
+    if (c == null) {
+        res = "null"
+    } else {
+        var list = mutableListOf<String>()
+        for (subList in c) {
+            if(subList == null){
+                list.add("null")
+            } else {
+                list.add(subList.joinToString(separator = "_"))
+            }
+        }
+        res = list.joinToString(separator = "|")
+    }
+    return res
+}

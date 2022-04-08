@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.sovereignfit.workoutapp.adapters.WorkoutPlayerAdapter
 import com.sovereignfit.workoutapp.data.exercisedb.*
 import com.sovereignfit.workoutapp.databinding.ActivityWorkoutPlayerBinding
+import kotlinx.coroutines.Job
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 import java.util.concurrent.TimeUnit
 
 class WorkoutPlayer : AppCompatActivity() {
@@ -23,6 +26,8 @@ class WorkoutPlayer : AppCompatActivity() {
 
     private var timeElapsed = 0L
     private var timeHandler: Handler? = null
+    private var timeStarted: Long = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC)
+    TODO("Finish time consistency implementation")!!!!
 
     private var consistency: List<MutableList<String>?>? = null
 
@@ -56,6 +61,7 @@ class WorkoutPlayer : AppCompatActivity() {
                         workout = w
                         wpAdapter.setWorkout(workout)
                         binding.tvTitle.setText(workout.title)
+                        checkSessions(workout.WID!!)
                     }
                 }
             }
@@ -177,6 +183,31 @@ class WorkoutPlayer : AppCompatActivity() {
 
     fun consistencyExists(): Boolean {
         return !(consistency == null)
+    }
+
+    fun checkSessions(WID: Int){
+        //Check if any existing sessions have this Workout ID (has the app closed mid workout)
+        exerciseViewModel.allSessions.observe(this, {sessions ->
+            sessions.let {
+                for (session in it) {
+                    if(session.WID == WID) {
+                        println("<<<<< FOUND SESSION >>>>>")
+                        //Use this session
+                        consistency = fromSets(session.sets)
+                        println("${consistency}")
+                        //TODO("Timer update code here")
+
+                        //make sure the adapters know it
+                        wpAdapter.forceConsistencyCheck()
+                        break
+                    }
+                }
+            }
+        })
+    }
+
+    fun updateSession() {
+        exerciseViewModel.insertSession(Session(SID = 1, WID = workout.WID!!, sets = toSets(consistency), startTime = 0))
     }
 
 

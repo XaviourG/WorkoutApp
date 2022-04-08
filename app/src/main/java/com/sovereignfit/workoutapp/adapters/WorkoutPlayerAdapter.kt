@@ -148,6 +148,11 @@ class WorkoutPlayerAdapter(private val context : AppCompatActivity, private val 
             }
         }
         parent.updateConsistency(list.map {it.consistencyLog})
+        parent.updateSession()
+    }
+
+    fun forceConsistencyCheck() {
+        notifyDataSetChanged()
     }
 
 }

@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 
 //add this to migrate autoMigrations = [AutoMigration(from = 1, to = 2)]
 //just recreating the emulator also fixes this issue
-@Database(entities = [Exercise::class, Workout::class, Log::class, Program::class], version=1)
+@Database(entities = [Exercise::class, Workout::class, Log::class, Program::class, Session::class], version=1)
 @TypeConverters(Converters::class)
 abstract class ExerciseDatabase : RoomDatabase() {
     abstract fun exerciseDao(): ExerciseDao
