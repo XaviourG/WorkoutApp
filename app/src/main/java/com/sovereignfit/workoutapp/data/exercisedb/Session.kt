@@ -10,5 +10,5 @@ data class Session(
     @PrimaryKey val SID: Int,
     @ColumnInfo(name = "WID") val WID: Int,
     @ColumnInfo(name = "sets") val sets: String,
-    @ColumnInfo(name = "startTime") val startTime: Int
+    @ColumnInfo(name = "startTime") val startTime: Long
 )

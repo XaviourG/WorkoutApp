@@ -26,8 +26,7 @@ class WorkoutPlayer : AppCompatActivity() {
 
     private var timeElapsed = 0L
     private var timeHandler: Handler? = null
-    private var timeStarted: Long = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC)
-    TODO("Finish time consistency implementation")!!!!
+    private var timeStarted: Long = -1
 
     private var consistency: List<MutableList<String>?>? = null
 
@@ -116,6 +115,7 @@ class WorkoutPlayer : AppCompatActivity() {
             i.putExtra("timeElapsed", elapsed)
             i.putExtra("title", workout.title)
             //i.putExtra("PRs", mutableListOf<String>().toTypedArray())
+            exerciseViewModel.deleteSession(Session(SID = 1, WID = workout.WID!!, sets = toSets(consistency), startTime = timeStarted))
             startActivity(i)
         }
         //Starting timer
@@ -189,25 +189,39 @@ class WorkoutPlayer : AppCompatActivity() {
         //Check if any existing sessions have this Workout ID (has the app closed mid workout)
         exerciseViewModel.allSessions.observe(this, {sessions ->
             sessions.let {
+                var sessionFound = false
+                var startTime: Long = -1
                 for (session in it) {
                     if(session.WID == WID) {
+                        sessionFound = true
                         println("<<<<< FOUND SESSION >>>>>")
                         //Use this session
                         consistency = fromSets(session.sets)
                         println("${consistency}")
-                        //TODO("Timer update code here")
+                        //TODO("Timer update code here"
+                        startTime = session.startTime
+                        timeStarted = session.startTime
 
                         //make sure the adapters know it
                         wpAdapter.forceConsistencyCheck()
                         break
                     }
                 }
+                if(sessionFound){
+                   //update timer with startTime, with have start time in epoch seconds,
+                       // so now in epoch minus that is time elapsed
+                    val timeElapsedInSeconds = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) - startTime
+                    timeElapsed = timeElapsedInSeconds
+                } else {
+                    //set start time
+                    timeStarted = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC)
+                }
             }
         })
     }
 
     fun updateSession() {
-        exerciseViewModel.insertSession(Session(SID = 1, WID = workout.WID!!, sets = toSets(consistency), startTime = 0))
+        exerciseViewModel.insertSession(Session(SID = 1, WID = workout.WID!!, sets = toSets(consistency), startTime = timeStarted))
     }
 
 
