@@ -210,17 +210,23 @@ class PlayerSetAdapter(private val context: Context, private val unit: Int, priv
         //update from consistency log
         var log = wpa.getConsistencyLog(this)[position].split(":")
         if(log[1] == ""){ // log is empty, do nothing
-        } else { //log exists, use it
+        } else { //log exists, use it (unless there is a text already in the box)
             if(log[1].contains("+")) { //is a drop set and must be loaded as such
                 val loads = log[0].split("+")
                 val reps = log[1].split("+")
-                holder.binding.etLoad.setText(loads[0])
-                holder.binding.etDropLoad.setText(loads[1])
-                holder.binding.etReps.setText(reps[0])
-                holder.binding.etDropReps.setText(reps[1])
+                if(holder.binding.etLoad.text.toString() == ""){
+                holder.binding.etLoad.setText(loads[0]) }
+                if(holder.binding.etDropLoad.text.toString() == ""){
+                holder.binding.etDropLoad.setText(loads[1])}
+                if(holder.binding.etReps.text.toString() == ""){
+                holder.binding.etReps.setText(reps[0])}
+                if(holder.binding.etDropReps.text.toString() == ""){
+                holder.binding.etDropReps.setText(reps[1])}
             } else { //load in as regular set
-                holder.binding.etLoad.setText(log[0])
-                holder.binding.etReps.setText(log[1])
+                if(holder.binding.etLoad.text.toString() == ""){
+                holder.binding.etLoad.setText(log[0])}
+                if(holder.binding.etReps.text.toString() == ""){
+                holder.binding.etReps.setText(log[1])}
             }
             highlight(holder.binding)
         }
